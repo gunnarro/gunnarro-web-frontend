@@ -1,5 +1,3 @@
-import { React } from 'react';
-
 import { DynamicTable } from 'components/DynamicTable';
 import { TableDataForm } from 'components/TableDataForm';
 
