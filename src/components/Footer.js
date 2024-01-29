@@ -1,10 +1,10 @@
-import {Container} from 'reactstrap';
+import { React } from 'react';
 
 export const Footer = () => (
     <footer>
         <div>
             <small>
-                <a class="text-white" href="@{/public/releasenotes}">project.version</a>
+                <a className="text-white" href="@{/public/releasenotes}">project.version</a>
                 <span>application.build.time</span>
             </small>
         </div>

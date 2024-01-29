@@ -1,14 +1,15 @@
+import { React } from 'react';
+
 import {
-  Container, Row, Col, Form, Input, Button, Navbar, Nav,
-  NavbarBrand, NavLink, NavItem, UncontrolledDropdown,
-  DropdownToggle, DropdownMenu, DropdownItem
+  Container, Row, Col, Navbar, Nav,
+  NavbarBrand, NavLink, NavItem
 } from 'reactstrap';
 
 const LOGO = '/gunnarroas-logo.png';
 
 export const Header = () => (
  <Navbar fixed="top" color="light" light expand="xs" className="border-bottom border-gray bg-white" style={{ height: 80 }}>
-        <Row g-0 className="position-relative w-100 align-items-center">
+        <Row className="position-relative w-100 align-items-center">
 
           <Col className="d-none d-lg-flex justify-content-start">
             <Nav className="mrx-auto" navbar>

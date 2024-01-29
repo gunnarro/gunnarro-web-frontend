@@ -1,5 +1,14 @@
 [![Node.js CI](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/node.js.yml/badge.svg)](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/node.js.yml)
 
+# gunnarro-web-frontend
+## eslint
+
+[eslint-plugin-react#configuration](https://github.com/jsx-eslint/eslint-plugin-react#configuration)
+Run from commandline:
+```
+npx eslint src/components/Footer.js
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

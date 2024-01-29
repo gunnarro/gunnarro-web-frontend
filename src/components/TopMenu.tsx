@@ -5,7 +5,7 @@ import { LANGUAGES } from '../constants/index';
 import { Navbar } from 'reactstrap';
 
 
-const isActive = ({ isActive }: any) => `link ${isActive ? 'active' : ''}`
+const isActive = ({ isActive } : any) => `link ${isActive ? 'active' : ''}`
 
 export const TopMenu = () => {
 
