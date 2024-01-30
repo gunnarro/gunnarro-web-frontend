@@ -86,9 +86,6 @@ export const DynamicTable = () => (
            { getToDos() }
         </tbody>
         <tfooter>
-            <tr>
-                <td>last updated:</td>
-            </tr>
         </tfooter>
     </table>
 )
