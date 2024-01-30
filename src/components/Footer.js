@@ -1,6 +1,6 @@
 
 export const Footer = () => (
-    <footer>
+    <footer className="float-end">
         <div>
             <small>
                 <a className="text-white" href="@{/public/releasenotes}">project.version</a>

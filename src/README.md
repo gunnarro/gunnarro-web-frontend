@@ -1,5 +1,18 @@
 # gunnarro-web-frontend
 
+## Technologies
+    NodeJs 21.6.1
+    React JS 18.2.0
+    i18next 22.4.9
+    TypeScript 4.9.5
+    Bootstrap 5.3.1
+
+## installed modules
+- npm install bootstrap reactstrap
+- npm install --save react-i18next
+- npm install --save react-router-dom
+- npm install --save material-table
+- npm install --save @material-ui/core
 
 ## React
 ### First React Application

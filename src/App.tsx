@@ -1,5 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { TopMenu } from './components/TopMenu';
+// bootstrap import
+import {
+  Container
+} from 'reactstrap';
+// project import
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { Home } from './pages/Home';
@@ -12,12 +16,14 @@ const App = () => {
   return (
     <Suspense fallback='loading'>
       <BrowserRouter>
-        <Header />
+      <Header />
+      <Container>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/todo' element={<ToDo />} />
           <Route path='/about' element={<About />} />
         </Routes>
+        </Container>
         <Footer />
       </BrowserRouter>
     </Suspense>

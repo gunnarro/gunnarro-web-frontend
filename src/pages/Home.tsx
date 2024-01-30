@@ -1,13 +1,23 @@
 import { useTranslation } from 'react-i18next';
 
+// bootstrap import
+import {
+  Card,
+  CardHeader,
+  CardBody
+} from 'reactstrap';
+
 export const Home = () => {
 
     const { t } = useTranslation()
 
     return (
-        <main>
-            <h1>{t('title')}</h1>
-            <span>{t('label')} </span>
-        </main>
+     <Card className="m-4">
+        <CardHeader>
+         <h3>{t('home')}</h3>
+        </CardHeader>
+            <CardBody>
+            </CardBody>
+     </Card>
     )
 }
