@@ -1,15 +1,14 @@
+import { useState, useEffect } from "react";
+// rest support
+import axios from "axios";
 // bootstrap import
 import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons'
-//import axios from "axios";
-import axios from "axios";
-import { useState, useEffect } from "react";
 
 const todoRestApi = axios.create({
   baseURL: "https://my-json-server.typicode.com/typicode/demo",
   timeout: 1000,
   headers: {'content-type': 'application/json; charset=utf-8'}
 });
-
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
@@ -89,5 +88,3 @@ export const DynamicTable = () => (
         </tfooter>
     </table>
 )
-
-// The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.

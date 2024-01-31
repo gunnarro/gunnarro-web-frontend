@@ -9,6 +9,7 @@ import { Header } from './components/Header';
 import { Home } from './pages/Home';
 import { ToDo } from './pages/ToDo';
 import { About } from './pages/About';
+import { EmployeeList } from './pages/EmployeeList';
 import { Suspense } from 'react';
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
       <Container>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/employees' element={<EmployeeList />} />
           <Route path='/todo' element={<ToDo />} />
           <Route path='/about' element={<About />} />
         </Routes>
