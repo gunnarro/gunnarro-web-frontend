@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 
 export const  TableDataForm = () => (
     <Form>
-           <Form.Group className="mb-3" controlId="formInventarStatus">
+         <Form.Group className="mb-3" controlId="formInventarStatus">
          <Form.Check type="radio" label="Todo" />
          <Form.Check type="radio" label="In progress" />
          <Form.Check type="radio" label="Utført" />

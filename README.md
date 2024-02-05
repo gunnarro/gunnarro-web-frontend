@@ -17,7 +17,6 @@ npx eslint src/components/Footer.js
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-
 ## Technologies
     NodeJs 21.6.1
     React JS 18.2.0
@@ -32,6 +31,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install material-table @material-ui/core
 - npm install @material-ui/icons
 - npm install axios
+- npm install react-hook-form
 
 ## uninstall module
 npm uninstall material-table
@@ -40,6 +40,31 @@ npm uninstall material-table
 ## Axios Call Rest API
 ref [Axios](https://www.npmjs.com/package/axios)
 
+
+## Resources
+- [React libraries](https://www.robinwieruch.de/react-libraries/)
+  - [React form](https://www.robinwieruch.de/react-form/)
+
+## React
+install npm
+
+check
+npm --version
+node --version
+
+### update node.js to latest version
+npm install -g n
+
+### install latest stable version of node.js
+sudo n lts
+
+### create default react app
+sudo npm -g install create-react-app
+create-react-app --version
+
+create-react-app my-react-app
+cd my-react-app
+npm start
 
 ## Available Scripts
 
