@@ -10,13 +10,21 @@ import {
 
 export const TodoItemForm = () => {
     const INITIAL_STATE = {
-      name: '',
-      description: '',
+        todoId: '',
+        name: '',
+        description: '',
+        action: '',
+        assignedTo: '',
+        status: ''
     };
 
     const [form, setForm] = useState({
+        todoId: '',
         name: '',
         description: '',
+        action: '',
+        assignedTo: '',
+        status: ''
       });
 
       const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,10 +43,13 @@ export const TodoItemForm = () => {
 
   return (
     <Form onSubmit={handleFormSubmit}>
+    <Input
+        id="todoId"
+        type="text"
+        value={form.todoId}
+      />
        <FormGroup>
-          <Label for="name">
-            Name
-          </Label>
+          <Label for="name">Name</Label>
           <Input
             id="name"
             type="text"
@@ -47,9 +58,7 @@ export const TodoItemForm = () => {
           />
         </FormGroup>
          <FormGroup>
-          <Label for="description">
-            Description
-          </Label>
+          <Label for="description">Description</Label>
           <Input
             id="description"
             type="text"
@@ -57,23 +66,41 @@ export const TodoItemForm = () => {
             onChange={handleFieldChange}
           />
         </FormGroup>
+        <FormGroup>
+          <Label for="action">Action</Label>
+          <Input
+            id="action"
+            type="text"
+             value={form.action}
+            onChange={handleFieldChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="assignedTo">Assigned to</Label>
+          <Input
+            id="assignedTo"
+            type="text"
+             value={form.assignedTo}
+            onChange={handleFieldChange}
+          />
+        </FormGroup>
         <FormGroup tag="fieldset">
-            <Label>
-              Status
-            </Label>
+            <Label>Status</Label>
+            <FormGroup switch disabled>
+                    <Input type="switch" disabled />
+                    <Label check>Open</Label>
+            </FormGroup>
             <FormGroup switch disabled>
                     <Input type="switch" disabled />
                     <Label check>Active</Label>
             </FormGroup>
             <FormGroup switch disabled>
                     <Input type="switch" disabled />
-                    <Label check>Finished</Label>
+                    <Label>Finished</Label>
             </FormGroup>
         </FormGroup>
         <FormGroup>
-        <Button type="submit">
-            Save
-        </Button>
+        <Button type="submit">Add</Button>
         </FormGroup>
     </Form>
   );

@@ -8,15 +8,35 @@ import {
   Button,
 } from 'reactstrap';
 
+// project import
+import { TodoRestApi } from 'components/TodoRestApi';
+
+ function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const todoData = JSON.stringify({
+                          name: 'form.name',
+                          description: 'form.description',
+                          status: 'form.status'
+                        });
+
+             TodoRestApi.post("/todos", todoData)
+               .then((response) => console.log(response.data))
+               .catch((error) => console.log("Error calling todo service rest api, error: " + error));
+
+     //   setForm(INITIAL_STATE);
+      }
+
 export const TodoForm = () => {
-    const INITIAL_STATE = {
-      name: '',
-      description: '',
-    };
+//    const INITIAL_STATE = {
+//      name: '',
+//      description: '',
+//      status: '',
+//    };
 
     const [form, setForm] = useState({
         name: '',
         description: '',
+        status: '',
       });
 
       const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,19 +46,10 @@ export const TodoForm = () => {
         });
       };
 
-      const handleFormSubmit = (event:React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        alert(form.name + ' ' + form.description);
-        setForm(INITIAL_STATE);
-      };
-
-
   return (
     <Form onSubmit={handleFormSubmit}>
        <FormGroup>
-          <Label for="name">
-            Name
-          </Label>
+          <Label for="name">Name</Label>
           <Input
             id="name"
             type="text"
@@ -47,33 +58,27 @@ export const TodoForm = () => {
           />
         </FormGroup>
          <FormGroup>
-          <Label for="description">
-            Description
-          </Label>
+          <Label for="description">Description</Label>
           <Input
             id="description"
             type="text"
-             value={form.description}
+            value={form.description}
             onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup tag="fieldset">
-            <Label>
-              Status
-            </Label>
+            <Label>Status</Label>
             <FormGroup switch disabled>
                     <Input type="switch" disabled />
                     <Label check>Active</Label>
             </FormGroup>
             <FormGroup switch disabled>
-                    <Input type="switch" disabled />
-                    <Label check>Finished</Label>
+                    <Input id="status" type="switch" disabled />
+                    <Label>Finished</Label>
             </FormGroup>
         </FormGroup>
         <FormGroup>
-        <Button type="submit">
-            Save
-        </Button>
+        <Button type="submit">Add</Button>
         </FormGroup>
     </Form>
   );

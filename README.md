@@ -47,6 +47,8 @@ ref [Axios](https://www.npmjs.com/package/axios)
 ## Resources
 - [React libraries](https://www.robinwieruch.de/react-libraries/)
   - [React form](https://www.robinwieruch.de/react-form/)
+- [axios-with-react-hooks](https://blog.openreplay.com/integrating-axios-with-react-hooks/) 
+- [axios - github](https://github.com/axios/axios)
 
 ## React
 install npm

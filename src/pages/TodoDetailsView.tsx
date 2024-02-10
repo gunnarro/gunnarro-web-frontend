@@ -7,6 +7,7 @@ import {
   Collapse,
   Card,
   CardHeader,
+  CardTitle,
   CardBody,
   Button
 } from 'reactstrap';
@@ -24,10 +25,8 @@ export const TodoDetailsView = () => {
     <Container>
         <Card className="m-4">
             <CardHeader>
-                <h3>New item</h3>
-                 <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>
-                        Toggle
-                 </Button>
+                <CardTitle>New Todo</CardTitle>
+                 <Button className="btn btn-primary btn-sm float-end" onClick={toggle}>Toggle</Button>
             </CardHeader>
             <CardBody>
                 <Collapse isOpen={isOpen}>
@@ -37,7 +36,7 @@ export const TodoDetailsView = () => {
         </Card>
         <Card className="m-4">
             <CardHeader>
-            <h3>Todo item list</h3>
+           <CardTitle>New Todo</CardTitle>
             </CardHeader>
                 <CardBody>
                     <TodoItemTable todoId={todoId} />

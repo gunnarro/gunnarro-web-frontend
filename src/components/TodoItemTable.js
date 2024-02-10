@@ -1,28 +1,15 @@
 import { useState, useEffect } from "react";
-// rest support
-import axios from "axios";
 // bootstrap import
 import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons'
-
-const todoRestApi = axios.create({
-  baseURL: "https://localhost:9999/todoservice/v1",
-  timeout: 50000,
-  auth: {
-      username: 'my-service-name',
-      password: 'change-me'
-  },
-  headers: {
-    'Accept': 'application/json; charset=utf-8',
-    'Content-Type': 'application/json; charset=utf-8'
-  }
-});
+// project import
+import { TodoRestApi } from 'components/TodoRestApi';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
 function getTodoData({ todoId }) {
     const [data, setData] = useState([]);
     useEffect(() => {
-      todoRestApi.get('/todos/' + todoId)
+      TodoRestApi.get('/todos/' + todoId)
         .then(response => {
             //alert(response.headers['content-type'])
             //alert(JSON.stringify(response.data.toDoItemDtoList))

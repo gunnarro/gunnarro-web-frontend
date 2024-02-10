@@ -27,9 +27,6 @@ export const Header = () => (
        <NavItem>
          <NavLink href="/todo">Todo</NavLink>
        </NavItem>
-        <NavItem>
-         <NavLink href="/todonew">Todo new</NavLink>
-         </NavItem>
        <NavItem>
          <NavLink href="/about">About</NavLink>
        </NavItem>
