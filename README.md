@@ -35,6 +35,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install @material-ui/icons
 - npm install axios
 - npm install react-hook-form
+- npm install @types/react @types/react-dom
 
 ## uninstall module
 npm uninstall material-table
@@ -49,6 +50,7 @@ ref [Axios](https://www.npmjs.com/package/axios)
   - [React form](https://www.robinwieruch.de/react-form/)
 - [axios-with-react-hooks](https://blog.openreplay.com/integrating-axios-with-react-hooks/) 
 - [axios - github](https://github.com/axios/axios)
+- [typescript](https://react.dev/learn/typescript)
 
 ## React
 install npm

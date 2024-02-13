@@ -1,7 +1,8 @@
 // react import
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
+import { Trash } from 'react-bootstrap-icons'
 import {
   Container,
   Collapse,
@@ -9,39 +10,42 @@ import {
   CardHeader,
   CardTitle,
   CardBody,
-  Button
+  Button,
+  Navbar,
+  Nav,
+  NavItem,
+  NavLink,
+  NavbarText,
 } from 'reactstrap';
 
 // project import
-import { TodoItemForm } from 'components/TodoItemForm';
 import { TodoItemTable } from 'components/TodoItemTable';
 
 export const TodoDetailsView = () => {
     // the todoId is provided through the uri.
     let { todoId } = useParams();
+
+    const navigate = useNavigate();
+        const navigateTodoItemNew = () => {
+           navigate("/todo/" + todoId + "/items/new");
+        };
+
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     return (
     <Container>
+        <h4>todoId: {todoId}</h4>
         <Card className="m-4">
-            <CardHeader>
-                <CardTitle>New Todo</CardTitle>
-                 <Button className="btn btn-primary btn-sm float-end" onClick={toggle}>Toggle</Button>
-            </CardHeader>
-            <CardBody>
-                <Collapse isOpen={isOpen}>
-                    <TodoItemForm />
-                </Collapse>
-            </CardBody>
-        </Card>
-        <Card className="m-4">
-            <CardHeader>
-           <CardTitle>New Todo</CardTitle>
-            </CardHeader>
+           <CardHeader>
+                <Navbar>
+                   <NavbarText>Todo item list</NavbarText>
+                   <Button onClick={() => navigateTodoItemNew()} size="sm" className="bnt-sm float-end" color="primary" outline>Add</Button>
+               </Navbar>
+           </CardHeader>
                 <CardBody>
-                    <TodoItemTable todoId={todoId} />
+                     <TodoItemTable todoId={todoId}/>
                 </CardBody>
-            </Card>
+        </Card>
     </Container>
     )
 }

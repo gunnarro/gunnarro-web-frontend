@@ -1,6 +1,6 @@
 // react import
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import {
   Container,
@@ -9,33 +9,34 @@ import {
   CardHeader,
   CardTitle,
   CardBody,
-  Button
+  Button,
+  Navbar,
+  Nav,
+  NavItem,
+  NavLink,
+  NavbarText,
 } from 'reactstrap';
 
 // project import
-import { TodoForm } from 'components/TodoForm';
 import { TodoTable } from 'components/TodoTable';
 
 export const TodoListView = () => {
+    const navigate = useNavigate();
+    const navigateTodoNew = () => {
+       navigate('/todo/new');
+    };
+
     let { userName } = useParams();
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
+
     return (
     <Container>
+        <h4>Welcome, {userName}</h4>
         <Card className="m-4">
             <CardHeader>
-                <CardTitle>New Todo</CardTitle>
-                <Button className="btn btn-primary btn-sm float-end" onClick={toggle}>Toggle</Button>
-            </CardHeader>
-            <CardBody>
-                <Collapse isOpen={isOpen}>
-                    <TodoForm />
-                </Collapse>
-            </CardBody>
-        </Card>
-        <Card className="m-4">
-            <CardHeader>
-                <CardTitle>{userName} Todo lists</CardTitle>
+                <Navbar>
+                    <NavbarText>Todo list</NavbarText>
+                    <Button onClick={() => navigateTodoNew()} size="sm" className="bnt-sm float-end" color="primary" outline>Add</Button>
+                </Navbar>
             </CardHeader>
             <CardBody>
                 <TodoTable userName={userName}/>

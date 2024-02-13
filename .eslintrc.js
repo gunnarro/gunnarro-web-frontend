@@ -33,5 +33,7 @@ module.exports = {
         // react-in-jsx-scope rule is turned off, so ESLint won’t throw errors when you fail to import React.
         "react/react-in-jsx-scope": "off",
         "react/jsx-uses-react": "off",
-    }
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        }
 }

@@ -4,17 +4,19 @@ import { useNavigate } from "react-router-dom"
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
+import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
 //const [data, setData] = useState([]);npm start
 function getTodosData({ userName }) {
     const navigate = useNavigate()
-    const [data, setData] = useState([]);
+    const [todoListData, setTodoListData] = useState([]);
+    // load data
     useEffect(() => {
       TodoRestApi.get('/todos/user/' + userName)
         .then(response => {
-            setData(response.data);
+            setTodoListData(response.data);
         })
         .catch(error => {
           console.log("Error calling todo service rest api, error" + error);
@@ -22,15 +24,21 @@ function getTodosData({ userName }) {
     }, []);
 
     const deleteTodo = (todoId) => {
+        const confirmed = showConfirmDeleteDialog(true);
+        if (confirmed) {
+            alert("ok")
+        } else {
         TodoRestApi.delete("/todos/" + todoId)
                        .then((response) => console.log(response.data))
                        .catch((error) => console.log("Error calling todo service rest api, error: " + error));
+
+                       }
       };
 
     return (
         <>
-        {data.map(todo => (
-          <tr key={todo.id}>
+        {todoListData.map(todo => (
+          <tr key={todo.idStr}>
              <td>{todo.idStr}</td>
              <td>{todo.status == 'Active' ? <CheckSquareFill /> : <ArrowDownLeftCircle />}</td>
              <td>{todo.name}</td>
@@ -40,12 +48,13 @@ function getTodosData({ userName }) {
              <td>{todo.createdDate}</td>
              <td>{todo.lastModifiedDate}</td>
              <td>
-                 <Pencil size={16} /><span>&nbsp;</span><Trash size={16} />
-                 <button onClick={() => navigate("/todo/" + todo.id + "/details")} className="btn">view</button>
-                 <button className="btn" onClick={() => {
-                            deleteTodo(todo.idStr);
-                          }}
-                 >delete</button>
+                <button onClick={() => navigate("/todo/" + todo.idStr + "/details")} type="button" className="btn btn-sm btn-outline-secondary">
+                    <Pencil size={16} color="royalblue" />
+                 </button>
+                <span>&nbsp;</span>
+                 <button onClick={() => { deleteTodo(todo.idStr);}} type="button" className="btn btn-sm btn-outline-secondary">
+                   <Trash  size={16} color="red" />
+                 </button>
              </td>
          </tr>
         ))}
