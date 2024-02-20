@@ -1,0 +1,70 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"
+// bootstrap import
+import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
+import { Table } from 'reactstrap';
+// project import
+import { TodoRestApi } from 'components/TodoRestApi';
+import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
+
+// To keep things simple, we'll store the returned Rest Api data in the React local state.
+// The initial value is an empty array.
+//const [data, setData] = useState([]);npm start
+function getTodoHistoryData({ todoId }) {
+    const navigate = useNavigate()
+    const [todoHistoryListData, setTodoHistoryListData] = useState([]);
+    // load data
+    useEffect(() => {
+      TodoRestApi.get('/todos/' + todoId + "/history")
+        .then(response => {
+            setTodoHistoryListData(response.data);
+        })
+        .catch(error => {
+          console.log("Error calling todo service rest api, error" + error);
+        });
+    }, []);
+
+    return (
+        <>
+        {todoHistoryListData.map(todoHistory => (
+          <tr key={todoHistory.id}>
+               <td>{todoHistory.revisionId}</td>
+               <td>{todoHistory.revisionType}</td>
+               <td>{todoHistory.name}</td>
+               <td>{todoHistory.description}</td>
+               <td>{todoHistory.status}</td>
+               <td>{todoHistory.createdDate}</td>
+               <td>{todoHistory.lastModifiedDate}</td>
+               <td>{todoHistory.createdByUser}</td>
+               <td>{todoHistory.lastModifiedByUser}</td>
+         </tr>
+        ))}
+        </>
+    );
+}
+
+export const TodoHistoryTable = (todoId) => (
+    <Table>
+        <thead>
+            <tr>
+                <th scope="col">Revision</th>
+                <th scope="col">Revision type</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Created date</th>
+                <th scope="col">Last modified date</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Last modified by</th>
+            </tr>
+        </thead>
+        <tbody className="table-group-divider">
+           { getTodoHistoryData(todoId) }
+        </tbody>
+        <tfoot className="table-group-divider">
+            <tr>
+                <td></td>
+            </tr>
+        </tfoot>
+    </Table>
+)

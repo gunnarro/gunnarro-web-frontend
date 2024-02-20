@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 // bootstrap import
-import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
+import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } from 'react-bootstrap-icons'
+import { Table } from 'reactstrap';
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
 import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
@@ -39,7 +40,6 @@ function getTodosData({ userName }) {
         <>
         {todoListData.map(todo => (
           <tr key={todo.idStr}>
-             <td>{todo.idStr}</td>
              <td>{todo.status == 'Active' ? <CheckSquareFill /> : <ArrowDownLeftCircle />}</td>
              <td>{todo.name}</td>
              <td>{todo.description}</td>
@@ -48,13 +48,17 @@ function getTodosData({ userName }) {
              <td>{todo.createdDate}</td>
              <td>{todo.lastModifiedDate}</td>
              <td>
-                <button onClick={() => navigate("/todo/" + todo.idStr + "/details")} type="button" className="btn btn-sm btn-outline-secondary">
+                 <button onClick={() => navigate("/todo/" + todo.idStr + "/details")} type="button" className="btn btn-sm btn-outline-secondary">
                     <Pencil size={16} color="royalblue" />
                  </button>
-                <span>&nbsp;</span>
+                 <span>&nbsp;</span>
                  <button onClick={() => { deleteTodo(todo.idStr);}} type="button" className="btn btn-sm btn-outline-secondary">
                    <Trash  size={16} color="red" />
                  </button>
+                 <span>&nbsp;</span>
+                 <button onClick={() => navigate("/todo/" + todo.idStr + "/history")} type="button" className="btn btn-sm btn-outline-secondary">
+                    <ClockHistory  size={16} color="black" />
+                  </button>
              </td>
          </tr>
         ))}
@@ -63,10 +67,9 @@ function getTodosData({ userName }) {
 }
 
 export const TodoTable = (userName) => (
-    <table className="table">
+    <Table>
         <thead>
             <tr>
-                <th scope="col">Id</th>
                 <th scope="col">Status</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
@@ -84,5 +87,5 @@ export const TodoTable = (userName) => (
                 <td></td>
             </tr>
         </tfoot>
-    </table>
+    </Table>
 )

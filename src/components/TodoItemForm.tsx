@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from 'react-router-dom';
+import Toast from 'react-bootstrap/Toast';
 // bootstrap import
 import {
   Card,
@@ -10,23 +11,29 @@ import {
   Label,
   Input,
   Form,
+  FormFeedback,
+  FormText,
   ButtonGroup,
   Button,
+  Alert,
 } from 'reactstrap';
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
 
 interface TodoItemFormProps {
-  todoId: string | undefined;
   userName: string;
 }
 
-export const TodoItemForm: React.FC<TodoItemFormProps> = ({ todoId, userName }) => {
+export const TodoItemForm: React.FC<TodoItemFormProps> = ({ userName }) => {
+    // the todoId is provided through the uri.
+    const { todoId } = useParams();
     const navigate = useNavigate();
     const navigateTodoItems = () => {
            //navigate('/todos');
            navigate(-1); // same as browser back button
         };
+    // form constants
+    const [formErrors, setFormErrors] = useState({});
     const [form, setForm] = useState({
         todoId: todoId,
         created_by: userName,
@@ -60,11 +67,14 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = ({ todoId, userName }) 
         // send data
          TodoRestApi.post("/todos/" + todoId + "/items", todoItemData)
             .then((response) => navigateTodoItems())
-           .catch((error) => console.log("Error calling todo service rest api, error: " + error));
+            .catch((error) => <Alert variant="error">Error calling todo service rest api, error:  {error}</Alert>);
+
+
     }
 
   return (
   <Card className="m-4">
+       <Alert variant="warning">Error calling todo service rest api, error</Alert>
        <CardHeader>
            <CardTitle>New Todo Item</CardTitle>
        </CardHeader>
@@ -77,22 +87,31 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = ({ todoId, userName }) 
               />
               <FormGroup>
                         <Label for="created_by">Created by</Label>
-                        <Input
+                        <Input valid
                           id="created_by"
                           type="text"
                           value={form.created_by}
                           onChange={handleFieldChange}
                           autoFocus
                         />
-                      </FormGroup>
+                <FormFeedback valid>
+                      put input validation errors here
+               </FormFeedback>
+                <FormText>
+                     Example help text that remains unchanged.
+                   </FormText>
+               </FormGroup>
                <FormGroup>
                   <Label for="name">Name</Label>
-                  <Input
+                  <Input invalid
                     id="name"
                     type="text"
                     value={form.name}
                     onChange={handleFieldChange}
                   />
+                  <FormFeedback invalid >
+                                        put input validation errors here
+                                 </FormFeedback>
                 </FormGroup>
                  <FormGroup>
                   <Label for="description">Description</Label>

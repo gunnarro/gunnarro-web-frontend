@@ -10,6 +10,7 @@ import { TodoForm } from './components/TodoForm';
 import { TodoItemForm } from './components/TodoItemForm';
 import { Home } from './pages/Home';
 import { TodoListView } from './pages/TodoListView';
+import { TodoHistoryView } from './pages/TodoHistoryView';
 import { TodoDetailsView } from './pages/TodoDetailsView';
 import { About } from './pages/About';
 import { EmployeeList } from './pages/EmployeeList';
@@ -27,9 +28,10 @@ const App = () => {
           <Route path='/employees' element={<EmployeeList />} />
           <Route path='/todo/:userName' element={<TodoListView />} />
           <Route path='/todo/:todoId/details' element={<TodoDetailsView />} />
+          <Route path='/todo/:todoId/history' element={<TodoHistoryView />} />
           <Route path='/todo/new' element={<TodoForm />} />
-          <Route path='/todo/:todoId/items/new' element={<TodoItemForm todoId="" userName="guest"/>} />
-          <Route path='/about' element={<TodoForm />} />
+          <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />
+          <Route path='/about' element={<About />} />
         </Routes>
         </Container>
         <Footer />

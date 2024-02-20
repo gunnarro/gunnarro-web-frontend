@@ -37,6 +37,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install react-hook-form
 - npm install @types/react @types/react-dom
 
+## Tools
+### OpenAPI Generator
+See [openapi-generator github](https://github.com/OpenAPITools/openapi-generator) and [openapi-generator tech](https://openapi-generator.tech/)
+
+Install the latest version of the cli: 
+```
+npm install @openapitools/openapi-generator-cli -g
+```
+Generate Api client from the rest service yaml file:
+```
+openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/api
+```
+
 ## uninstall module
 npm uninstall material-table
 

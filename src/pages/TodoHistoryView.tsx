@@ -7,28 +7,27 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // project import
-import { TodoTable } from 'components/TodoTable';
+import { TodoHistoryTable } from 'components/TodoHistoryTable';
 
-export const TodoListView = () => {
+export const TodoHistoryView = () => {
     const navigate = useNavigate();
-    const navigateTodoNew = () => {
-       navigate('/todo/new');
+    const navigateTodo = () => {
+       navigate('/todo/guro');
     };
 
-    let { userName } = useParams();
+    let { todoId } = useParams();
 
     return (
     <Container>
-        <h4>Welcome, {userName}</h4>
         <Card className="m-4">
             <Card.Header>
                 <Navbar className="justify-content-between">
-                    <Navbar.Text>Todo list</Navbar.Text>
-                    <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary" >Add</Button>
+                    <Navbar.Text>Todo History</Navbar.Text>
+                    <Button onClick={() => navigateTodo()} size="sm" variant="outline-primary" >Back</Button>
                 </Navbar>
             </Card.Header>
             <Card.Body>
-                <TodoTable userName={userName}/>
+                <TodoHistoryTable todoId={todoId}/>
             </Card.Body>
         </Card>
     </Container>

@@ -23,7 +23,7 @@ import { TodoItemTable } from 'components/TodoItemTable';
 
 export const TodoDetailsView = () => {
     // the todoId is provided through the uri.
-    let { todoId } = useParams();
+    const { todoId } = useParams();
 
     const navigate = useNavigate();
         const navigateTodoItemNew = () => {

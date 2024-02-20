@@ -1,18 +1,11 @@
+// react import
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 // bootstrap import
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-  FormGroup,
-  Label,
-  Input,
-  Form,
-  ButtonGroup,
-  Button,
-} from 'reactstrap';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
 
@@ -23,6 +16,7 @@ export const TodoForm = () => {
        navigate(-1); // same as browser back button
     };
 
+    const [validated, setValidated] = useState(false);
     const [todoForm, setTodoForm] = useState({
         created_by: '',
         name: '',
@@ -39,63 +33,80 @@ export const TodoForm = () => {
 
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        // map form data to todo API model
-        const todoData = JSON.stringify({
-              createdByUser: todoForm.created_by,
-              lastModifiedByUser: todoForm.created_by,
-              name: todoForm.name,
-              description: todoForm.description,
-              status: todoForm.status
-        });
-        // send data
-         TodoRestApi.post("/todos", todoData)
-           .then((response) => navigateTodos())
-           .catch((error) => console.log("Error calling todo service rest api, error: " + error));
+        // Check form input
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+         } else {
+            // map form data to todo API model
+            const todoData = JSON.stringify({
+                  createdByUser: todoForm.created_by,
+                  lastModifiedByUser: todoForm.created_by,
+                  name: todoForm.name,
+                  description: todoForm.description,
+                  status: todoForm.status
+            });
+            // send data
+             TodoRestApi.post("/todos", todoData)
+               .then((response) => navigateTodos())
+               .catch((error) => validationErrorMsg = error);
+         }
+         setValidated(true);
     }
+
+    var validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
 
   return (
     <Card className="m-4">
-     <CardHeader>
-         <CardTitle>New Todo task</CardTitle>
-     </CardHeader>
-     <CardBody>
-        <Form onSubmit={handleFormSubmit}>
-           <FormGroup>
-                  <Label for="created_by">Created by</Label>
-                  <Input
+     <Card.Header>
+         <Card.Title>New Todo task</Card.Title>
+     </Card.Header>
+     <Card.Body>
+        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+           <Form.Group controlId="validationCreatedBy">
+                  <Form.Label for="created_by">Created by</Form.Label>
+                  <Form.Control
+                    autoFocus
+                    required
                     id="created_by"
                     type="text"
-                    value={todoForm.created_by}
+                    placeholder={todoForm.created_by}
                     onChange={handleFieldChange}
-                    autoFocus
+                    isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.created_by)}
                   />
-           </FormGroup>
-           <FormGroup>
-              <Label for="name">Name</Label>
-              <Input
+                  <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+           </Form.Group>
+           <Form.Group controlId="validationName">
+              <Form.Label for="name">Name</Form.Label>
+              <Form.Control
+                required
                 id="name"
                 type="text"
-                value={todoForm.name}
+                placeholder={todoForm.name}
                 onChange={handleFieldChange}
+                isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.name)}
               />
-           </FormGroup>
-             <FormGroup>
-              <Label for="description">Description</Label>
-              <Input
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+           </Form.Group>
+           <Form.Group controlId="validationDescription">
+              <Form.Label for="description">Description</Form.Label>
+              <Form.Control
                 id="description"
                 type="text"
-                value={todoForm.description}
+                placeholder={todoForm.description}
                 onChange={handleFieldChange}
               />
-           </FormGroup>
-            <FormGroup>
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+           </Form.Group>
+           <Form.Group>
                   <div className="float-end">
-                    <Button onClick={() => navigateTodos()} size="sm" className="m-1" color="secondary" outline>Cancel</Button>
-                    <Button type="submit" size="sm" className="m-1" color="primary" outline>Save</Button>
+                    <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >Cancel</Button>
+                    <Button type="submit" className="" variant="outline-primary" >Save</Button>
                   </div>
-           </FormGroup>
+           </Form.Group>
         </Form>
-     </CardBody>
+     </Card.Body>
     </Card>
   );
 }
