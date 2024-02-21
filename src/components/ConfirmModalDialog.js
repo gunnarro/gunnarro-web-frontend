@@ -13,6 +13,9 @@ export function ShowConfirmDeleteDialog({ isShow }) {
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
 
+   function handleAction(isOk) {
+   }
+
    return (
      <div className="modal show" style={{ display: 'block', position: 'initial' }} >
         <Modal.Dialog>
@@ -21,8 +24,8 @@ export function ShowConfirmDeleteDialog({ isShow }) {
             </Modal.Header>
             <Modal.Body><div className="alert alert-danger">Are you sure you want to delete the item?</div></Modal.Body>
             <Modal.Footer>
-              <Button variant="default" onClick={() => {false} }>No</Button>
-              <Button variant="danger" onClick={() => {true} }>Yes</Button>
+              <Button variant="default" onClick={() => { handleAction(false) } }>No</Button>
+              <Button variant="danger" onClick={() => { handleAction(true) } }>Yes</Button>
             </Modal.Footer>
         </Modal.Dialog>
      </div>
