@@ -10,7 +10,7 @@ import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
 //const [data, setData] = useState([]);npm start
-function getTodosData({ userName }) {
+function GetTodosData({ userName }) {
     const navigate = useNavigate()
     const [todoListData, setTodoListData] = useState([]);
     // load data
@@ -80,7 +80,7 @@ export const TodoTable = (userName) => (
             </tr>
         </thead>
         <tbody className="table-group-divider">
-           { getTodosData(userName) }
+           { GetTodosData(userName) }
         </tbody>
         <tfoot className="table-group-divider">
             <tr>
