@@ -1,4 +1,4 @@
-name: Deploy docker image
+name: build and deploy image to docker.hub
 
 on:
   push:

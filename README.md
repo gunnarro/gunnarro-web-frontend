@@ -64,6 +64,7 @@ ref [Axios](https://www.npmjs.com/package/axios)
 - [axios-with-react-hooks](https://blog.openreplay.com/integrating-axios-with-react-hooks/) 
 - [axios - github](https://github.com/axios/axios)
 - [typescript](https://react.dev/learn/typescript)
+- [github action deploy](https://akoskm.com/how-to-publish-docker-images-to-docker-hub-with-github-actions)
 
 ## React
 install npm

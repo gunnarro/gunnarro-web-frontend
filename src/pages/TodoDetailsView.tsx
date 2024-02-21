@@ -22,7 +22,6 @@ export const TodoDetailsView = () => {
         };
 
     const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
     return (
     <Container>
         <h4>todoId: {todoId}</h4>
