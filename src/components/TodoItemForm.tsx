@@ -61,7 +61,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = ({ userName }) => {
             .catch((error) => <Alert variant="error">Error calling todo service rest api, error:  {error}</Alert>);
     }
 
-    var validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
+    let validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
 
   return (
   <Card className="m-4">

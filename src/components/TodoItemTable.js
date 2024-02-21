@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
+import PropTypes from 'prop-types';
 // bootstrap import
 import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
 import { ShowConfirmDeleteDialog } from 'components/ConfirmModalDialog';
 
+
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
 function GetTodoItemData({ todoId }) {
+    GetTodoItemData.propTypes = {
+        todoId: PropTypes.integer.isRequired
+    };
     const navigate = useNavigate()
     const [data, setData] = useState([]);
+
     useEffect(() => {
       TodoRestApi.get('/todos/' + todoId)
         .then(response => {

@@ -11,6 +11,9 @@ import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
 // The initial value is an empty array.
 //const [data, setData] = useState([]);npm start
 function GetTodoHistoryData({ todoId }) {
+    GetTodoHistoryData.propTypes = {
+        todoId: PropTypes.integer.isRequired
+    };
     const navigate = useNavigate()
     const [todoHistoryListData, setTodoHistoryListData] = useState([]);
     // load data

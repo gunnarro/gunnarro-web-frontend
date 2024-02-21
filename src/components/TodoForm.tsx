@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
@@ -55,7 +54,7 @@ export const TodoForm = () => {
          setValidated(true);
     }
 
-    var validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
+    let validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
 
   return (
     <Card className="m-4">

@@ -4,7 +4,12 @@ import { Modal, Button } from "react-bootstrap";
 
 
 export function ShowConfirmDeleteDialog({ isShow }) {
-const [show, setShow] = useState(false);
+
+   ShowConfirmDeleteDialog.propTypes = {
+        isShow: PropTypes.boolean.isRequired
+   };
+
+   const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
 
