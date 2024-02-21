@@ -5,7 +5,7 @@ import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } fro
 import { Table } from 'reactstrap';
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
-import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
+import { ShowConfirmDeleteDialog } from 'components/ConfirmModalDialog';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
@@ -25,7 +25,7 @@ function GetTodosData({ userName }) {
     }, []);
 
     const deleteTodo = (todoId) => {
-        const confirmed = showConfirmDeleteDialog(true);
+        const confirmed = ShowConfirmDeleteDialog(true);
         if (confirmed) {
             alert("ok")
         } else {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
-import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
+import { ShowConfirmDeleteDialog } from 'components/ConfirmModalDialog';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
@@ -26,7 +26,7 @@ function GetTodoItemData({ todoId }) {
     }, []);
 
      const deleteTodoItem = (todoId, todoItemId) => {
-            const confirmed = showConfirmDeleteDialog(true);
+            const confirmed = ShowConfirmDeleteDialog(true);
             if (confirmed) {
                 alert("ok! todoId=" + todoId + ", todoItemId=" + todoItemId)
             } else {
