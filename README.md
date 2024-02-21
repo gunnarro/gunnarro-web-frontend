@@ -1,9 +1,9 @@
 [![Node.js CI](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/node.js.yml/badge.svg)](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/node.js.yml)
-[![build and deploy image to docker.hub](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/deploy-docker-hub.yml/badge.svg)](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/deploy-docker-hub.yml)
-
-[![Node.js CI](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/node.js.yml/badge.svg)](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/node.js.yml)
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=gunnarro_gunnarro-web-frontend)](https://sonarcloud.io/summary/new_code?id=gunnarro_gunnarro-web-frontend)
 [![Known Vulnerabilities](https://snyk.io/test/github/gunnarro/gunnarro-web-frontend/badge.svg)](https://snyk.io/test/github/gunnarro/gunnarro-web-frontend)
+[![build and deploy image to docker.hub](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/deploy-docker-hub.yml/badge.svg)](https://github.com/gunnarro/gunnarro-web-frontend/actions/workflows/deploy-docker-hub.yml)
+
+
 # gunnarro-web-frontend
 ## Installed
 npm install react-table
