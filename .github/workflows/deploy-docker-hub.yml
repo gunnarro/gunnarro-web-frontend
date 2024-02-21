@@ -20,4 +20,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: gunnarro/gunnarro-frontend-image:latest
+          tags: gunnarro-web-frontend:latest
