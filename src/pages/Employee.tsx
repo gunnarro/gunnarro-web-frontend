@@ -1,18 +1,14 @@
 //import { useTranslation } from 'react-i18next';
 
 // bootstrap import
-import {
-  Card,
-  CardBody,
-  CardTitle
-} from 'reactstrap';
+import Card from 'react-bootstrap/Card';
 
 export const Employee = () => {
 
 //    const { t } = useTranslation()
 
     return (
-    <CardBody>
+    <Card.Body>
        <Card className="m-3">
           <div className="row g-0">
              <div className="col-md-1 m-2">
@@ -26,21 +22,21 @@ export const Employee = () => {
                 />
              </div>
              <div className="col-md-8">
-                <CardBody>
-                   <CardTitle>
+                <Card.Body>
+                   <Card.Title>
                       <h5>Gunnar Rønneberg</h5>
-                   </CardTitle>
-                   <CardTitle>
+                   </Card.Title>
+                   <Card.Title>
                       <h6>page.employee.role.ceo</h6>
-                   </CardTitle>
+                   </Card.Title>
                    <ul>
                       <li><a href="/public/cv(id=guro)"><span>page.employee.cv</span></a></li>
                       <li><a href="/public/cv/projects(id=guro)"><span>page.employee.projects</span></a></li>
                    </ul>
-                </CardBody>
+                </Card.Body>
              </div>
           </div>
        </Card>
-    </CardBody>
+    </Card.Body>
     )
 }

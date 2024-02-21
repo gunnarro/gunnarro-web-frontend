@@ -2,21 +2,12 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+// boots6rap icon import
 import { Trash } from 'react-bootstrap-icons'
-import {
-  Container,
-  Collapse,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-  Button,
-  Navbar,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText,
-} from 'reactstrap';
 
 // project import
 import { TodoItemTable } from 'components/TodoItemTable';
@@ -36,15 +27,15 @@ export const TodoDetailsView = () => {
     <Container>
         <h4>todoId: {todoId}</h4>
         <Card className="m-4">
-           <CardHeader>
-                <Navbar>
-                   <NavbarText>Todo item list</NavbarText>
-                   <Button onClick={() => navigateTodoItemNew()} size="sm" className="bnt-sm float-end" color="primary" outline>Add</Button>
+           <Card.Header>
+                 <Navbar className="justify-content-between">
+                   <Navbar.Text>Todo item list</Navbar.Text>
+                   <Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >Add</Button>
                </Navbar>
-           </CardHeader>
-                <CardBody>
+           </Card.Header>
+                <Card.Body>
                      <TodoItemTable todoId={todoId}/>
-                </CardBody>
+                </Card.Body>
         </Card>
     </Container>
     )

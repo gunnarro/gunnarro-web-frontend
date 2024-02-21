@@ -1,10 +1,7 @@
 //import { useTranslation } from 'react-i18next';
 import { Employee } from "./Employee"
 // bootstrap import
-import {
-  Card,
-  CardHeader
-} from 'reactstrap';
+import Card from 'react-bootstrap/Card';
 
 export const EmployeeList = () => {
 
@@ -12,7 +9,7 @@ export const EmployeeList = () => {
 
     return (
         <Card className="m-3">
-            <CardHeader><h3>page.employees.title</h3></CardHeader>
+            <Card.Header><h3>page.employees.title</h3></Card.Header>
             <Employee />
         </Card>
     )

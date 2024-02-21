@@ -2,21 +2,11 @@ import React, { FC, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Toast from 'react-bootstrap/Toast';
 // bootstrap import
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-  FormGroup,
-  Label,
-  Input,
-  Form,
-  FormFeedback,
-  FormText,
-  ButtonGroup,
-  Button,
-  Alert,
-} from 'reactstrap';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from 'components/TodoRestApi';
 
@@ -33,6 +23,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = ({ userName }) => {
            navigate(-1); // same as browser back button
         };
     // form constants
+    const [validated, setValidated] = useState(false);
     const [formErrors, setFormErrors] = useState({});
     const [form, setForm] = useState({
         todoId: todoId,
@@ -68,86 +59,83 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = ({ userName }) => {
          TodoRestApi.post("/todos/" + todoId + "/items", todoItemData)
             .then((response) => navigateTodoItems())
             .catch((error) => <Alert variant="error">Error calling todo service rest api, error:  {error}</Alert>);
-
-
     }
+
+    var validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
 
   return (
   <Card className="m-4">
        <Alert variant="warning">Error calling todo service rest api, error</Alert>
-       <CardHeader>
-           <CardTitle>New Todo Item</CardTitle>
-       </CardHeader>
-       <CardBody>
-           <Form onSubmit={handleFormSubmit}>
-            <Input
+       <Card.Header>
+           <Card.Title>New Todo Item</Card.Title>
+       </Card.Header>
+       <Card.Body>
+           <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+            <Form.Control
                 id="todoId"
                 type="text"
-                value={form.todoId}
+                placeholder={form.todoId}
               />
-              <FormGroup>
-                        <Label for="created_by">Created by</Label>
-                        <Input valid
+              <Form.Group>
+                        <Form.Label for="created_by">Created by</Form.Label>
+                          <Form.Control
+                          autoFocus
+                          required
                           id="created_by"
                           type="text"
-                          value={form.created_by}
+                          placeholder={form.created_by}
                           onChange={handleFieldChange}
-                          autoFocus
+                          isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(form.created_by)}
                         />
-                <FormFeedback valid>
-                      put input validation errors here
-               </FormFeedback>
-                <FormText>
-                     Example help text that remains unchanged.
-                   </FormText>
-               </FormGroup>
-               <FormGroup>
-                  <Label for="name">Name</Label>
-                  <Input invalid
+                <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+               </Form.Group>
+               <Form.Group>
+                  <Form.Label for="name">Name</Form.Label>
+                  <Form.Control
                     id="name"
                     type="text"
                     value={form.name}
                     onChange={handleFieldChange}
                   />
-                  <FormFeedback invalid >
-                                        put input validation errors here
-                                 </FormFeedback>
-                </FormGroup>
-                 <FormGroup>
-                  <Label for="description">Description</Label>
-                  <Input
+                  <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                </Form.Group>
+                 <Form.Group>
+                  <Form.Label for="description">Description</Form.Label>
+                  <Form.Control
                     id="description"
                     type="text"
                      value={form.description}
                     onChange={handleFieldChange}
                   />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="action">Action</Label>
-                  <Input
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label for="action">Action</Form.Label>
+                  <Form.Control
                     id="action"
                     type="text"
                      value={form.action}
                     onChange={handleFieldChange}
                   />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="assigned_to">Assigned to</Label>
-                  <Input
+                   <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label for="assigned_to">Assigned to</Form.Label>
+                  <Form.Control
                     id="assigned_to"
                     type="text"
                      value={form.assigned_to}
                     onChange={handleFieldChange}
                   />
-                </FormGroup>
-                <FormGroup>
+                   <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
                       <div className="float-end">
-                        <Button onClick={() => navigateTodoItems()} size="sm" className="m-1" color="secondary" outline>Cancel</Button>
-                        <Button type="submit" size="sm" className="m-1" color="primary" outline>Save</Button>
+                         <Button onClick={() => navigateTodoItems()} className="m-1" variant="outline-secondary" >Cancel</Button>
+                         <Button type="submit" className="" variant="outline-primary" >Save</Button>
                       </div>
-               </FormGroup>
+               </Form.Group>
             </Form>
-        </CardBody>
+        </Card.Body>
     </Card>
   );
 }
