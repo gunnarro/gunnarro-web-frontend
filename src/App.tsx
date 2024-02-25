@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // bootstrap import
 import Container from 'react-bootstrap/Container';
@@ -7,13 +8,12 @@ import { Header } from './components/Header';
 import { TodoForm } from './components/TodoForm';
 import { TodoItemForm } from './components/TodoItemForm';
 import { Home } from './pages/Home';
-import { Todo } from './pages/Todo';
-import { TodoListView } from './pages/TodoListView';
-import { TodoHistoryView } from './pages/TodoHistoryView';
-import { TodoDetailsView } from './pages/TodoDetailsView';
 import { About } from './pages/About';
 import { EmployeeList } from './pages/EmployeeList';
-import { Suspense } from 'react';
+import { Todo } from './pages/todo/Todo';
+import { TodoListView } from './pages/todo/TodoListView';
+import { TodoHistoryView } from './pages/todo/TodoHistoryView';
+import { TodoDetailsView } from './pages/todo/TodoDetailsView';
 
 const App = () => {
 

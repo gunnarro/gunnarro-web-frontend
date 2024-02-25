@@ -10,7 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Trash } from 'react-bootstrap-icons'
 
 // project import
-import { TodoItemTable } from 'components/TodoItemTable';
+import { TodoItemTable } from '../../components/TodoItemTable';
 
 export const TodoDetailsView = () => {
     // the todoId is provided through the uri.

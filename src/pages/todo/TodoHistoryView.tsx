@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // project import
-import { TodoHistoryTable } from '../components/TodoHistoryTable';
+import { TodoHistoryTable } from '../../components/TodoHistoryTable';
 
 export const TodoHistoryView = () => {
     const navigate = useNavigate();
