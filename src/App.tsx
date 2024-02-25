@@ -15,6 +15,9 @@ import { TodoListView } from './pages/todo/TodoListView';
 import { TodoHistoryView } from './pages/todo/TodoHistoryView';
 import { TodoDetailsView } from './pages/todo/TodoDetailsView';
 
+import { Cv } from './pages/cv/Cv';
+import { Projects } from './pages/cv/Projects';
+
 const App = () => {
 
   return (
@@ -25,6 +28,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/employees' element={<EmployeeList />} />
+          <Route path='/employees/:employeeId/cv' element={<Cv />} />
+           <Route path='/employees/:employeeId/projects' element={<Projects />} />
           <Route path='/todo' element={<TodoForm />} />
           <Route path='/todo/:userName' element={<TodoListView />} />
           <Route path='/todo/:todoId/details' element={<TodoDetailsView />} />
