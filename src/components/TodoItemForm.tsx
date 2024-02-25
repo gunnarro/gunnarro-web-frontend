@@ -8,7 +8,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 // project import
-import { TodoRestApi } from 'components/TodoRestApi';
+import { TodoRestApi } from '../services//TodoRestApi';
 
 interface TodoItemFormProps {
   userName: string;

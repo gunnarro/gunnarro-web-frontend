@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
 import { Table } from 'reactstrap';
 // project import
-import { TodoRestApi } from 'components/TodoRestApi';
-import { showConfirmDeleteDialog } from 'components/ConfirmModalDialog';
+import { TodoRestApi } from '../services//TodoRestApi';
+import { showConfirmDeleteDialog } from '../components/ConfirmModalDialog';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.

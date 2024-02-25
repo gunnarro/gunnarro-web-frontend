@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // project import
-import { TodoRestApi } from 'components/TodoRestApi';
+import { TodoRestApi } from '../services/TodoRestApi';
 
 export const TodoForm = () => {
     const navigate = useNavigate();
