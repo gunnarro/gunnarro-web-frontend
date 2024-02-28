@@ -30,8 +30,8 @@ export const Employee = () => {
                       <h6>page.employee.role.ceo</h6>
                    </Card.Title>
                    <ul>
-                      <li><a href="/public/cv(id=guro)"><span>page.employee.cv</span></a></li>
-                      <li><a href="/public/cv/projects(id=guro)"><span>page.employee.projects</span></a></li>
+                      <li><a href="/employees/guro/cv"><span>page.employee.cv</span></a></li>
+                      <li><a href="/employees/guro/projects"><span>page.employee.projects</span></a></li>
                    </ul>
                 </Card.Body>
              </div>

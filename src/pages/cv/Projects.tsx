@@ -2,8 +2,6 @@ export const Projects = () => {
 return (
 <section id="projects" className="bsb-timeline-4 p-1">
     <div className="resume-section-content">
-        <h2 className="mb-3">Prosjekter</h2>
-        <hr className="bg-primary"/>
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-10 col-md-12 col-xl-10 col-xxl-9">

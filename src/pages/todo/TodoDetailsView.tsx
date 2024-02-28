@@ -8,7 +8,6 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // boots6rap icon import
 import { Trash } from 'react-bootstrap-icons'
-
 // project import
 import { TodoItemTable } from '../../components/TodoItemTable';
 

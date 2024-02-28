@@ -7,6 +7,7 @@ import { CvHeader } from './CvHeader';
 import { CvSkills } from './CvSkills';
 import { CvExperience } from './CvExperience';
 import { CvEducation } from './CvEducation';
+import { Projects } from './Projects';
 // css project import
 import "../../assets/timeline-4-custom.css";
 
@@ -35,6 +36,12 @@ export const Cv = () => {
               <Accordion.Body>
                   <CvEducation/>
               </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="3">
+            <Accordion.Header><h4>Projects</h4></Accordion.Header>
+            <Accordion.Body>
+                <Projects/>
+            </Accordion.Body>
           </Accordion.Item>
         </Accordion>
     </Container>
