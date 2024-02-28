@@ -36,10 +36,15 @@ export const About = () => {
                          <li><a href="https://github.com/gunnarro/gunnarro-web-frontend/actions">Github Actions</a></li>
                          <li><a href="https://maven.apache.org/">Maven</a></li>
                          <li><a href="https://github.com/GoogleContainerTools/jib">Jib</a></li>
+                         <li><a href="https://github.com/GoogleContainerTools/jib">dockerhub</a></li>
                      </ul>
                      <Card.Title>Security scan</Card.Title>
                      <ul>
                          <li><a href="https://app.snyk.io/org/gunnarro">Snyk</a></li>
+                     </ul>
+                     <Card.Title>API check</Card.Title>
+                     <ul>
+                        <li><a href="http://opensource.zalando.com/zally/">zally</a></li>
                      </ul>
                      <Card.Title>QA</Card.Title>
                      <ul>
