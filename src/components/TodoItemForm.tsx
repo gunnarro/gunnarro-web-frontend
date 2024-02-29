@@ -14,7 +14,7 @@ interface TodoItemFormProps {
   userName: string;
 }
 
-export const TodoItemForm: React.FC<TodoItemFormProps> = ({ userName }) => {
+export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     // the todoId is provided through the uri.
     const { todoId } = useParams();
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = ({ userName }) => {
     const [formErrors, setFormErrors] = useState({});
     const [form, setForm] = useState({
         todoId: todoId,
-        created_by: userName,
+        created_by: props.userName,
         name: '',
         description: '',
         action: '',

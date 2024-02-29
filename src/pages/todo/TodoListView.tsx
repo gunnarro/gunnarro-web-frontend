@@ -1,5 +1,5 @@
 // react import
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
@@ -28,7 +28,9 @@ export const TodoListView = () => {
                 </Navbar>
             </Card.Header>
             <Card.Body>
+               <Suspense fallback={<div>Loading data...</div>}>
                 <TodoTable userName={userName}/>
+               </Suspense>
             </Card.Body>
         </Card>
     </Container>

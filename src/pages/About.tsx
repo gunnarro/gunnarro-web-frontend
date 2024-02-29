@@ -18,6 +18,8 @@ export const About = () => {
                      <Card.Title>Open Source projects</Card.Title>
                      <ul>
                          <li><a href="https://spring.io/projects/spring-boot">Spring Boot</a></li>
+                         <li><a href="https://react.dev/">React</a></li>
+                         <li><a href="https://nodejs.org/en">Node.js</a></li>
                          <li><a href="https://www.mysql.com/">mysql</a></li>
                          <li><a href="https://useiconic.com/open">OpenIconic</a></li>
                      </ul>
@@ -29,14 +31,13 @@ export const About = () => {
                      <Card.Title>Source</Card.Title>
                      <ul>
                          <li><a href="https://github.com/gunnarro/gunnarro-web-frontend">Github</a></li>
-                         <li><a href="https://hub.docker.com/u/gunnarro">Docker hub</a></li>
+                          <li><a href="https://hub.docker.com/repositories/gunnarro">docker hub</a></li>
                      </ul>
                      <Card.Title>Build and deploy</Card.Title>
                      <ul>
                          <li><a href="https://github.com/gunnarro/gunnarro-web-frontend/actions">Github Actions</a></li>
                          <li><a href="https://maven.apache.org/">Maven</a></li>
                          <li><a href="https://github.com/GoogleContainerTools/jib">Jib</a></li>
-                         <li><a href="https://github.com/GoogleContainerTools/jib">dockerhub</a></li>
                      </ul>
                      <Card.Title>Security scan</Card.Title>
                      <ul>

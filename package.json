@@ -1,6 +1,7 @@
 {
-  "name": "gunnarro-web-frontent-master",
+  "name": "gunnarro-web",
   "version": "0.1.0",
+  "description": "powered by gunnarro as",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

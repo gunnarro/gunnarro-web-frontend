@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 

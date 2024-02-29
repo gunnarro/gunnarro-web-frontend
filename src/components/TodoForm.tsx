@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
+import { AlertBox } from '../components/Alert';
 
 export const TodoForm = () => {
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ export const TodoForm = () => {
        navigate(-1); // same as browser back button
     };
 
+    const [error, setError] = useState("");
     const [validated, setValidated] = useState(false);
     const [todoForm, setTodoForm] = useState({
         created_by: '',
@@ -32,6 +35,8 @@ export const TodoForm = () => {
 
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        // clear all previous error
+        setError("")
         // Check form input
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -49,17 +54,26 @@ export const TodoForm = () => {
             // send data
              TodoRestApi.post("/todos", todoData)
                .then((response) => navigateTodos())
-               .catch((error) => validationErrorMsg = error);
+               .catch(function (error) {
+                     if (error.response) {
+                        //alert( "data: " + error.response.data + ", status: " + error.response.status + ", headers: " + error.response.headers)
+                        setError(error.response.status);
+                    } else {
+                        setError(error.message);
+                    }
+               });
          }
          setValidated(true);
     }
 
-    let validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
+  let validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
 
   return (
-    <Card className="m-4">
+  <div className="m-4">
+    {error && <AlertBox message={error} />}
+    <Card>
      <Card.Header>
-         <Card.Title>New Todo task</Card.Title>
+        <Card.Title>New Todo task</Card.Title>
      </Card.Header>
      <Card.Body>
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -107,5 +121,6 @@ export const TodoForm = () => {
         </Form>
      </Card.Body>
     </Card>
+  </div>
   );
 }
