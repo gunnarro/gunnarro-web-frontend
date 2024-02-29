@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+// react import
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // bootstrap import
 import Container from 'react-bootstrap/Container';
@@ -14,34 +14,30 @@ import { Todo } from './pages/todo/Todo';
 import { TodoListView } from './pages/todo/TodoListView';
 import { TodoHistoryView } from './pages/todo/TodoHistoryView';
 import { TodoDetailsView } from './pages/todo/TodoDetailsView';
-
 import { Cv } from './pages/cv/Cv';
 import { Projects } from './pages/cv/Projects';
 
 const App = () => {
-
   return (
-    <Suspense fallback='loading'>
-      <BrowserRouter>
+  <Container>
       <Header />
-      <Container>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/employees' element={<EmployeeList />} />
-          <Route path='/employees/:employeeId/cv' element={<Cv />} />
-          <Route path='/employees/:employeeId/projects' element={<Projects />} />
-          <Route path='/todo' element={<TodoForm />} />
-          <Route path='/todo/:userName' element={<TodoListView />} />
-          <Route path='/todo/:todoId/details' element={<TodoDetailsView />} />
-          <Route path='/todo/:todoId/history' element={<TodoHistoryView />} />
-          <Route path='/todo/new' element={<TodoForm />} />
-          <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />
-          <Route path='/about' element={<About />} />
-        </Routes>
-        </Container>
-        <Footer />
-      </BrowserRouter>
-    </Suspense>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/employees' element={<EmployeeList />} />
+              <Route path='/employees/:employeeId/cv' element={<Cv />} />
+              <Route path='/employees/:employeeId/projects' element={<Projects />} />
+              <Route path='/todo' element={<TodoForm />} />
+              <Route path='/todo/:userName' element={<TodoListView />} />
+              <Route path='/todo/:todoId/details' element={<TodoDetailsView />} />
+              <Route path='/todo/:todoId/history' element={<TodoHistoryView />} />
+              <Route path='/todo/new' element={<TodoForm />} />
+              <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />
+              <Route path='/about' element={<About />} />
+            </Routes>
+          </BrowserRouter>
+      <Footer />
+  </Container>
   )
 }
 export default App
