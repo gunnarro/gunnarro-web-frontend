@@ -6,7 +6,7 @@ import axios from "axios";
 //
 // config axios with todo rest service properties, user and pwd should not be placed here, still in react learning mode.
 export const TodoRestApi = axios.create({
-  baseURL: process.env.REACT_APP_TODO_SERVICE_URL,
+  baseURL: 'https://localhost:9998',
   timeout: 50000,
   auth: {
       username: 'my-service-name',
@@ -17,3 +17,5 @@ export const TodoRestApi = axios.create({
     'Content-Type': 'application/json; charset=utf-8',
   }
 });
+
+

@@ -5,10 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
+// service import
+import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../api";
 
 export const TodoForm = () => {
     const navigate = useNavigate();
@@ -51,17 +54,39 @@ export const TodoForm = () => {
                   description: todoForm.description,
                   status: todoForm.status
             });
+            // new send data
+
+            const todoDto : TodoDto = {
+                  createdByUser: todoForm.created_by,
+                  lastModifiedByUser: todoForm.created_by,
+                  name: todoForm.name,
+                  description: todoForm.description,
+                  status: todoForm.status,
+            };
+
+            const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
+
+                todoApi.createTodo(todoDto)
+                    .then((response) => navigateTodos())
+                    .catch(function (error) {
+                         if (error.response && error.response.headers["content-type"] == 'application/json') {
+                            setError(error.response.data["description"]);
+                        } else {
+                            setError(error.message);
+                        }
+                    });
+
             // send data
+            /*
              TodoRestApi.post("/todos", todoData)
                .then((response) => navigateTodos())
                .catch(function (error) {
-                     if (error.response) {
-                        //alert( "data: " + error.response.data + ", status: " + error.response.status + ", headers: " + error.response.headers)
-                        setError(error.response.status);
+                     if (error.response && error.response.headers["content-type"] == 'application/json') {
+                        setError(error.response.data["description"]);
                     } else {
                         setError(error.message);
                     }
-               });
+               });*/
          }
          setValidated(true);
     }
@@ -78,20 +103,22 @@ export const TodoForm = () => {
      <Card.Body>
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
            <Form.Group controlId="validationCreatedBy">
-                  <Form.Label for="created_by">Created by</Form.Label>
-                  <Form.Control
-                    autoFocus
-                    required
-                    id="created_by"
-                    type="text"
-                    placeholder={todoForm.created_by}
-                    onChange={handleFieldChange}
-                    isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.created_by)}
-                  />
-                  <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+              <Form.FloatingLabel controlId="created_by" label="created by" className="mb-3">
+              <Form.Control
+                autoFocus
+                required
+                id="created_by"
+                type="text"
+                placeholder={todoForm.created_by}
+                onChange={handleFieldChange}
+                isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.created_by)}
+              />
+              </Form.FloatingLabel>
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
            </Form.Group>
            <Form.Group controlId="validationName">
-              <Form.Label for="name">Name</Form.Label>
+              <Form.FloatingLabel controlId="name" label="name" className="mb-3">
               <Form.Control
                 required
                 id="name"
@@ -101,9 +128,11 @@ export const TodoForm = () => {
                 isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.name)}
               />
               <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+              </Form.FloatingLabel>
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
            </Form.Group>
            <Form.Group controlId="validationDescription">
-              <Form.Label for="description">Description</Form.Label>
+              <Form.FloatingLabel controlId="description" label="description" className="mb-3">
               <Form.Control
                 id="description"
                 type="text"
@@ -111,12 +140,14 @@ export const TodoForm = () => {
                 onChange={handleFieldChange}
               />
               <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+              </Form.FloatingLabel>
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
            </Form.Group>
            <Form.Group>
-                  <div className="float-end">
-                    <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >Cancel</Button>
-                    <Button type="submit" className="" variant="outline-primary" >Save</Button>
-                  </div>
+              <div className="float-end">
+                <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >Cancel</Button>
+                <Button type="submit" className="" variant="outline-primary" >Save</Button>
+              </div>
            </Form.Group>
         </Form>
      </Card.Body>
