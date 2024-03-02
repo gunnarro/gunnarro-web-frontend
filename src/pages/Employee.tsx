@@ -1,11 +1,10 @@
-//import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from 'react-i18next';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 
 export const Employee = () => {
 
-//    const { t } = useTranslation()
+    const { t } = useTranslation()
 
     return (
     <Card.Body>
@@ -27,11 +26,11 @@ export const Employee = () => {
                       <h5>Gunnar Rønneberg</h5>
                    </Card.Title>
                    <Card.Title>
-                      <h6>page.employee.role.ceo</h6>
+                      <h6>{t("ceo")}</h6>
                    </Card.Title>
                    <ul>
-                      <li><a href="/employees/guro/cv"><span>page.employee.cv</span></a></li>
-                      <li><a href="/employees/guro/projects"><span>page.employee.projects</span></a></li>
+                      <li><a href="/employees/guro/cv"><span>{t("cv")}</span></a></li>
+                      <li><a href="/employees/guro/projects"><span>{t("projects")}</span></a></li>
                    </ul>
                 </Card.Body>
              </div>

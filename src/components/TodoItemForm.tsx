@@ -6,9 +6,10 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Alert from 'react-bootstrap/Alert';
 // project import
-import { TodoRestApi } from '../services//TodoRestApi';
+import { TodoRestApi } from '../services/TodoRestApi';
 
 interface TodoItemFormProps {
   userName: string;
@@ -77,56 +78,62 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                 placeholder={form.todoId}
               />
               <Form.Group>
-                        <Form.Label for="created_by">Created by</Form.Label>
-                          <Form.Control
-                          autoFocus
-                          required
-                          id="created_by"
-                          type="text"
-                          placeholder={form.created_by}
-                          onChange={handleFieldChange}
-                          isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(form.created_by)}
-                        />
-                <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
-               </Form.Group>
-               <Form.Group>
-                  <Form.Label for="name">Name</Form.Label>
-                  <Form.Control
-                    id="name"
-                    type="text"
-                    value={form.name}
-                    onChange={handleFieldChange}
-                  />
-                  <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
-                </Form.Group>
+                <Form.FloatingLabel controlId="created_by" label="created by" className="mb-3">
+                      <Form.Control
+                      autoFocus
+                      required
+                      id="created_by"
+                      type="text"
+                      placeholder={form.created_by}
+                      onChange={handleFieldChange}
+                      isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(form.created_by)}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                </Form.FloatingLabel>
+              </Form.Group>
+              <Form.Group>
+                <Form.FloatingLabel controlId="name" label="name" className="mb-3">
+                      <Form.Control
+                        id="name"
+                        type="text"
+                        value={form.name}
+                        onChange={handleFieldChange}
+                      />
+                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                </Form.FloatingLabel>
+              </Form.Group>
                  <Form.Group>
-                  <Form.Label for="description">Description</Form.Label>
-                  <Form.Control
-                    id="description"
-                    type="text"
-                     value={form.description}
-                    onChange={handleFieldChange}
-                  />
+                  <Form.FloatingLabel controlId="description" label="description" className="mb-3">
+                      <Form.Control
+                        id="description"
+                        type="text"
+                         value={form.description}
+                        onChange={handleFieldChange}
+                      />
+                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                      </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label for="action">Action</Form.Label>
-                  <Form.Control
-                    id="action"
-                    type="text"
-                     value={form.action}
-                    onChange={handleFieldChange}
-                  />
-                   <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                    <Form.FloatingLabel controlId="action" label="action" className="mb-3">
+                      <Form.Control
+                        id="action"
+                        type="text"
+                         value={form.action}
+                        onChange={handleFieldChange}
+                      />
+                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                    </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label for="assigned_to">Assigned to</Form.Label>
-                  <Form.Control
-                    id="assigned_to"
-                    type="text"
-                     value={form.assigned_to}
-                    onChange={handleFieldChange}
-                  />
-                   <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                    <Form.FloatingLabel controlId="assigned_to" label="assigned to" className="mb-3">
+                      <Form.Control
+                        id="assigned_to"
+                        type="text"
+                         value={form.assigned_to}
+                        onChange={handleFieldChange}
+                      />
+                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                    </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
                       <div className="float-end">

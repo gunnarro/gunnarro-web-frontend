@@ -1,0 +1,18 @@
+{
+  "home":"Home",
+  "about":"About",
+  "employees":"Employees",
+  "todo":"Todo",
+  "cv":"CV",
+  "projects":"Projects",
+  "ceo":"Chief executive officer",
+  "createdBy":"Created by",
+  "name":"Name",
+  "description":"Description",
+  "status":"Status",
+  "assignTo":"Assigned to",
+  "save":"Save",
+  "cancel":"Cancel",
+  "todoFormTitle":"New Todo list",
+  "todoItemFormTitle":"New Todo item"
+}

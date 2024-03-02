@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // bootstrap import
 import Container from 'react-bootstrap/Container';
 // project import
+import "./i18n";
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { TodoForm } from './components/TodoForm';

@@ -1,4 +1,5 @@
 // react import
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 // bootstrap import
@@ -11,9 +12,12 @@ import Alert from 'react-bootstrap/Alert';
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
-import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../api";
+import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../services/todo/api";
 
 export const TodoForm = () => {
+
+    const { t } = useTranslation()
+
     const navigate = useNavigate();
     const navigateTodos = () => {
        //navigate('/todos');
@@ -54,8 +58,8 @@ export const TodoForm = () => {
                   description: todoForm.description,
                   status: todoForm.status
             });
-            // new send data
-
+            // send data
+            // map from form data into todo api model
             const todoDto : TodoDto = {
                   createdByUser: todoForm.created_by,
                   lastModifiedByUser: todoForm.created_by,
@@ -66,27 +70,15 @@ export const TodoForm = () => {
 
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
-                todoApi.createTodo(todoDto)
-                    .then((response) => navigateTodos())
-                    .catch(function (error) {
-                         if (error.response && error.response.headers["content-type"] == 'application/json') {
-                            setError(error.response.data["description"]);
-                        } else {
-                            setError(error.message);
-                        }
-                    });
-
-            // send data
-            /*
-             TodoRestApi.post("/todos", todoData)
-               .then((response) => navigateTodos())
-               .catch(function (error) {
+            todoApi.createTodo(todoDto)
+                .then((response) => navigateTodos())
+                .catch(function (error) {
                      if (error.response && error.response.headers["content-type"] == 'application/json') {
                         setError(error.response.data["description"]);
                     } else {
                         setError(error.message);
                     }
-               });*/
+                });
          }
          setValidated(true);
     }
@@ -98,12 +90,12 @@ export const TodoForm = () => {
     {error && <AlertBox message={error} />}
     <Card>
      <Card.Header>
-        <Card.Title>New Todo task</Card.Title>
+        <Card.Title>{t("todoFormTitle")}</Card.Title>
      </Card.Header>
      <Card.Body>
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
            <Form.Group controlId="validationCreatedBy">
-              <Form.FloatingLabel controlId="created_by" label="created by" className="mb-3">
+              <Form.FloatingLabel controlId="created_by" label={t("createdBy")} className="mb-3">
               <Form.Control
                 autoFocus
                 required
@@ -113,12 +105,11 @@ export const TodoForm = () => {
                 onChange={handleFieldChange}
                 isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.created_by)}
               />
+              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
               </Form.FloatingLabel>
-              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
            </Form.Group>
            <Form.Group controlId="validationName">
-              <Form.FloatingLabel controlId="name" label="name" className="mb-3">
+              <Form.FloatingLabel controlId="name" label={t("name")} className="mb-3">
               <Form.Control
                 required
                 id="name"
@@ -132,7 +123,7 @@ export const TodoForm = () => {
               <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
            </Form.Group>
            <Form.Group controlId="validationDescription">
-              <Form.FloatingLabel controlId="description" label="description" className="mb-3">
+              <Form.FloatingLabel controlId="description" label={t("description")} className="mb-3">
               <Form.Control
                 id="description"
                 type="text"
@@ -145,8 +136,8 @@ export const TodoForm = () => {
            </Form.Group>
            <Form.Group>
               <div className="float-end">
-                <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >Cancel</Button>
-                <Button type="submit" className="" variant="outline-primary" >Save</Button>
+                <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >{t("cancel")}</Button>
+                <Button type="submit" className="" variant="outline-primary" >{t("save")}</Button>
               </div>
            </Form.Group>
         </Form>
