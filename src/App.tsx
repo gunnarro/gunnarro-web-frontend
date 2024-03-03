@@ -17,6 +17,7 @@ import { TodoHistoryView } from './pages/todo/TodoHistoryView';
 import { TodoDetailsView } from './pages/todo/TodoDetailsView';
 import { Cv } from './pages/cv/Cv';
 import { Projects } from './pages/cv/Projects';
+import { Availability } from './pages/employee/Availability';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
               <Route path='/employees' element={<EmployeeList />} />
               <Route path='/employees/:employeeId/cv' element={<Cv />} />
               <Route path='/employees/:employeeId/projects' element={<Projects />} />
+              <Route path='/employees/:employeeId/availability' element={<Availability />} />
               <Route path='/todo' element={<TodoForm />} />
               <Route path='/todo/:userName' element={<TodoListView />} />
               <Route path='/todo/:todoId/details' element={<TodoDetailsView />} />

@@ -31,6 +31,7 @@ export const Employee = () => {
                    <ul>
                       <li><a href="/employees/guro/cv"><span>{t("cv")}</span></a></li>
                       <li><a href="/employees/guro/projects"><span>{t("projects")}</span></a></li>
+                      <li><a href="/employees/guro/availability"><span>{t("availability")}</span></a></li>
                    </ul>
                 </Card.Body>
              </div>
