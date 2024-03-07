@@ -11,10 +11,22 @@
   "description": "Description",
   "status": "Status",
   "assignTo": "Assigned to",
-  "save": "Save",
-  "cancel": "Cancel",
   "todoFormTitle": "New Todo list",
   "todoItemFormTitle": "New Todo item",
+  "applicationErrorTitle": "Application error!",
+
+  "validationErrorMsg": "Please enter a valid username (alphanumeric characters only).",
+
+  "userName": "Username",
+  "password": "Password",
+  "rememberMe": "Remember me",
+  "loginErrorMsg": "Login failed, wrong username or password!",
+
+  "login": "Login",
+  "save": "Save",
+  "cancel": "Cancel",
+  "add": "Add",
+  "delete": "Delete",
 
   "availabilityTitle": "Availability",
   "availabilityBasicCondition": "Standard betingelser.",

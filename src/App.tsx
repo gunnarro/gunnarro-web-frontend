@@ -8,6 +8,7 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { TodoForm } from './components/TodoForm';
 import { TodoItemForm } from './components/TodoItemForm';
+import { Login } from './pages/Login';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { EmployeeList } from './pages/EmployeeList';
@@ -21,11 +22,12 @@ import { Availability } from './pages/employee/Availability';
 
 const App = () => {
   return (
-  <Container>
+  <Container fluid>
       <Header />
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
               <Route path='/employees' element={<EmployeeList />} />
               <Route path='/employees/:employeeId/cv' element={<Cv />} />
               <Route path='/employees/:employeeId/projects' element={<Projects />} />

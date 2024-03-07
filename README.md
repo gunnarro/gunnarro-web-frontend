@@ -29,6 +29,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## installed modules
 - npm install react-i18next
+- npm install i18next-http-backend
 - npm install react-router-dom
 - npm install bootstrap react-bootstrap-icons reactstrap
 - npm install material-table @material-ui/core
@@ -36,18 +37,44 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install axios
 - npm install react-hook-form
 - npm install @types/react @types/react-dom
+- 
 
 ## Tools
 ### OpenAPI Generator
-See [openapi-generator github](https://github.com/OpenAPITools/openapi-generator) and [openapi-generator tech](https://openapi-generator.tech/)
+Resources: 
+- [openapi-generator github](https://github.com/OpenAPITools/openapi-generator)
+- [openapi-generator tech](https://openapi-generator.tech/)
+- [how-to-use-oas-generator](https://hmos.dev/en/how-to-use-oas-generator)
+- [typescript](https://openapi-generator.tech/docs/generators/typescript/)
 
 Install the latest version of the cli: 
 ```
 npm install @openapitools/openapi-generator-cli -g
-```
+``` 
 Generate Api client from the rest service yaml file:
 ```
 openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/api
+```
+Where to place the generated code:
+- create a library
+- have a dedicated folder, not under the src directory
+
+
+can also use a configuration file, openapi-generator-config-todo-service.yaml, as follows:
+```
+generatorName: typescript-axios
+outputDir: src/api
+cleanupOutput: true
+inputSpec: docs/api/todo-service-api.yaml
+additionalProperties:
+supportsES6: true
+```
+
+#### Use generated code example
+```
+import { TodoServiceApiFactory } from "../api";
+
+const todoApi = TodoServiceApiFactory();
 ```
 
 ## uninstall module
@@ -57,6 +84,61 @@ npm uninstall material-table
 ## Axios Call Rest API
 ref [Axios](https://www.npmjs.com/package/axios)
 
+## CI/CD
+- run github action build script, snyk security scan, sonarqube, build, test.
+- run github action push image to docker hub
+- run github action deploy image to azure
+- 
+## Docker
+### Build docker image
+```
+```
+
+### Push to docker hub
+```
+docker push gunnarro/gunnarro-web-frontend:latest
+```
+
+
+### Run docker image
+
+Docker run creates a new container of an image. We can create as many clones of the same image as possible. 
+On the other hand, docker start launches a previously stopped container.
+
+```
+docker run -d -p 3000:3000 --name gunnarro-web-frontend gunnarro-web-frontend:latest
+```
+where 'name' is the container name, if omitted, docker wil generate a container name.
+
+or get docker image from docker hub (deployed by the project github action).
+By default, docker pull pulls images from Docker Hub.
+```
+docker pull gunnarro/gunnarro-web-frontend:latest
+# or dockerhub (use docker.io)
+docker image pull docker.io/gunnarro/gunnarro-web-frontend
+# then run
+docker run -d -p 8080:3000 --name gunnarro-web-frontend gunnarro-web-frontend:latest
+```
+### Start docker image
+```
+docker start gunnarro-web-frontend
+```
+
+### Stop docker image
+```
+docker stop gunnarro-web-frontend
+```
+
+### remove docker image/container
+```
+docker rmi gunnarro-web-frontend:latest
+docker container rm <container-id>
+```
+
+### docker clean up
+```
+docker system prune
+```
 
 ## Resources
 - [React libraries](https://www.robinwieruch.de/react-libraries/)
@@ -65,6 +147,10 @@ ref [Axios](https://www.npmjs.com/package/axios)
 - [axios - github](https://github.com/axios/axios)
 - [typescript](https://react.dev/learn/typescript)
 - [github action deploy](https://akoskm.com/how-to-publish-docker-images-to-docker-hub-with-github-actions)
+- [react docker examples](https://docs.docker.com/samples/react/)
+- [best-practices-to-containerize-nodejs](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/)
+- [azure secure n-tier app](https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app)
+- [docker desktop on ubuntu](https://docs.docker.com/desktop/install/ubuntu/)
 
 ## React
 install npm

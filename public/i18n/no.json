@@ -11,10 +11,22 @@
   "description": "Beskrivelse",
   "status": "Status",
   "assignTo": "Tildelt til",
-  "save": "Lagre",
-  "cancel": "Avbryt",
   "todoFormTitle": "Ny Todo liste",
   "todoItemFormTitle": "Ny Todo task",
+  "applicationErrorTitle": "Application error!",
+
+  "validationErrorMsg": "Vennligst skriv inn ett gyldig navn (alphanumeric characters only).",
+
+  "userName": "Brukernavn",
+  "password": "Passord",
+  "rememberMe": "Husk meg",
+  "loginErrorMsg": "Login feilet, sjekk brukernavm og/eller passord",
+
+  "login": "Login",
+  "save": "Lagre",
+  "cancel": "Avbryt",
+  "add": "Legg til",
+  "delete": "Slett",
 
   "availabilityTitle": "Tilgjengelighet",
   "availabilityBasicCondition": "Basic conditions.",
