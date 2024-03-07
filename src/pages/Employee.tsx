@@ -13,7 +13,7 @@ export const Employee = () => {
              <div className="col-md-1 m-2">
                 <img className="rounded float-start"
                 alt="gunnarro ronneberg"
-                src="/gunnarro-as-40.png"
+                src="/gr-tumb.jpg"
                 style={{
                 height: 100,
                 width: 100

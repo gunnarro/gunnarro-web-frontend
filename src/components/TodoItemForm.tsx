@@ -1,6 +1,7 @@
+// react import
+import { useTranslation } from 'react-i18next';
 import React, { FC, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Toast from 'react-bootstrap/Toast';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -10,12 +11,16 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
+import { AlertBox } from '../components/Alert';
+// service import
+import { TodoServiceApiFactory, TodoItemDto, ErrorResponse, Configuration } from "../services/todo/api";
 
 interface TodoItemFormProps {
   userName: string;
 }
 
 export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
+    const { t } = useTranslation()
     // the todoId is provided through the uri.
     const { todoId } = useParams();
     const navigate = useNavigate();
@@ -24,10 +29,10 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
            navigate(-1); // same as browser back button
         };
     // form constants
+    const [formErrors, setFormErrors] = useState("");
     const [validated, setValidated] = useState(false);
-    const [formErrors, setFormErrors] = useState({});
-    const [form, setForm] = useState({
-        todoId: todoId,
+    const [todoItemForm, setTodoItemForm] = useState({
+        todo_id: todoId,
         created_by: props.userName,
         name: '',
         description: '',
@@ -37,102 +42,128 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
       });
 
      const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({
-          ...form,
+        setTodoItemForm({
+          ...todoItemForm,
           [event.target.id]: event.target.value,
         });
      };
 
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        // map form data to todo API model
-        const todoItemData = JSON.stringify({
-              createdByUser: form.created_by,
-              lastModifiedByUser: form.created_by,
-              todoId: form.todoId,
-              name: form.name,
-              description: form.description,
-              action: form.action,
-              assignedTo: form.assigned_to,
-              status: form.status
-        });
-        // send data
-         TodoRestApi.post("/todos/" + todoId + "/items", todoItemData)
-            .then((response) => navigateTodoItems())
-            .catch((error) => <Alert variant="error">Error calling todo service rest api, error:  {error}</Alert>);
+        // clear all previous error
+        setFormErrors("")
+        // Check form input
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+         } else {
+            // send data
+            // map from form data into todo api model
+            const todoItemDto : TodoItemDto = {
+                  todoId: Number(todoId),
+                  createdByUser: todoItemForm.created_by,
+                  lastModifiedByUser: todoItemForm.created_by,
+                  name: todoItemForm.name,
+                  description: todoItemForm.description,
+                  status: todoItemForm.status,
+                  action: todoItemForm.action,
+                  assignedTo: todoItemForm.assigned_to
+            };
+
+            const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
+
+            todoApi.createTodoItem(todoItemDto.todoId, todoItemDto)
+                .then((response) => navigateTodoItems())
+                .catch(function (error) {
+                     if (error.response && error.response.headers["content-type"] == 'application/json') {
+                        setFormErrors(error.response.data["description"]);
+                    } else {
+                       setFormErrors(error.message + " StackTrace:\n" + error.stack);
+                    }
+                });
+        }
+        setValidated(true);
     }
 
-    let validationErrorMsg = "Please enter a valid username (alphanumeric characters only).";
-
   return (
-  <Card className="m-4">
-       <Alert variant="warning">Error calling todo service rest api, error</Alert>
+  <div className="m-4 w-50 mx-auto">
+    {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
+    <Card>
        <Card.Header>
-           <Card.Title>New Todo Item</Card.Title>
+          <Card.Title>{t("todoItemFormTitle")}, {props.userName}, {todoItemForm.created_by}</Card.Title>
        </Card.Header>
        <Card.Body>
            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
             <Form.Control
+                disabled
                 id="todoId"
-                type="text"
-                placeholder={form.todoId}
+                type="number"
+                placeholder={todoItemForm.todo_id}
               />
               <Form.Group>
-                <Form.FloatingLabel controlId="created_by" label="created by" className="mb-3">
+                <Form.FloatingLabel label="created by" className="mb-3">
                       <Form.Control
                       autoFocus
                       required
                       id="created_by"
                       type="text"
-                      placeholder={form.created_by}
+                      placeholder={todoItemForm.created_by}
                       onChange={handleFieldChange}
-                      isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(form.created_by)}
+                      isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.created_by)}
                     />
-                    <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                 </Form.FloatingLabel>
               </Form.Group>
               <Form.Group>
-                <Form.FloatingLabel controlId="name" label="name" className="mb-3">
+                <Form.FloatingLabel label="name" className="mb-3">
                       <Form.Control
+                        required
                         id="name"
                         type="text"
-                        value={form.name}
+                        value={todoItemForm.name}
                         onChange={handleFieldChange}
+                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.name)}
                       />
-                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                 </Form.FloatingLabel>
               </Form.Group>
                  <Form.Group>
-                  <Form.FloatingLabel controlId="description" label="description" className="mb-3">
+                  <Form.FloatingLabel label="description" className="mb-3">
                       <Form.Control
                         id="description"
                         type="text"
-                         value={form.description}
+                        value={todoItemForm.description}
                         onChange={handleFieldChange}
+                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.description)}
                       />
-                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                       </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
-                    <Form.FloatingLabel controlId="action" label="action" className="mb-3">
+                    <Form.FloatingLabel label="action" className="mb-3">
                       <Form.Control
+                        required
                         id="action"
                         type="text"
-                         value={form.action}
+                        value={todoItemForm.action}
                         onChange={handleFieldChange}
+                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.action)}
                       />
-                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                     </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
-                    <Form.FloatingLabel controlId="assigned_to" label="assigned to" className="mb-3">
+                    <Form.FloatingLabel label="assigned to" className="mb-3">
                       <Form.Control
+                        required
                         id="assigned_to"
                         type="text"
-                         value={form.assigned_to}
+                        value={todoItemForm.assigned_to}
                         onChange={handleFieldChange}
+                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.assigned_to)}
                       />
-                      <Form.Control.Feedback type="invalid">{validationErrorMsg}</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                     </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
@@ -143,6 +174,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                </Form.Group>
             </Form>
         </Card.Body>
-    </Card>
+      </Card>
+    </div>
   );
 }

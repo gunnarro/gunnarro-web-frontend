@@ -1,4 +1,5 @@
 // react import
+import { useTranslation } from 'react-i18next';
 import { Suspense, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
@@ -10,6 +11,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { TodoTable } from '../../components/TodoTable';
 
 export const TodoListView = () => {
+    const { t } = useTranslation()
     const navigate = useNavigate();
     const navigateTodoNew = () => {
        navigate('/todo/new');
@@ -24,7 +26,7 @@ export const TodoListView = () => {
             <Card.Header>
                 <Navbar className="justify-content-between">
                     <Navbar.Text>Todo list</Navbar.Text>
-                    <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary" >Add</Button>
+                    <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary">{t("add")}</Button>
                 </Navbar>
             </Card.Header>
             <Card.Body>

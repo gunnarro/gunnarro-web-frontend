@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
+import { PropTypes } from 'prop-types';
 // bootstrap import
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } from 'react-bootstrap-icons'
 import { Table } from 'reactstrap';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { ShowConfirmDeleteDialog } from '../components/ConfirmModalDialog';
+// service import
+import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../services/todo/api";
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
@@ -14,9 +17,22 @@ function GetTodosData({ userName }) {
     GetTodosData.propTypes = {
         userName: PropTypes.string.isRequired
     };
+    const [error, setError] = useState("");
     const navigate = useNavigate()
-    const [todoListData, setTodoListData] = useState([]);
     // load data
+    const [todoListData, setTodoListData] = useState([]);
+    const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
+
+    todoApi.getTodosForUser(userName)
+        .then((response) => setTodoListData(response.data))
+        .catch(function (error) {
+             if (error.response && error.response.headers["content-type"] == 'application/json') {
+                setError(error.response.data["description"]);
+            } else {
+                setError(error.message);
+            }
+        });
+    /*
     useEffect(() => {
       TodoRestApi.get('/todos/user/' + userName)
         .then(response => {
@@ -26,7 +42,7 @@ function GetTodosData({ userName }) {
           console.log("Error calling todo service rest api, error" + error);
         });
     }, []);
-
+*/
     const deleteTodo = (todoId) => {
         const confirmed = ShowConfirmDeleteDialog(true);
         if (confirmed) {

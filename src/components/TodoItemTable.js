@@ -1,29 +1,45 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 // bootstrap import
 import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { ShowConfirmDeleteDialog } from '../components/ConfirmModalDialog';
+// service import
+import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../services/todo/api";
 
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
 function GetTodoItemData({ todoId }) {
     GetTodoItemData.propTypes = {
-        todoId: PropTypes.integer.isRequired
+        todoId: PropTypes.number.isRequired
     };
     const navigate = useNavigate()
     const [data, setData] = useState([]);
+    // load data
+    const [todoData, setTodoData] = useState([]);
+    const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
+/*
+    todoApi.getTodoById(todoId)
+        .then((response) => setTodoData(response.data))
+        .catch(function (error) {
+             if (error.response && error.response.headers["content-type"] == 'application/json') {
+                setError(error.response.data["description"]);
+            } else {
+                setError(error.message);
+            }
+        });
+*/
 
     useEffect(() => {
-      TodoRestApi.get('/todos/' + todoId)
+      TodoRestApi.get('/todoservice/v1/todos/' + todoId)
         .then(response => {
             //alert(response.headers['content-type'])
             //alert(JSON.stringify(response.data.toDoItemDtoList))
             if (response.data.toDoItemDtoList !== undefined && response.data.toDoItemDtoList !== null) {
-                setData(response.data.toDoItemDtoList);
+                setTodoData(response.data.toDoItemDtoList);
             }
         })
         .catch(error => {
@@ -46,7 +62,7 @@ function GetTodoItemData({ todoId }) {
 
     return (
         <>
-        {data.map(item => (
+        {todoData.map(item => (
           <tr key={item.id}>
              <td>{item.status == 'Finished' ? <CheckCircleFill /> : 'todo'}</td>
              <td>{item.name}</td>

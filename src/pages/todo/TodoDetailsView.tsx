@@ -1,4 +1,5 @@
 // react import
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
@@ -12,6 +13,7 @@ import { Trash } from 'react-bootstrap-icons'
 import { TodoItemTable } from '../../components/TodoItemTable';
 
 export const TodoDetailsView = () => {
+    const { t } = useTranslation()
     // the todoId is provided through the uri.
     const { todoId } = useParams();
 
@@ -26,14 +28,14 @@ export const TodoDetailsView = () => {
         <h4>todoId: {todoId}</h4>
         <Card className="m-4">
            <Card.Header>
-                 <Navbar className="justify-content-between">
+               <Navbar className="justify-content-between">
                    <Navbar.Text>Todo item list</Navbar.Text>
-                   <Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >Add</Button>
+                   <Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button>
                </Navbar>
            </Card.Header>
-                <Card.Body>
-                     <TodoItemTable todoId={todoId}/>
-                </Card.Body>
+           <Card.Body>
+               <TodoItemTable todoId={todoId}/>
+           </Card.Body>
         </Card>
     </Container>
     )

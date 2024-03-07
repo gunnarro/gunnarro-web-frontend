@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
+import { PropTypes } from 'prop-types';
 // bootstrap import
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
 import { Table } from 'reactstrap';
@@ -12,7 +13,7 @@ import { showConfirmDeleteDialog } from '../components/ConfirmModalDialog';
 //const [data, setData] = useState([]);npm start
 function GetTodoHistoryData({ todoId }) {
     GetTodoHistoryData.propTypes = {
-        todoId: PropTypes.integer.isRequired
+        todoId: PropTypes.PropTypes.isRequired
     };
     const navigate = useNavigate()
     const [todoHistoryListData, setTodoHistoryListData] = useState([]);
