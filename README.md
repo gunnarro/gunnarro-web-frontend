@@ -55,10 +55,36 @@ Generate Api client from the rest service yaml file:
 ```
 openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/api
 ```
+
+Run code generation from npm:
+Create a 'codegen' option under the script section in the package.json file
+```
+"scripts": {
+  "codegen": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated --additional-properties=npmName=todo-service-client,apiPackage=todoservice/api,modelPackage=todoservice/model",
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+},
+```
+the you can simply generate code by running:
+```
+npm run codegen
+```
+
 Where to place the generated code:
 - create a library
 - have a dedicated folder, not under the src directory
 
+list config options for a generator:
+```
+openapi-generator-cli config-help -g typescript-axios
+```
+
+Generator-specific options should be passed as --additional-properties:
+```
+--additional-properties=key1=value1,key2=value2
+```
 
 can also use a configuration file, openapi-generator-config-todo-service.yaml, as follows:
 ```
@@ -69,6 +95,9 @@ inputSpec: docs/api/todo-service-api.yaml
 additionalProperties:
 supportsES6: true
 ```
+
+debug generation:
+--global-property=debugModels,debugOperations
 
 #### Use generated code example
 ```

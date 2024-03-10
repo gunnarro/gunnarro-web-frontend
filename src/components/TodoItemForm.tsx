@@ -13,7 +13,7 @@ import Alert from 'react-bootstrap/Alert';
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
-import { TodoServiceApiFactory, TodoItemDto, ErrorResponse, Configuration } from "../services/todo/api";
+import { TodoServiceApiFactory, TodoItemDto, ErrorResponse, Configuration } from "generated/client/todoservice";
 
 interface TodoItemFormProps {
   userName: string;
@@ -22,12 +22,13 @@ interface TodoItemFormProps {
 export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     const { t } = useTranslation()
     // the todoId is provided through the uri.
-    const { todoId } = useParams();
+    const { todoId } = useParams() as { todoId:string };
     const navigate = useNavigate();
     const navigateTodoItems = () => {
            //navigate('/todos');
            navigate(-1); // same as browser back button
         };
+
     // form constants
     const [formErrors, setFormErrors] = useState("");
     const [validated, setValidated] = useState(false);
@@ -61,7 +62,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
             // send data
             // map from form data into todo api model
             const todoItemDto : TodoItemDto = {
-                  todoId: Number(todoId),
+                  todoId: todoItemForm.todo_id,
                   createdByUser: todoItemForm.created_by,
                   lastModifiedByUser: todoItemForm.created_by,
                   name: todoItemForm.name,
@@ -73,7 +74,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
 
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
-            todoApi.createTodoItem(todoItemDto.todoId, todoItemDto)
+            todoApi.createTodoItem(todoId, todoItemDto)
                 .then((response) => navigateTodoItems())
                 .catch(function (error) {
                      if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -91,14 +92,14 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
        <Card.Header>
-          <Card.Title>{t("todoItemFormTitle")}, {props.userName}, {todoItemForm.created_by}</Card.Title>
+          <Card.Title>{t("todoItemFormTitle")}, todoId={todoId}, user={props.userName}, createdBy={todoItemForm.created_by}</Card.Title>
        </Card.Header>
        <Card.Body>
            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
             <Form.Control
                 disabled
-                id="todoId"
-                type="number"
+                id="todo_id"
+                type="text"
                 placeholder={todoItemForm.todo_id}
               />
               <Form.Group>

@@ -30,9 +30,7 @@ export const TodoListView = () => {
                 </Navbar>
             </Card.Header>
             <Card.Body>
-               <Suspense fallback={<div>Loading data...</div>}>
                 <TodoTable userName={userName}/>
-               </Suspense>
             </Card.Body>
         </Card>
     </Container>

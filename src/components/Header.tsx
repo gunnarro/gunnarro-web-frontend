@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 // project import
 import { LANGUAGES } from "../constants";
@@ -32,6 +33,10 @@ export const Header = () => {
              <Nav.Link href="/">{t('home')}</Nav.Link>
              <Nav.Link href="/employees">{t('employees')}</Nav.Link>
              <Nav.Link href="/todo">{t('todo')}</Nav.Link>
+             <NavDropdown title={t('products')} id="basic-nav-dropdown">
+               <NavDropdown.Item href="/todo">{t('todo')}</NavDropdown.Item>
+               <NavDropdown.Item href="/tournament-planner" disabled >{t('tournamentPlanner')}</NavDropdown.Item>
+             </NavDropdown>
              <Nav.Link href="/about">{t('about')}</Nav.Link>
          </Nav>
          <div className="bg-secondary">

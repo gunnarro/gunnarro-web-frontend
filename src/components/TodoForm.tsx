@@ -12,7 +12,7 @@ import Alert from 'react-bootstrap/Alert';
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
-import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../services/todo/api";
+import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../generated/client/todoservice";
 
 export const TodoForm = () => {
 

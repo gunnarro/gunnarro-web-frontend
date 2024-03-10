@@ -28,6 +28,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "codegen": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated/client/todoservice --additional-properties=npmName=todo-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
