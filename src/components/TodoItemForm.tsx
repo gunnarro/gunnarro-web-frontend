@@ -12,8 +12,9 @@ import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
+import { LANGUAGES } from "../constants";
 // service import
-import { TodoServiceApiFactory, TodoItemDto, ErrorResponse, Configuration } from "generated/client/todoservice";
+import { TodoServiceApiFactory, TodoItemDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, ErrorResponse, Configuration } from "generated/client/todoservice";
 
 interface TodoItemFormProps {
   userName: string;
@@ -67,8 +68,8 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                   lastModifiedByUser: todoItemForm.created_by,
                   name: todoItemForm.name,
                   description: todoItemForm.description,
-                  status: todoItemForm.status,
-                  action: todoItemForm.action,
+                  status: TodoItemDtoStatusEnum.Open,
+                  action: TodoItemDtoActionEnum.StayAsIs,
                   assignedTo: todoItemForm.assigned_to
             };
 
@@ -143,15 +144,13 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                 </Form.Group>
                 <Form.Group>
                     <Form.FloatingLabel label="action" className="mb-3">
-                      <Form.Control
-                        required
-                        id="action"
-                        type="text"
-                        value={todoItemForm.action}
-                        onChange={handleFieldChange}
-                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.action)}
-                      />
-                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                        <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} >
+                           {Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
+                               <option value={value} key={key}>
+                                 {t(key)}
+                               </option>
+                             ))}
+                         </Form.Select>
                     </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>

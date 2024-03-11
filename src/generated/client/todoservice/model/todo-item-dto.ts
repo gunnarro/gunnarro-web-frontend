@@ -57,7 +57,7 @@ export interface TodoItemDto {
      */
     'lastModifiedByUser'?: string;
     /**
-     * doc me
+     * Name of the task
      * @type {string}
      * @memberof TodoItemDto
      */
@@ -69,22 +69,61 @@ export interface TodoItemDto {
      */
     'description'?: string;
     /**
-     * Status of todo, OPEN, IN_PROGRESS or FINISHED
+     * Holds all possible statues for a todo item
      * @type {string}
      * @memberof TodoItemDto
      */
-    'status'?: string;
+    'status': TodoItemDtoStatusEnum;
     /**
      * The action that should be done for this item
      * @type {string}
      * @memberof TodoItemDto
      */
-    'action'?: string;
+    'action'?: TodoItemDtoActionEnum;
     /**
      * the person that is responsible to follow up and fulfill this task
      * @type {string}
      * @memberof TodoItemDto
      */
     'assignedTo'?: string;
+    /**
+     * the priority of this task, can be any integer, typically from 1- 10
+     * @type {number}
+     * @memberof TodoItemDto
+     */
+    'priority'?: number;
+    /**
+     * the price of this item
+     * @type {object}
+     * @memberof TodoItemDto
+     */
+    'price'?: object;
+    /**
+     * number of minutes worked with this task
+     * @type {number}
+     * @memberof TodoItemDto
+     */
+    'workedMinutes'?: number;
 }
+
+export const TodoItemDtoStatusEnum = {
+    Open: 'OPEN',
+    InProgress: 'IN_PROGRESS',
+    OnHold: 'ON_HOLD',
+    Done: 'DONE',
+    Cancelled: 'CANCELLED'
+} as const;
+
+export type TodoItemDtoStatusEnum = typeof TodoItemDtoStatusEnum[keyof typeof TodoItemDtoStatusEnum];
+export const TodoItemDtoActionEnum = {
+    ToBeSold: 'TO_BE_SOLD',
+    GivesAway: 'GIVES_AWAY',
+    ThrowAway: 'THROW_AWAY',
+    OwnedBy: 'OWNED_BY',
+    GivenTo: 'GIVEN_TO',
+    StayAsIs: 'STAY_AS_IS'
+} as const;
+
+export type TodoItemDtoActionEnum = typeof TodoItemDtoActionEnum[keyof typeof TodoItemDtoActionEnum];
+
 

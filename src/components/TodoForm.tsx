@@ -12,7 +12,7 @@ import Alert from 'react-bootstrap/Alert';
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
-import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../generated/client/todoservice";
+import { TodoServiceApiFactory, TodoDto, TodoDtoStatusEnum, ErrorResponse, Configuration } from "../generated/client/todoservice";
 
 export const TodoForm = () => {
 
@@ -57,7 +57,7 @@ export const TodoForm = () => {
                   lastModifiedByUser: todoForm.created_by,
                   name: todoForm.name,
                   description: todoForm.description,
-                  status: todoForm.status,
+                  status: TodoDtoStatusEnum.Open,
             };
 
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);

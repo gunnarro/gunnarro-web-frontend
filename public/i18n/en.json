@@ -40,5 +40,13 @@
   "availabilityAvailabilityType": "Type of availability",
   "availabilityPricing": "Pricing",
   "availabilityPricingRate": "Hourly rate",
-  "availabilityPricingTerminationCost": "Termination costs"
+  "availabilityPricingTerminationCost": "Termination costs",
+
+  "toBeSold": "To be sold",
+  "givesAway": "Gives away",
+  "throwAway": "Throw away",
+  "ownedBy": "Owned by",
+  "givenTo": "Given to",
+  "stayAsIs": "Stay as is"
+
 }

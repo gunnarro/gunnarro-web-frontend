@@ -14,7 +14,7 @@ import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons';
 import { TodoRestApi } from '../../services/TodoRestApi';
 import { TodoItemTable } from '../../components/TodoItemTable';
 // service import
-import { TodoServiceApiFactory, TodoDto, TodoItemDto, ErrorResponse, Configuration } from "../../generated/client/todoservice";
+import { TodoServiceApiFactory, TodoDto, TodoItemDto, TodoDtoStatusEnum, ErrorResponse, Configuration } from "../../generated/client/todoservice";
 
 export const TodoDetailsView = () => {
     const { t } = useTranslation()
@@ -34,7 +34,7 @@ export const TodoDetailsView = () => {
             createdDate: '',
             name: '',
             description: '',
-            status: '',
+            status: TodoDtoStatusEnum.Open,
             todoItemDtoList: [],
           });
 
@@ -49,7 +49,6 @@ export const TodoDetailsView = () => {
             .then((response) => {
                 setTodoData(response.data);
                 setLoading(false);
-                 alert(todoData["todoItemDtoList"]);
              })
             .catch(function (error) {
                  if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -112,7 +111,7 @@ export const TodoDetailsView = () => {
                        <tbody className="table-group-divider">
                              {todoData.todoItemDtoList && todoData.todoItemDtoList.map(item => (
                                   <tr key={item.id}>
-                                     <td>{item.status == 'Finished' ? <CheckCircleFill /> : 'todo'}</td>
+                                     <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill /> : t(item.status)}</td>
                                      <td>{item.name}</td>
                                      <td>{item.action}</td>
                                      <td>{item.assignedTo}</td>

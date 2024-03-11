@@ -66,11 +66,11 @@ export interface TodoDto {
      */
     'name'?: string;
     /**
-     * Status of todo, OPEN, IN_PROGRESS or FINISHED
+     * Holds all possible statues of a todo task
      * @type {string}
      * @memberof TodoDto
      */
-    'status': string;
+    'status': TodoDtoStatusEnum;
     /**
      * description of this to do task
      * @type {string}
@@ -84,4 +84,15 @@ export interface TodoDto {
      */
     'todoItemDtoList'?: Array<TodoItemDto>;
 }
+
+export const TodoDtoStatusEnum = {
+    Open: 'OPEN',
+    InProgress: 'IN_PROGRESS',
+    OnHold: 'ON_HOLD',
+    Done: 'DONE',
+    Cancelled: 'CANCELLED'
+} as const;
+
+export type TodoDtoStatusEnum = typeof TodoDtoStatusEnum[keyof typeof TodoDtoStatusEnum];
+
 

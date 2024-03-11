@@ -40,5 +40,12 @@
   "availabilityAvailabilityType": "Type tilgjengelighet",
   "availabilityPricing": "Pris",
   "availabilityPricingRate": "Timepris",
-  "availabilityPricingTerminationCost": "Termineringspris"
+  "availabilityPricingTerminationCost": "Termineringspris",
+
+  "toBeSold": "Selges",
+  "givesAway": "Gis bort",
+  "throwAway": "Kastes",
+  "ownedBy": "Eies av",
+  "givenTo": "Git til",
+  "stayAsIs": "Blir stående"
 }

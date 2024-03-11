@@ -1071,6 +1071,10 @@
   },
   "components": {
     "schemas": {
+      "ItemPrice": {
+        "type": "object",
+        "description": "the price of this item"
+      },
       "TodoDto": {
         "required": [
           "status"
@@ -1112,7 +1116,14 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of todo, OPEN, IN_PROGRESS or FINISHED"
+            "description": "Holds all possible statues of a todo task",
+            "enum": [
+              "OPEN",
+              "IN_PROGRESS",
+              "ON_HOLD",
+              "DONE",
+              "CANCELLED"
+            ]
           },
           "description": {
             "pattern": "[\\w\\s\\dæÆøØåÅ_-]{1,100}",
@@ -1130,6 +1141,9 @@
         "description": "Holds information about a todo"
       },
       "TodoItemDto": {
+        "required": [
+          "status"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1163,7 +1177,7 @@
           "name": {
             "pattern": "[\\w\\s\\dæÆøØåÅ_-]{1,50}",
             "type": "string",
-            "description": "doc me"
+            "description": "Name of the task"
           },
           "description": {
             "pattern": "[\\w\\s\\dæÆøØåÅ_-]{1,100}",
@@ -1172,15 +1186,43 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of todo, OPEN, IN_PROGRESS or FINISHED"
+            "description": "Holds all possible statues for a todo item",
+            "enum": [
+              "OPEN",
+              "IN_PROGRESS",
+              "ON_HOLD",
+              "DONE",
+              "CANCELLED"
+            ]
           },
           "action": {
             "type": "string",
-            "description": "The action that should be done for this item"
+            "description": "The action that should be done for this item",
+            "enum": [
+              "TO_BE_SOLD",
+              "GIVES_AWAY",
+              "THROW_AWAY",
+              "OWNED_BY",
+              "GIVEN_TO",
+              "STAY_AS_IS"
+            ]
           },
           "assignedTo": {
             "type": "string",
             "description": "the person that is responsible to follow up and fulfill this task"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "the priority of this task, can be any integer, typically from 1- 10",
+            "format": "int32"
+          },
+          "price": {
+            "$ref": "#/components/schemas/ItemPrice"
+          },
+          "workedMinutes": {
+            "type": "integer",
+            "description": "number of minutes worked with this task",
+            "format": "int32"
           }
         },
         "description": "Holds information about a todo item"
