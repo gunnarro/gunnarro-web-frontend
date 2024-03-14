@@ -158,7 +158,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                         <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} onChange={handleActionSelectChange}>
                            {
                              Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
-                               <option value={value} key={key}>
+                               <option id="action" value={value} key={key}>
                                  {t(key)}
                                </option>
                              ))
@@ -171,11 +171,11 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                     <Form.FloatingLabel label={t("price")} className="mb-3">
                       <Form.Control
                         required
-                        id="assigned_to"
+                        id="price"
                         type="text"
                         value={todoItemForm.assigned_to}
                         onChange={handleFieldChange}
-                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.assigned_to)}
+                        isInvalid={validated && !/^[0-9]+$/.test(todoItemForm.assigned_to)}
                       />
                       <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                     </Form.FloatingLabel>
@@ -192,6 +192,19 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                         isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.assigned_to)}
                       />
                       <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                    </Form.FloatingLabel>
+                </Form.Group>
+                <Form.Group>
+                    <Form.FloatingLabel label={t("assignedTo")} className="mb-3">
+                        <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} onChange={handleActionSelectChange}>
+                           {
+                             Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
+                               <option id="assigned_to" value={value} key={key}>
+                                 {t(key)}
+                               </option>
+                             ))
+                           }
+                         </Form.Select>
                     </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>

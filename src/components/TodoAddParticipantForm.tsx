@@ -108,6 +108,15 @@ export const TodoAddParticipantForm = () => {
                   <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
               </Form.FloatingLabel>
            </Form.Group>
+           <Form.Group className="mb-3" controlId="validationEmail">
+                     <Form.Check
+                         checked
+                         disabled
+                         id="enabled"
+                         type="switch"
+                         label={t("activateUser")}
+                       />
+              </Form.Group>
            <Form.Group>
               <div className="float-end">
                 <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >{t("cancel")}</Button>

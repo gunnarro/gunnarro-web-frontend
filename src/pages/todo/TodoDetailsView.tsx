@@ -138,11 +138,11 @@ export const TodoDetailsView = () => {
                                 <th scope="col" className="float-end" ><Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button></th>
                            </tr>
                            <tr>
-                               <th scope="col">Status</th>
-                               <th scope="col">Name</th>
-                               <th scope="col">Action</th>
-                               <th scope="col">Assigned to</th>
-                               <th scope="col">Description</th>
+                               <th scope="col">{t("status")}</th>
+                               <th scope="col">{t("taskName")}</th>
+                               <th scope="col">{t("action")}</th>
+                               <th scope="col">{t("assignedTo")}</th>
+                               <th scope="col">{t("description")}</th>
                                <th scope="col">#</th>
                            </tr>
                        </thead>
