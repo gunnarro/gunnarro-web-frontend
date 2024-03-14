@@ -1,19 +1,12 @@
 import { useState } from 'react'
 import { Modal, Button } from "react-bootstrap";
 
-
-
-export function ShowConfirmDeleteDialog({ isShow }) {
-
-   ShowConfirmDeleteDialog.propTypes = {
-        isShow: PropTypes.boolean.isRequired
-   };
-
+export function ShowConfirmDeleteDialog( isShow: boolean ) {
    const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
 
-   function handleAction(isOk) {
+   function handleAction(isOk: boolean) {
    }
 
    return (

@@ -24,6 +24,8 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     const { t } = useTranslation()
     // the todoId is provided through the uri.
     const { todoId } = useParams() as { todoId:string };
+    // if the price input field should be visible or not
+    const [showPriceField, setShowPriceField] = useState(false);
     const navigate = useNavigate();
     const navigateTodoItems = () => {
            //navigate('/todos');
@@ -38,8 +40,8 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
         created_by: props.userName,
         name: '',
         description: '',
-        action: '',
-        status: 'OPEN',
+        action: TodoItemDtoActionEnum.StayAsIs,
+        status: TodoItemDtoStatusEnum.Open,
         assigned_to: '',
       });
 
@@ -49,6 +51,14 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
           [event.target.id]: event.target.value,
         });
      };
+
+    const handleActionSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        if (event.target.value == "TO_BE_SOLD") {
+            setShowPriceField(true);
+        } else {
+            setShowPriceField(false);
+        }
+    };
 
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -99,18 +109,19 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
             <Form.Control
                 disabled
+                hidden
                 id="todo_id"
                 type="text"
-                placeholder={todoItemForm.todo_id}
+                value={todoItemForm.todo_id}
               />
               <Form.Group>
-                <Form.FloatingLabel label="created by" className="mb-3">
+                <Form.FloatingLabel label={t("createdBy")} className="mb-3">
                       <Form.Control
                       autoFocus
                       required
                       id="created_by"
                       type="text"
-                      placeholder={todoItemForm.created_by}
+                      value={todoItemForm.created_by}
                       onChange={handleFieldChange}
                       isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.created_by)}
                     />
@@ -118,7 +129,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                 </Form.FloatingLabel>
               </Form.Group>
               <Form.Group>
-                <Form.FloatingLabel label="name" className="mb-3">
+                <Form.FloatingLabel label={t("name")} className="mb-3">
                       <Form.Control
                         required
                         id="name"
@@ -131,7 +142,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                 </Form.FloatingLabel>
               </Form.Group>
                  <Form.Group>
-                  <Form.FloatingLabel label="description" className="mb-3">
+                  <Form.FloatingLabel label={t("description")} className="mb-3">
                       <Form.Control
                         id="description"
                         type="text"
@@ -143,18 +154,35 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                       </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
-                    <Form.FloatingLabel label="action" className="mb-3">
-                        <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} >
-                           {Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
+                    <Form.FloatingLabel label={t("action")} className="mb-3">
+                        <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} onChange={handleActionSelectChange}>
+                           {
+                             Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
                                <option value={value} key={key}>
                                  {t(key)}
                                </option>
-                             ))}
+                             ))
+                           }
                          </Form.Select>
                     </Form.FloatingLabel>
                 </Form.Group>
+              { showPriceField &&
                 <Form.Group>
-                    <Form.FloatingLabel label="assigned to" className="mb-3">
+                    <Form.FloatingLabel label={t("price")} className="mb-3">
+                      <Form.Control
+                        required
+                        id="assigned_to"
+                        type="text"
+                        value={todoItemForm.assigned_to}
+                        onChange={handleFieldChange}
+                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.assigned_to)}
+                      />
+                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                    </Form.FloatingLabel>
+                </Form.Group>
+                }
+                <Form.Group>
+                    <Form.FloatingLabel label={t("assignedTo")} className="mb-3">
                       <Form.Control
                         required
                         id="assigned_to"
@@ -168,8 +196,8 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                 </Form.Group>
                 <Form.Group>
                       <div className="float-end">
-                         <Button onClick={() => navigateTodoItems()} className="m-1" variant="outline-secondary" >Cancel</Button>
-                         <Button type="submit" className="" variant="outline-primary" >Save</Button>
+                         <Button onClick={() => navigateTodoItems()} className="m-1" variant="outline-secondary" >{t("Cancel")}</Button>
+                         <Button type="submit" variant="outline-primary" >{t("Save")}</Button>
                       </div>
                </Form.Group>
             </Form>

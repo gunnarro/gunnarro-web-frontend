@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { ParticipantDto } from './participant-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import { TodoItemDto } from './todo-item-dto';
 
 /**
@@ -78,11 +81,17 @@ export interface TodoDto {
      */
     'description'?: string;
     /**
-     * List of task/item/action this todo list contains
+     * List of task for the todo list
      * @type {Array<TodoItemDto>}
      * @memberof TodoDto
      */
     'todoItemDtoList'?: Array<TodoItemDto>;
+    /**
+     * List of participant for the todo
+     * @type {Array<ParticipantDto>}
+     * @memberof TodoDto
+     */
+    'participantDtoList'?: Array<ParticipantDto>;
 }
 
 export const TodoDtoStatusEnum = {

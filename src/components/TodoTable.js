@@ -11,6 +11,10 @@ import { ShowConfirmDeleteDialog } from '../components/ConfirmModalDialog';
 import { TodoServiceApiFactory, Configuration } from "../generated/client/todoservice";
 import { TodoDto } from "../generated/client/todoservice/model";
 
+function formatDate(dateStr:string) {
+    return new Date(Date.parse(dateStr)).toDateString();
+}
+
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
 function GetTodosData({ userName }): React.ReactElement {
@@ -73,13 +77,12 @@ function GetTodosData({ userName }): React.ReactElement {
             {todoListData && todoListData.map(todo => (
               <tr key={todo.id}>
                  <td>{todo.status == 'Active' ? <CheckSquareFill /> : <ArrowDownLeftCircle />}</td>
-                 <td>{todo.id}</td>
                  <td>{todo.name}</td>
                  <td>{todo.description}</td>
                  <td>{todo.createdByUser}</td>
                  <td>{todo.lastModifiedByUser}</td>
-                 <td>{todo.createdDate}</td>
-                 <td>{todo.lastModifiedDate}</td>
+                 <td>{formatDate(todo.createdDate)}</td>
+                 <td>{formatDate(todo.lastModifiedDate)}</td>
                  <td>
                      <button onClick={() => navigate("/todo/" + todo.id + "/details")} type="button" className="btn btn-sm btn-outline-secondary">
                         <Pencil size={16} color="royalblue" />
@@ -104,7 +107,6 @@ export const TodoTable = (userName) => (
         <thead>
             <tr>
                 <th scope="col">Status</th>
-                <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Created by</th>

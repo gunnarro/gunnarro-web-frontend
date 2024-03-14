@@ -21,13 +21,12 @@ export const TodoListView = () => {
 
     return (
     <Container>
-        <h4>Welcome, {userName}</h4>
         <Card className="m-4">
             <Card.Header>
-                <Navbar className="justify-content-between">
-                    <Navbar.Text>Todo list</Navbar.Text>
+                <div className="d-flex justify-content-between">
+                    <h4>Todo list</h4>
                     <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary">{t("add")}</Button>
-                </Navbar>
+                </div>
             </Card.Header>
             <Card.Body>
                 <TodoTable userName={userName}/>

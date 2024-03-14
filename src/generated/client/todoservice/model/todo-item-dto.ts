@@ -63,6 +63,12 @@ export interface TodoItemDto {
      */
     'name'?: string;
     /**
+     * 
+     * @type {string}
+     * @memberof TodoItemDto
+     */
+    'category'?: string;
+    /**
      * description of the task to do
      * @type {string}
      * @memberof TodoItemDto
@@ -94,10 +100,10 @@ export interface TodoItemDto {
     'priority'?: number;
     /**
      * the price of this item
-     * @type {object}
+     * @type {number}
      * @memberof TodoItemDto
      */
-    'price'?: object;
+    'price'?: number;
     /**
      * number of minutes worked with this task
      * @type {number}
