@@ -1,26 +1,34 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react'
 import { Modal, Button } from "react-bootstrap";
 
-export function ShowConfirmDeleteDialog( isShow: boolean ) {
-   const [show, setShow] = useState(false);
-   const handleClose = () => setShow(false);
-   const handleShow = () => setShow(true);
+interface ShowConfirmDeleteDialogProps {
+  isShow: boolean;
+  deleteMethodRef?: undefined;
+}
 
-   function handleAction(isOk: boolean) {
+export const ShowConfirmDeleteDialog: React.FC<ShowConfirmDeleteDialogProps> = (props) => {
+   const { t } = useTranslation()
+   const [show, setShow] = useState(true);
+
+   function handleConfirm() {
+        setShow(false);
+   }
+
+   function handleCancel() {
+        setShow(false);
    }
 
    return (
-     <div className="modal show" style={{ display: 'block', position: 'initial' }} >
-        <Modal.Dialog>
+        <Modal show={show}>
             <Modal.Header>
-              <Modal.Title>Delete Confirmation</Modal.Title>
+              <Modal.Title>{t("confirmDelete")}</Modal.Title>
             </Modal.Header>
-            <Modal.Body><div className="alert alert-danger">Are you sure you want to delete the item?</div></Modal.Body>
+            <Modal.Body><div className="alert alert-danger">{t("confirmDeleteMsg")}</div></Modal.Body>
             <Modal.Footer>
-              <Button variant="default" onClick={() => { handleAction(false) } }>No</Button>
-              <Button variant="danger" onClick={() => { handleAction(true) } }>Yes</Button>
+              <Button variant="default" onClick={() => { handleCancel() } }>{t("cancel")}</Button>
+              <Button variant="danger" onClick={() => { handleConfirm() } }>{t("yes")}</Button>
             </Modal.Footer>
-        </Modal.Dialog>
-     </div>
-    )
+        </Modal>
+   )
 }
