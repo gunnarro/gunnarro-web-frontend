@@ -15,13 +15,16 @@
   "createdModifiedDate": "Created/last modified",
   "createdModifiedBy": "Created/last modified by",
   "name": "Name",
+  "email": "Email",
+  "activateUser": "Activate user",
   "reference": "Reference",
   "description": "Description",
   "status": "Status",
-  "assignedTo": "Assigned to",
+  "assignedTo": "Assigned",
   "action": "Action",
   "todoFormTitle": "New Todo list",
   "todoItemFormTitle": "New Todo item",
+  "addParticipantFormTitle": "Add participant",
   "applicationErrorTitle": "Application error!",
 
   "validationErrorMsg": "Please enter a valid username (alphanumeric characters only).",
@@ -33,6 +36,7 @@
   "participants": "Participants",
   "category": "Category",
   "price": "Price",
+  "taskName": "Task",
 
   "login": "Login",
   "save": "Save",
@@ -78,6 +82,11 @@
   "IN_PROGRESS": "In progress",
   "ON_HOLD": "On hold",
   "DONE": "Done",
-  "CANCELLED": "Cancelled"
+  "CANCELLED": "Cancelled",
+
+  "confirmDelete": "Confirm delete",
+  "confirmDeleteMsg": "Please confirm that you want to delete the item?",
+  "yes": "Yes",
+  "no": "No"
 
 }

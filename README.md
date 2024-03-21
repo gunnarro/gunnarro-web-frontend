@@ -40,7 +40,33 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install moment # for date formation
   - usage: import moment from 'moment'; let formattedDate = moment(date).format('MMMM Do YYYY, h:mm:ss a'); 
 
+- npm install -g npm-check-updates
 
+## Upgrade dependencies
+First install
+```
+npm install -g npm-check-updates
+```
+Then run
+```
+ncu
+```
+that for example will output following:
+```
+ axios                           ^1.6.7  →     ^1.6.8
+ bootstrap                       ^5.3.2  →     ^5.3.3
+ eslint                         ^8.56.0  →    ^8.57.0
+ eslint-plugin-react            ^7.33.2  →    ^7.34.1
+ i18next                        ^23.8.0  →   ^23.10.1
+ react-bootstrap                ^2.10.0  →    ^2.10.2
+```
+
+In order to upgrade  all suggestion, you ca run:
+```
+ncu -u
+npm install
+```
+or that a lock at the documentation, there isa bunch of options in order to select what to upgrade
 
 ## Tools
 ### OpenAPI Generator

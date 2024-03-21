@@ -66,7 +66,7 @@ export const TodoDetailsView = () => {
     }, []);
 
     const deleteTodoItem = (todoId:string, todoItemId:string) => {
-        const confirmed = ShowConfirmDeleteDialog(true);
+        const confirmed = true;//ShowConfirmDeleteDialog(true);
         if (confirmed) {
             console.log("confirmed delete! todoId=" + todoId + ", todoItemId=" + todoItemId)
         } else {
@@ -151,7 +151,7 @@ export const TodoDetailsView = () => {
                                   <tr key={item.id}>
                                      <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill /> : t(item.status)}</td>
                                      <td>{item.name}</td>
-                                     <td>{item.action}</td>
+                                     <td>{t(item.action as string)}</td>
                                      <td>{item.assignedTo}</td>
                                      <td>{item.description}</td>
                                      <td>

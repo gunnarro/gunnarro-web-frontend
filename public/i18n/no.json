@@ -15,13 +15,16 @@
   "createdModifiedDate": "Opprettet/sist endret",
   "createdModifiedBy": "Opprettet/sist endret av",
   "name": "Navn",
+  "email": "Epost",
+  "activateUser": "Aktiver bruker",
   "reference": "Referanse",
   "description": "Beskrivelse",
   "status": "Status",
-  "assignedTo": "Tildelt til",
+  "assignedTo": "Tildelt",
   "action": "Handling",
   "todoFormTitle": "Ny Todo liste",
   "todoItemFormTitle": "Ny Todo task",
+  "addParticipantFormTitle": "Legg til deltaker",
   "applicationErrorTitle": "Application error!",
 
   "validationErrorMsg": "Vennligst skriv inn ett gyldig navn (alphanumeric characters only).",
@@ -33,6 +36,7 @@
   "participants": "Deltagere",
   "category": "Kategori",
   "price": "Pris",
+  "taskName": "Oppgave",
 
   "login": "Login",
   "save": "Lagre",
@@ -78,5 +82,10 @@
   "IN_PROGRESS": "Aktiv",
   "ON_HOLD": "PÅ vent",
   "DONE": "Utført",
-  "CANCELLED": "Kansellert"
+  "CANCELLED": "Kansellert",
+
+  "confirmDelete": "Bekreft sletting",
+  "confirmDeleteMsg": "Vennligst bekreft at du ønsker å slette?",
+  "yes": "Ja",
+  "no": "Nei"
 }

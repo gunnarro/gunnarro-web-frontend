@@ -4,28 +4,31 @@
   "description": "powered by gunnarro as",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.76",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "axios": "^1.6.7",
-    "bootstrap": "^5.3.2",
-    "i18next": "^23.8.0",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "i18next": "^23.10.1",
     "i18next-http-backend": "^2.5.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.0",
-    "react-bootstrap-icons": "^1.10.3",
+    "react-bootstrap": "^2.10.2",
+    "react-bootstrap-icons": "^1.11.3",
     "react-dom": "^18.2.0",
-    "react-i18next": "^14.0.1",
-    "react-router-dom": "^6.21.3",
+    "react-i18next": "^14.1.0",
+    "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
     "react-table": "^7.8.0",
     "reactstrap": "^9.2.2",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "typescript": "^5.4.3",
+    "web-vitals": "^3.5.2"
+  },
+  "overrides": {
+    "typescript": "^5.4.3"
   },
   "scripts": {
     "codegen": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated/client/todoservice --additional-properties=npmName=todo-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model",
@@ -47,7 +50,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2"
+
   }
 }
