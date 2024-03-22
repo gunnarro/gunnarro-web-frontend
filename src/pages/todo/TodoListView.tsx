@@ -33,6 +33,8 @@ export const TodoListView = () => {
 
     // confirm dialog useState
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [confirmDialogMsg, setConfirmDialogMsg] = useState("");
+    const [confirmDialogTodoId, setConfirmDialogTodoId] = useState("");
     // initial todo data
     const initialTodos: TodoDto[] = [];
 
@@ -61,28 +63,40 @@ export const TodoListView = () => {
             });
     } ,[])
 
+    const handleDeleteTodo = (todoId:string) => {
+        setShowConfirmDialog(true);
+        setConfirmDialogTodoId(todoId);
+        setConfirmDialogMsg("are yuo sure you want to delete " + todoId + "?")
+        console.log("clicked delete button, todoId=" + todoId)
+    }
+
+    const handleCancelDeleteTodo = (todoId:string) => {
+        setShowConfirmDialog(false);
+        setConfirmDialogTodoId("");
+        setConfirmDialogMsg("");
+        console.log("canceled delete todoId=" + todoId);
+    }
+
     const deleteTodo = (todoId:string) => {
-            setShowConfirmDialog(true);
-            const confirmed = true;//ShowConfirmDeleteDialog(true);
-            if (confirmed) {
-                console.log("confirmed delete! todoId=" + todoId)
-            } else {
-                TodoRestApi.delete("/todos/" + todoId)
-               .then((response) => console.log(response.data))
-               .catch((error) => console.log("Error calling todo service rest api, error: " + error));
-           }
-        };
+        console.log("confirmed delete todoId=" + todoId)
+        TodoRestApi.delete("/todos/" + todoId)
+       .then((response) => console.log(response.data))
+       .catch((error) => console.log("Error calling todo service rest api, error: " + error));
+        // reset confirm dialog state variable
+        setShowConfirmDialog(false);
+        setConfirmDialogMsg("");
+    };
 
     return (
     <Container>
      <div className="m-2 mx-auto">
-        {error && <AlertBox title={t("applicationErrorTitle")} message={error} />}
+        { error && <AlertBox title={t("applicationErrorTitle")} message={error} /> }
+        { showConfirmDialog && <ShowConfirmDeleteDialog isShow={showConfirmDialog} itemId={confirmDialogTodoId} message={confirmDialogMsg} deleteTodoRef={deleteTodo} cancelDeleteTodoRef={handleCancelDeleteTodo} /> }
         <Card>
             <Card.Header>
-                <div className="d-flex justify-content-between">
-                    <h4>Todo list</h4>
-                    <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary">{t("add")}</Button>
-                </div>
+                <h4 className="float-start">{t("todoListTitle")}</h4>
+                    <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary" className="float-end" >{t("add")}</Button>
+                    <button onClick={() => handleDeleteTodo('12345678')} type="button" className="btn btn-sm btn-outline-secondary float-end"><Trash  size={16} color="red" /></button>
             </Card.Header>
             <Card.Body>
                   <Table>
@@ -113,7 +127,7 @@ export const TodoListView = () => {
                                         <Pencil size={16} color="royalblue" />
                                      </button>
                                      <span>&nbsp;</span>
-                                     <button onClick={() => { deleteTodo(todo.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
+                                     <button onClick={() => { handleDeleteTodo(todo.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
                                        <Trash  size={16} color="red" />
                                      </button>
                                      <span>&nbsp;</span>
@@ -127,15 +141,14 @@ export const TodoListView = () => {
                         </tbody>
                         <tfoot className="table-group-divider">
                             <tr>
-                                <td></td>
+                                <td>
+
+                                </td>
                             </tr>
                         </tfoot>
                     </Table>
             </Card.Body>
         </Card>
-        {
-           <ShowConfirmDeleteDialog isShow={showConfirmDialog} />
-        }
        </div>
     </Container>
     )

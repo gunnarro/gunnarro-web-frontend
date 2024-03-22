@@ -4,19 +4,24 @@ import { Modal, Button } from "react-bootstrap";
 
 interface ShowConfirmDeleteDialogProps {
   isShow: boolean;
-  deleteMethodRef?: undefined;
+  itemId: string;
+  message?: string;
+  deleteTodoRef: Function;
+  cancelDeleteTodoRef: Function;
 }
 
-export const ShowConfirmDeleteDialog: React.FC<ShowConfirmDeleteDialogProps> = (props) => {
+export const ShowConfirmDeleteDialog: React.FC<ShowConfirmDeleteDialogProps> = (props: ShowConfirmDeleteDialogProps) => {
    const { t } = useTranslation()
-   const [show, setShow] = useState(true);
+   const [show, setShow] = useState(props.isShow);
 
    function handleConfirm() {
         setShow(false);
+        props.deleteTodoRef(props.itemId)
    }
 
    function handleCancel() {
         setShow(false);
+        props.cancelDeleteTodoRef(props.itemId);
    }
 
    return (
@@ -24,7 +29,7 @@ export const ShowConfirmDeleteDialog: React.FC<ShowConfirmDeleteDialogProps> = (
             <Modal.Header>
               <Modal.Title>{t("confirmDelete")}</Modal.Title>
             </Modal.Header>
-            <Modal.Body><div className="alert alert-danger">{t("confirmDeleteMsg")}</div></Modal.Body>
+            <Modal.Body><div className="alert alert-danger">{props.message}</div></Modal.Body>
             <Modal.Footer>
               <Button variant="default" onClick={() => { handleCancel() } }>{t("cancel")}</Button>
               <Button variant="danger" onClick={() => { handleConfirm() } }>{t("yes")}</Button>
