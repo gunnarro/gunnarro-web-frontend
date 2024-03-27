@@ -12,7 +12,7 @@ import { TodoAddParticipantForm } from './components/TodoAddParticipantForm'
 import { Login } from './pages/Login';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
-import { EmployeeList } from './pages/EmployeeList';
+import { EmployeeList } from './pages/employee/EmployeeList';
 import { Todo } from './pages/todo/Todo';
 import { TodoListView } from './pages/todo/TodoListView';
 import { TodoHistoryView } from './pages/todo/TodoHistoryView';

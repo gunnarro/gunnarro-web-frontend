@@ -75,7 +75,7 @@ export const TodoAddParticipantForm = () => {
     }
 
   return (
-  <div className="m-4 w-50 mx-auto">
+  <div className="m-2 w-50 mx-auto">
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
      <Card.Header>
@@ -83,8 +83,8 @@ export const TodoAddParticipantForm = () => {
      </Card.Header>
      <Card.Body>
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-           <Form.Group controlId="validationName">
-              <Form.FloatingLabel controlId="name" label={t("name")} className="mb-3">
+           <Form.Group>
+              <Form.FloatingLabel label={t("name")} className="mb-3">
                   <Form.Control
                     required
                     id="name"
@@ -96,8 +96,8 @@ export const TodoAddParticipantForm = () => {
                   <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
               </Form.FloatingLabel>
            </Form.Group>
-           <Form.Group controlId="validationEmail">
-              <Form.FloatingLabel controlId="email" label={t("email")} className="mb-3">
+           <Form.Group>
+              <Form.FloatingLabel label={t("email")} className="mb-3">
                   <Form.Control
                     id="email"
                     type="text"
@@ -108,7 +108,7 @@ export const TodoAddParticipantForm = () => {
                   <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
               </Form.FloatingLabel>
            </Form.Group>
-           <Form.Group className="mb-3" controlId="validationEmail">
+           <Form.Group className="mb-3">
                      <Form.Check
                          checked
                          disabled

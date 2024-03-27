@@ -20,7 +20,8 @@
   "reference": "Reference",
   "description": "Description",
   "status": "Status",
-  "assignedTo": "Assigned",
+  "assignedTo": "Assigned to",
+  "assignTo": "Assign to",
   "action": "Action",
   "todoFormTitle": "New Todo list",
   "todoItemFormTitle": "New Todo item",
@@ -65,7 +66,7 @@
   "GivenTo": "Given to",
   "StayAsIs": "Stay as is",
 
-  "TO_BO_SOLD": "To be sold",
+  "TO_BE_SOLD": "To be sold",
   "GIVES_AWAY": "Gives away",
   "THROW_AWAY": "Throw away",
   "OWNED_BY": "Owned by",

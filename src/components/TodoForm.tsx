@@ -76,7 +76,7 @@ export const TodoForm = () => {
     }
 
   return (
-  <div className="m-4 w-50 mx-auto">
+  <div className="m-2 w-50 mx-auto">
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
      <Card.Header>
@@ -84,8 +84,8 @@ export const TodoForm = () => {
      </Card.Header>
      <Card.Body>
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-           <Form.Group controlId="validationCreatedBy">
-              <Form.FloatingLabel controlId="created_by" label={t("createdBy")} className="mb-3">
+           <Form.Group>
+              <Form.FloatingLabel label={t("createdBy")} className="mb-3">
                   <Form.Control
                     autoFocus
                     required
@@ -98,8 +98,8 @@ export const TodoForm = () => {
                   <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
               </Form.FloatingLabel>
            </Form.Group>
-           <Form.Group controlId="validationName">
-              <Form.FloatingLabel controlId="name" label={t("name")} className="mb-3">
+           <Form.Group>
+              <Form.FloatingLabel label={t("name")} className="mb-3">
                   <Form.Control
                     required
                     id="name"
@@ -111,8 +111,8 @@ export const TodoForm = () => {
                   <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
               </Form.FloatingLabel>
            </Form.Group>
-           <Form.Group controlId="validationDescription">
-              <Form.FloatingLabel controlId="description" label={t("description")} className="mb-3">
+           <Form.Group>
+              <Form.FloatingLabel label={t("description")} className="mb-3">
                   <Form.Control
                     id="description"
                     type="text"

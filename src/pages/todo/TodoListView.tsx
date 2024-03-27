@@ -44,14 +44,39 @@ export const TodoListView = () => {
     const [todoListData, setTodoListData] = useState<TodoDto[]>([]);
     const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
-    // we use useEffect with an empty array [], this in order to prevent that the rest api is called whenever the component is rendered, which cause an infinity loop.
+    // Always called after the render() method, and we use useEffect with an empty array [], this in order to prevent that the rest api is called whenever the component is rendered, which cause an infinity loop.
     useEffect(() => {
         setLoading(true);
-        todoApi.getTodosByUserName(userName)
+        getTodosByUserName(userName);
+        setLoading(false);
+    } ,[])
+
+    const confirmDeleteTodo = (todoId:string) => {
+        setShowConfirmDialog(true);
+        setConfirmDialogTodoId(todoId);
+        setConfirmDialogMsg("are yuo sure you want to delete " + todoId + "?")
+        console.log("clicked delete button, todoId=" + todoId)
+    }
+
+    const handleDeleteTodo = (todoId:string) => {
+        deleteTodo(todoId);
+    }
+
+    const handleCancelDeleteTodo = (todoId:string) => {
+        setError("");
+        resetConformDialog();
+        console.log("canceled delete todoId=" + todoId);
+    }
+
+    const getTodosByUserName = (userName:string) => {
+         // clear current errors, if any
+         setError("")
+         todoApi.getTodosByUserName(userName)
             .then((response) => {
                 const todoDtos = JSON.parse(JSON.stringify(response.data)) as TodoDto[];
                 setTodoListData(todoDtos);
                 setLoading(false);
+                console.log("loaded todos for " + userName)
             })
             .catch(function (error) {
                  if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -59,44 +84,41 @@ export const TodoListView = () => {
                 } else {
                     setError(error.message);
                 }
-                setLoading(false);
-            });
-    } ,[])
-
-    const handleDeleteTodo = (todoId:string) => {
-        setShowConfirmDialog(true);
-        setConfirmDialogTodoId(todoId);
-        setConfirmDialogMsg("are yuo sure you want to delete " + todoId + "?")
-        console.log("clicked delete button, todoId=" + todoId)
-    }
-
-    const handleCancelDeleteTodo = (todoId:string) => {
-        setShowConfirmDialog(false);
-        setConfirmDialogTodoId("");
-        setConfirmDialogMsg("");
-        console.log("canceled delete todoId=" + todoId);
+            })
     }
 
     const deleteTodo = (todoId:string) => {
-        console.log("confirmed delete todoId=" + todoId)
-        TodoRestApi.delete("/todos/" + todoId)
-       .then((response) => console.log(response.data))
-       .catch((error) => console.log("Error calling todo service rest api, error: " + error));
-        // reset confirm dialog state variable
+        // clear current errors, if any
+        setError("")
+        todoApi.deleteTodo(todoId)
+            .then((response) => {
+                setError("deleted todoId=" + todoId);
+                console.log("deleted todoId " + todoId)
+            })
+            .catch(function (error) {
+                if (error.response && error.response.headers["content-type"] == 'application/json') {
+                    setError(error.response.data["description"]);
+                } else {
+                    setError(error.message);
+                }
+            });
+    }
+
+    function resetConformDialog() {
         setShowConfirmDialog(false);
+        setConfirmDialogTodoId("");
         setConfirmDialogMsg("");
-    };
+    }
 
     return (
     <Container>
      <div className="m-2 mx-auto">
         { error && <AlertBox title={t("applicationErrorTitle")} message={error} /> }
-        { showConfirmDialog && <ShowConfirmDeleteDialog isShow={showConfirmDialog} itemId={confirmDialogTodoId} message={confirmDialogMsg} deleteTodoRef={deleteTodo} cancelDeleteTodoRef={handleCancelDeleteTodo} /> }
+        { showConfirmDialog && <ShowConfirmDeleteDialog isShow={showConfirmDialog} itemId={confirmDialogTodoId} message={confirmDialogMsg} deleteTodoRef={handleDeleteTodo} cancelDeleteTodoRef={handleCancelDeleteTodo} /> }
         <Card>
             <Card.Header>
-                <h4 className="float-start">{t("todoListTitle")}</h4>
+                    <h4 className="float-start">{t("todoListTitle")}</h4>
                     <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary" className="float-end" >{t("add")}</Button>
-                    <button onClick={() => handleDeleteTodo('12345678')} type="button" className="btn btn-sm btn-outline-secondary float-end"><Trash  size={16} color="red" /></button>
             </Card.Header>
             <Card.Body>
                   <Table>
@@ -127,12 +149,12 @@ export const TodoListView = () => {
                                         <Pencil size={16} color="royalblue" />
                                      </button>
                                      <span>&nbsp;</span>
-                                     <button onClick={() => { handleDeleteTodo(todo.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
-                                       <Trash  size={16} color="red" />
+                                     <button onClick={() => { confirmDeleteTodo(todo.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
+                                       <Trash size={16} color="red" />
                                      </button>
                                      <span>&nbsp;</span>
                                      <button onClick={() => navigate("/todo/" + todo.id + "/history")} type="button" className="btn btn-sm btn-outline-secondary">
-                                        <ClockHistory  size={16} color="black" />
+                                        <ClockHistory size={16} color="black" />
                                       </button>
                                  </td>
                              </tr>
@@ -141,9 +163,6 @@ export const TodoListView = () => {
                         </tbody>
                         <tfoot className="table-group-divider">
                             <tr>
-                                <td>
-
-                                </td>
                             </tr>
                         </tfoot>
                     </Table>

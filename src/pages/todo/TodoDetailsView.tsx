@@ -83,7 +83,6 @@ export const TodoDetailsView = () => {
                 counter += 1;
             }
         });
-
         return <span>{counter}</span>;
     };
 
@@ -93,13 +92,11 @@ export const TodoDetailsView = () => {
 
     return (
     <Container>
-        <Card className="m-4">
+        <Card className="m-2">
            <Card.Header>
-                <div className="d-flex justify-content-between">
-                    <h4>{todoData.name} - {todoData.description}</h4>
-                    <Button onClick={() => navigate(-1)} size="sm" variant="outline-primary">{t("back")}</Button>
-                    <Button onClick={() => navigateAddParticipant()} size="sm" variant="outline-primary">{t("addParticipant")}</Button>
-                </div>
+                    <h4 className="float-start">{todoData.name} - {todoData.description}</h4>
+                    <Button className="float-end ms-2" onClick={() => navigate(-1)} size="sm" variant="outline-primary">{t("back")}</Button>
+                    <Button className="float-end" onClick={() => navigateAddParticipant()} size="sm" variant="outline-primary">{t("addParticipant")}</Button>
            </Card.Header>
            <Card.Body>
                 <div>
@@ -114,10 +111,10 @@ export const TodoDetailsView = () => {
                        <dd className="col-sm-8">{t(todoData.status)}</dd>
                        <dt className="col-sm-3">{t("participants")}</dt>
                        <dd className="col-sm-8">
-                           <div className="hstack gap-4 col-md-2">
+                           <div key="participants" className="hstack gap-4 col-md-2">
                               {
                                  todoData.participantDtoList && todoData.participantDtoList.map((participant) => (
-                                      <Button disabled key="{participant.id}" type="button" className="position-relative" variant="outline-secondary">
+                                      <Button disabled key={participant.id} type="button" className="position-relative" variant="outline-secondary">
                                          {participant.name}
                                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">{ getAssignedTaskCount(participant.name as string) }</span>
                                       </Button>

@@ -1,6 +1,6 @@
 // react import
 import { useTranslation } from 'react-i18next';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
@@ -14,7 +14,7 @@ import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 import { LANGUAGES } from "../constants";
 // service import
-import { TodoServiceApiFactory, TodoItemDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, ErrorResponse, Configuration } from "generated/client/todoservice";
+import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, ErrorResponse, Configuration } from "generated/client/todoservice";
 
 interface TodoItemFormProps {
   userName: string;
@@ -26,24 +26,51 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     const { todoId } = useParams() as { todoId:string };
     // if the price input field should be visible or not
     const [showPriceField, setShowPriceField] = useState(false);
+
     const navigate = useNavigate();
     const navigateTodoItems = () => {
            //navigate('/todos');
            navigate(-1); // same as browser back button
         };
 
+    const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
     // form constants
     const [formErrors, setFormErrors] = useState("");
     const [validated, setValidated] = useState(false);
+    const [participantListData, setParticipantListData] = useState<ParticipantDto[]>([]);
     const [todoItemForm, setTodoItemForm] = useState({
         todo_id: todoId,
-        created_by: props.userName,
+        created_by: props.userName, // always set equal to user that create this todo item, can not be changed
         name: '',
         description: '',
-        action: TodoItemDtoActionEnum.StayAsIs,
-        status: TodoItemDtoStatusEnum.Open,
+        action: '',
+        price: '',
+        status: TodoItemDtoStatusEnum.Open, // set to Open as default, can not be changed for new todo item
         assigned_to: '',
       });
+
+     useEffect(() => {
+            getTodoParticipants(todoId);
+        } ,[])
+
+    const getTodoParticipants = (todoId:string) => {
+         // clear current errors, if any
+         //setError("")
+         todoApi.getTodoParticipants(todoId)
+            .then((response) => {
+                const participants = JSON.parse(JSON.stringify(response.data)) as ParticipantDto[];
+                setParticipantListData(participants);
+                //setLoading(false);
+                console.log("loaded participants for todoId=" + todoId)
+            })
+            .catch(function (error) {
+                 if (error.response && error.response.headers["content-type"] == 'application/json') {
+                    setFormErrors(error.response.data["description"]);
+                } else {
+                    setFormErrors(error.message);
+                }
+            })
+    }
 
      const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTodoItemForm({
@@ -58,7 +85,42 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
         } else {
             setShowPriceField(false);
         }
+        setTodoItemForm({
+          ...todoItemForm,
+          [event.target.id]: event.target.value,
+        });
     };
+
+    const handleAssignToSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setTodoItemForm({
+          ...todoItemForm,
+          [event.target.id]: event.target.value,
+        });
+    };
+
+    function toTodoItemDtoActionEnum(key: string): TodoItemDtoActionEnum {
+        console.log("map key: " + key);
+        if (key == TodoItemDtoActionEnum.ToBeSold) {
+           return TodoItemDtoActionEnum.ToBeSold;
+        } else if (key == TodoItemDtoActionEnum.GivesAway) {
+           return TodoItemDtoActionEnum.GivesAway;
+        } else if (key == TodoItemDtoActionEnum.ThrowAway) {
+           return TodoItemDtoActionEnum.ThrowAway;
+        } else if (key == TodoItemDtoActionEnum.OwnedBy) {
+           return TodoItemDtoActionEnum.OwnedBy;
+        } else if (key == TodoItemDtoActionEnum.GivenTo) {
+           return TodoItemDtoActionEnum.GivenTo;
+        } else if (key == TodoItemDtoActionEnum.StayAsIs) {
+           return TodoItemDtoActionEnum.StayAsIs;
+       } else {
+           console.log("no map for key: " + key);
+           return TodoItemDtoActionEnum.StayAsIs;
+       }
+    }
+
+    function isInStringEnum(key: string, enumeration: any): boolean {
+        return Object.keys(enumeration).includes(key) || Object.values(enumeration).includes(key);
+    }
 
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -78,11 +140,13 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                   lastModifiedByUser: todoItemForm.created_by,
                   name: todoItemForm.name,
                   description: todoItemForm.description,
-                  status: TodoItemDtoStatusEnum.Open,
-                  action: TodoItemDtoActionEnum.StayAsIs,
+                  status: todoItemForm.status,
+                  action: toTodoItemDtoActionEnum(todoItemForm.action),
                   assignedTo: todoItemForm.assigned_to
             };
 
+            console.log("form assinged to: " + todoItemForm.assigned_to);
+            console.log(todoItemDto);
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
             todoApi.createTodoItem(todoId, todoItemDto)
@@ -99,7 +163,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     }
 
   return (
-  <div className="m-4 w-50 mx-auto">
+  <div className="m-2 w-50 mx-auto">
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
        <Card.Header>
@@ -155,10 +219,10 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                 </Form.Group>
                 <Form.Group>
                     <Form.FloatingLabel label={t("action")} className="mb-3">
-                        <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} onChange={handleActionSelectChange}>
+                        <Form.Select id="action" name="action" className="form-select" size="sm" value={todoItemForm.action} onChange={handleActionSelectChange}>
                            {
                              Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
-                               <option id="action" value={value} key={key}>
+                               <option key={key} value={value} >
                                  {t(key)}
                                </option>
                              ))
@@ -166,43 +230,30 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                          </Form.Select>
                     </Form.FloatingLabel>
                 </Form.Group>
-              { showPriceField &&
-                <Form.Group>
-                    <Form.FloatingLabel label={t("price")} className="mb-3">
-                      <Form.Control
-                        required
-                        id="price"
-                        type="text"
-                        value={todoItemForm.assigned_to}
-                        onChange={handleFieldChange}
-                        isInvalid={validated && !/^[0-9]+$/.test(todoItemForm.assigned_to)}
-                      />
-                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
-                    </Form.FloatingLabel>
-                </Form.Group>
+                { showPriceField &&
+                    <Form.Group>
+                        <Form.FloatingLabel label={t("price")} className="mb-3">
+                          <Form.Control
+                            required
+                            id="price"
+                            type="text"
+                            value={todoItemForm.price}
+                            onChange={handleFieldChange}
+                            isInvalid={validated && !/^[0-9]+$/.test(todoItemForm.price)}
+                          />
+                          <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                        </Form.FloatingLabel>
+                    </Form.Group>
                 }
                 <Form.Group>
-                    <Form.FloatingLabel label={t("assignedTo")} className="mb-3">
-                      <Form.Control
-                        required
-                        id="assigned_to"
-                        type="text"
-                        value={todoItemForm.assigned_to}
-                        onChange={handleFieldChange}
-                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.assigned_to)}
-                      />
-                      <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
-                    </Form.FloatingLabel>
-                </Form.Group>
-                <Form.Group>
-                    <Form.FloatingLabel label={t("assignedTo")} className="mb-3">
-                        <Form.Select className="form-select" size="sm" defaultValue={t(TodoItemDtoActionEnum.StayAsIs)} onChange={handleActionSelectChange}>
+                    <Form.FloatingLabel label={t("assignTo")} className="mb-3">
+                        <Form.Select id="assigned_to" name="assigned_to" className="form-select" size="sm" value={todoItemForm.assigned_to} onChange={handleAssignToSelectChange} >
                            {
-                             Object.entries(TodoItemDtoActionEnum).map(([key, value]) => (
-                               <option id="assigned_to" value={value} key={key}>
-                                 {t(key)}
-                               </option>
-                             ))
+                                participantListData.map(participant => (
+                                    <option key={participant.id} value={participant.name} >
+                                        {participant.name}
+                                    </option>
+                               ))
                            }
                          </Form.Select>
                     </Form.FloatingLabel>

@@ -19,7 +19,7 @@ export const TodoHistoryView = () => {
 
     return (
     <Container>
-        <Card className="m-4">
+        <Card className="m-2">
             <Card.Header>
                 <Navbar className="justify-content-between">
                     <Navbar.Text>Todo History</Navbar.Text>
