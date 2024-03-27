@@ -114,7 +114,7 @@ export const TodoListView = () => {
     <Container>
      <div className="m-2 mx-auto">
         { error && <AlertBox title={t("applicationErrorTitle")} message={error} /> }
-        { showConfirmDialog && <ShowConfirmDeleteDialog isShow={showConfirmDialog} itemId={confirmDialogTodoId} message={confirmDialogMsg} deleteTodoRef={handleDeleteTodo} cancelDeleteTodoRef={handleCancelDeleteTodo} /> }
+        { showConfirmDialog && <ShowConfirmDeleteDialog isShow={showConfirmDialog} itemId={confirmDialogTodoId} message={confirmDialogMsg} deleteRef={handleDeleteTodo} cancelDeleteRef={handleCancelDeleteTodo} /> }
         <Card>
             <Card.Header>
                     <h4 className="float-start">{t("todoListTitle")}</h4>

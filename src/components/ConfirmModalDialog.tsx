@@ -6,8 +6,8 @@ interface ShowConfirmDeleteDialogProps {
   isShow: boolean;
   itemId: string;
   message?: string;
-  deleteTodoRef: Function;
-  cancelDeleteTodoRef: Function;
+  deleteRef: Function;
+  cancelDeleteRef: Function;
 }
 
 export const ShowConfirmDeleteDialog: React.FC<ShowConfirmDeleteDialogProps> = (props: ShowConfirmDeleteDialogProps) => {
@@ -16,12 +16,12 @@ export const ShowConfirmDeleteDialog: React.FC<ShowConfirmDeleteDialogProps> = (
 
    function handleConfirm() {
         setShow(false);
-        props.deleteTodoRef(props.itemId)
+        props.deleteRef(props.itemId)
    }
 
    function handleCancel() {
         setShow(false);
-        props.cancelDeleteTodoRef(props.itemId);
+        props.cancelDeleteRef(props.itemId);
    }
 
    return (

@@ -14,6 +14,7 @@ import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons';
 import { TodoRestApi } from '../../services/TodoRestApi';
 import { TodoItemTable } from '../../components/TodoItemTable';
 import { ShowConfirmDeleteDialog } from '../../components/ConfirmModalDialog';
+import { AlertBox } from '../../components/Alert';
 // service import
 import { TodoServiceApiFactory, TodoDto, TodoItemDto, TodoDtoStatusEnum, ParticipantDto, ErrorResponse, Configuration } from "../../generated/client/todoservice";
 
@@ -30,6 +31,11 @@ export const TodoDetailsView = () => {
     const navigateAddParticipant = () => {
         navigate("/todo/" + todoId + "/participants");
      };
+
+     // confirm dialog useState
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [confirmDialogMsg, setConfirmDialogMsg] = useState("");
+    const [confirmDialogTodoItemId, setConfirmDialogTodoItemId] = useState("");
 
      // load data
     const [todoData, setTodoData] = useState<TodoDto>({
@@ -65,16 +71,40 @@ export const TodoDetailsView = () => {
             });
     }, []);
 
+    const confirmDeleteTodoItem = (todoId:string, todoItemId:string) => {
+        setShowConfirmDialog(true);
+        setConfirmDialogTodoItemId(todoItemId);
+        setConfirmDialogMsg("are yuo sure you want to delete " + todoId + " / " + todoItemId + " ?" )
+        console.log("clicked delete button, todoItemId=" + todoItemId)
+    }
+
+    const handleDeleteTodoItem = (todoItemId:string) => {
+        deleteTodoItem(todoId, todoItemId);
+    }
+
+    const handleCancelDeleteTodoItem = (todoId:string) => {
+        setError("");
+        resetConformDialog();
+        console.log("canceled delete todoId=" + todoId);
+    }
+
     const deleteTodoItem = (todoId:string, todoItemId:string) => {
-        const confirmed = true;//ShowConfirmDeleteDialog(true);
-        if (confirmed) {
-            console.log("confirmed delete! todoId=" + todoId + ", todoItemId=" + todoItemId)
-        } else {
-            TodoRestApi.delete("/todos/" + todoId + "/items/" + todoItemId)
-           .then((response) => console.log(response.data))
-           .catch((error) => console.log("Error calling todo service rest api, error: " + error));
-       }
-    };
+        console.log("delete todoItem, " + todoId + " / "+ todoItemId);
+        // clear current errors, if any
+        setError("")
+        todoApi.deleteTodoItem(todoId, todoItemId)
+            .then((response) => {
+                setError("deleted todoItemId=" + todoItemId);
+                console.log("deleted todoItemId " + todoItemId)
+            })
+            .catch(function (error) {
+                if (error.response && error.response.headers["content-type"] == 'application/json') {
+                    setError(error.response.data["description"]);
+                } else {
+                    setError(error.message);
+                }
+            });
+        }
 
     const getAssignedTaskCount = (userName:string) => {
         var counter = 0 as number;
@@ -86,12 +116,20 @@ export const TodoDetailsView = () => {
         return <span>{counter}</span>;
     };
 
+    function resetConformDialog() {
+        setShowConfirmDialog(false);
+        setConfirmDialogTodoItemId("");
+        setConfirmDialogMsg("");
+    }
+
     if (loading) {
         return <div>loading todo items for {todoId} ...</div>
     }
 
     return (
     <Container>
+        { error && <AlertBox title={t("applicationErrorTitle")} message={error} /> }
+        { showConfirmDialog && <ShowConfirmDeleteDialog isShow={showConfirmDialog} itemId={confirmDialogTodoItemId} message={confirmDialogMsg} deleteRef={handleDeleteTodoItem} cancelDeleteRef={handleCancelDeleteTodoItem} /> }
         <Card className="m-2">
            <Card.Header>
                     <h4 className="float-start">{todoData.name} - {todoData.description}</h4>
@@ -156,7 +194,7 @@ export const TodoDetailsView = () => {
                                             <Pencil size={16} color="royalblue" />
                                         </button>
                                         <span>&nbsp;</span>
-                                        <button onClick={() => { deleteTodoItem('23', '23');}} type="button" className="btn btn-sm btn-outline-secondary">
+                                        <button onClick={() => { confirmDeleteTodoItem(todoData.id as string, item.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
                                             <Trash  size={16} color="red" />
                                         </button>
                                      </td>
