@@ -69,7 +69,7 @@ export interface TodoDto {
      */
     'name'?: string;
     /**
-     * Holds all possible statues of a todo task
+     * Holds all possible statues for a todo task.
      * @type {string}
      * @memberof TodoDto
      */
@@ -87,7 +87,7 @@ export interface TodoDto {
      */
     'todoItemDtoList'?: Array<TodoItemDto>;
     /**
-     * List of participant for the todo
+     * The todo list can have many participants and a participant is unique for a todo list.
      * @type {Array<ParticipantDto>}
      * @memberof TodoDto
      */

@@ -81,11 +81,11 @@ export interface TodoItemDto {
      */
     'status': TodoItemDtoStatusEnum;
     /**
-     * The action that should be done for this item
+     * Holds all possible actions for a todo task.
      * @type {string}
      * @memberof TodoItemDto
      */
-    'action'?: TodoItemDtoActionEnum;
+    'action': TodoItemDtoActionEnum;
     /**
      * the person that is responsible to follow up and fulfill this task
      * @type {string}
@@ -93,11 +93,11 @@ export interface TodoItemDto {
      */
     'assignedTo'?: string;
     /**
-     * the priority of this task, can be any integer, typically from 1- 10
-     * @type {number}
+     * Holds all possible priority levels for a todo item. Where default level is MEDIUM.
+     * @type {string}
      * @memberof TodoItemDto
      */
-    'priority'?: number;
+    'priority': TodoItemDtoPriorityEnum;
     /**
      * the price of this item
      * @type {number}
@@ -110,6 +110,12 @@ export interface TodoItemDto {
      * @memberof TodoItemDto
      */
     'workedMinutes'?: number;
+    /**
+     * Indicates it this task must be approved ba all participants or not, Default is no need for approval.
+     * @type {boolean}
+     * @memberof TodoItemDto
+     */
+    'approvalRequired'?: boolean;
 }
 
 export const TodoItemDtoStatusEnum = {
@@ -131,5 +137,14 @@ export const TodoItemDtoActionEnum = {
 } as const;
 
 export type TodoItemDtoActionEnum = typeof TodoItemDtoActionEnum[keyof typeof TodoItemDtoActionEnum];
+export const TodoItemDtoPriorityEnum = {
+    Lowest: 'LOWEST',
+    Low: 'LOW',
+    Medium: 'MEDIUM',
+    High: 'HIGH',
+    Highest: 'HIGHEST'
+} as const;
+
+export type TodoItemDtoPriorityEnum = typeof TodoItemDtoPriorityEnum[keyof typeof TodoItemDtoPriorityEnum];
 
 

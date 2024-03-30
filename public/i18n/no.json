@@ -36,8 +36,10 @@
   "loginErrorMsg": "Login feilet, sjekk brukernavm og/eller passord",
   "participants": "Deltagere",
   "category": "Kategori",
+  "priority": "Prioritet",
   "price": "Pris",
   "taskName": "Oppgave",
+  "approvalRequired": "Alle deltagere må godkjenne oppgaven",
 
   "login": "Login",
   "save": "Lagre",

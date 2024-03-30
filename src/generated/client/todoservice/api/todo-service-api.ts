@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import { ApprovalDto } from '../model';
+// @ts-ignore
 import { ErrorResponse } from '../model';
 // @ts-ignore
 import { ParticipantDto } from '../model';
@@ -31,6 +33,8 @@ import { TodoDto } from '../model';
 import { TodoHistoryDto } from '../model';
 // @ts-ignore
 import { TodoItemDto } from '../model';
+// @ts-ignore
+import { TodoItemHistoryDto } from '../model';
 /**
  * TodoServiceApi - axios parameter creator
  * @export
@@ -147,6 +151,92 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(todoItemDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * return todo item approval
+         * @summary Add item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {ApprovalDto} approvalDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTodoItemApproval: async (todoId: string, todoItemId: string, approvalDto: ApprovalDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'todoId' is not null or undefined
+            assertParamExists('createTodoItemApproval', 'todoId', todoId)
+            // verify required parameter 'todoItemId' is not null or undefined
+            assertParamExists('createTodoItemApproval', 'todoItemId', todoItemId)
+            // verify required parameter 'approvalDto' is not null or undefined
+            assertParamExists('createTodoItemApproval', 'approvalDto', approvalDto)
+            const localVarPath = `/todoservice/v1/todos/{todoId}/items/{todoItemId}/approvals`
+                .replace(`{${"todoId"}}`, encodeURIComponent(String(todoId)))
+                .replace(`{${"todoItemId"}}`, encodeURIComponent(String(todoItemId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(approvalDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * approval to delete
+         * @summary delete todo item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {string} participantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteApproval: async (todoId: string, todoItemId: string, participantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'todoId' is not null or undefined
+            assertParamExists('deleteApproval', 'todoId', todoId)
+            // verify required parameter 'todoItemId' is not null or undefined
+            assertParamExists('deleteApproval', 'todoItemId', todoItemId)
+            // verify required parameter 'participantId' is not null or undefined
+            assertParamExists('deleteApproval', 'participantId', participantId)
+            const localVarPath = `/todoservice/v1/todos/{todoId}/items/{todoItemId}/approvals/{participantId}`
+                .replace(`{${"todoId"}}`, encodeURIComponent(String(todoId)))
+                .replace(`{${"todoItemId"}}`, encodeURIComponent(String(todoItemId)))
+                .replace(`{${"participantId"}}`, encodeURIComponent(String(participantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -309,6 +399,82 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
             assertParamExists('getTodoHistoryById', 'todoId', todoId)
             const localVarPath = `/todoservice/v1/todos/{todoId}/history`
                 .replace(`{${"todoId"}}`, encodeURIComponent(String(todoId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * return todo item
+         * @summary Get todo item
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTodoItem: async (todoId: string, todoItemId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'todoId' is not null or undefined
+            assertParamExists('getTodoItem', 'todoId', todoId)
+            // verify required parameter 'todoItemId' is not null or undefined
+            assertParamExists('getTodoItem', 'todoItemId', todoItemId)
+            const localVarPath = `/todoservice/v1/todos/{todoId}/items/{todoItemId}`
+                .replace(`{${"todoId"}}`, encodeURIComponent(String(todoId)))
+                .replace(`{${"todoItemId"}}`, encodeURIComponent(String(todoItemId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * return todo item approvals
+         * @summary Get todo item approvals
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTodoItemApprovals: async (todoId: string, todoItemId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'todoId' is not null or undefined
+            assertParamExists('getTodoItemApprovals', 'todoId', todoId)
+            // verify required parameter 'todoItemId' is not null or undefined
+            assertParamExists('getTodoItemApprovals', 'todoItemId', todoItemId)
+            const localVarPath = `/todoservice/v1/todos/{todoId}/items/{todoItemId}/approvals`
+                .replace(`{${"todoId"}}`, encodeURIComponent(String(todoId)))
+                .replace(`{${"todoItemId"}}`, encodeURIComponent(String(todoItemId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -557,6 +723,50 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * return todo item approval
+         * @summary Add item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {ApprovalDto} approvalDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTodoItemApproval: async (todoId: string, todoItemId: string, approvalDto: ApprovalDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'todoId' is not null or undefined
+            assertParamExists('updateTodoItemApproval', 'todoId', todoId)
+            // verify required parameter 'todoItemId' is not null or undefined
+            assertParamExists('updateTodoItemApproval', 'todoItemId', todoItemId)
+            // verify required parameter 'approvalDto' is not null or undefined
+            assertParamExists('updateTodoItemApproval', 'approvalDto', approvalDto)
+            const localVarPath = `/todoservice/v1/todos/{todoId}/items/{todoItemId}/approvals`
+                .replace(`{${"todoId"}}`, encodeURIComponent(String(todoId)))
+                .replace(`{${"todoItemId"}}`, encodeURIComponent(String(todoItemId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(approvalDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -575,7 +785,7 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createParticipant(todoId: string, participantDto: ParticipantDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoItemDto>> {
+        async createParticipant(todoId: string, participantDto: ParticipantDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParticipantDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createParticipant(todoId, participantDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.createParticipant']?.[localVarOperationServerIndex]?.url;
@@ -606,6 +816,36 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTodoItem(todoId, todoItemDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.createTodoItem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * return todo item approval
+         * @summary Add item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {ApprovalDto} approvalDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createTodoItemApproval(todoId: string, todoItemId: string, approvalDto: ApprovalDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApprovalDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createTodoItemApproval(todoId, todoItemId, approvalDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.createTodoItemApproval']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * approval to delete
+         * @summary delete todo item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {string} participantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteApproval(todoId: string, todoItemId: string, participantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteApproval(todoId, todoItemId, participantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.deleteApproval']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -676,6 +916,34 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * return todo item
+         * @summary Get todo item
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTodoItem(todoId: string, todoItemId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoItemDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTodoItem(todoId, todoItemId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.getTodoItem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * return todo item approvals
+         * @summary Get todo item approvals
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTodoItemApprovals(todoId: string, todoItemId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApprovalDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTodoItemApprovals(todoId, todoItemId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.getTodoItemApprovals']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * return todo audit history
          * @summary Get todo audit history
          * @param {string} todoId 
@@ -683,7 +951,7 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTodoItemHistoryById(todoId: string, todoItemId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoHistoryDto>> {
+        async getTodoItemHistoryById(todoId: string, todoItemId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoItemHistoryDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTodoItemHistoryById(todoId, todoItemId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.getTodoItemHistoryById']?.[localVarOperationServerIndex]?.url;
@@ -696,7 +964,7 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTodoParticipants(todoId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoDto>> {
+        async getTodoParticipants(todoId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParticipantDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTodoParticipants(todoId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.getTodoParticipants']?.[localVarOperationServerIndex]?.url;
@@ -723,7 +991,7 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateParticipant(todoId: string, participantDto: ParticipantDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoItemDto>> {
+        async updateParticipant(todoId: string, participantDto: ParticipantDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParticipantDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateParticipant(todoId, participantDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.updateParticipant']?.[localVarOperationServerIndex]?.url;
@@ -757,6 +1025,21 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.updateTodoItem']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * return todo item approval
+         * @summary Add item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {ApprovalDto} approvalDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateTodoItemApproval(todoId: string, todoItemId: string, approvalDto: ApprovalDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApprovalDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTodoItemApproval(todoId, todoItemId, approvalDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TodoServiceApi.updateTodoItemApproval']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -775,7 +1058,7 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createParticipant(todoId: string, participantDto: ParticipantDto, options?: any): AxiosPromise<TodoItemDto> {
+        createParticipant(todoId: string, participantDto: ParticipantDto, options?: any): AxiosPromise<ParticipantDto> {
             return localVarFp.createParticipant(todoId, participantDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -798,6 +1081,30 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
          */
         createTodoItem(todoId: string, todoItemDto: TodoItemDto, options?: any): AxiosPromise<TodoItemDto> {
             return localVarFp.createTodoItem(todoId, todoItemDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * return todo item approval
+         * @summary Add item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {ApprovalDto} approvalDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTodoItemApproval(todoId: string, todoItemId: string, approvalDto: ApprovalDto, options?: any): AxiosPromise<ApprovalDto> {
+            return localVarFp.createTodoItemApproval(todoId, todoItemId, approvalDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * approval to delete
+         * @summary delete todo item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {string} participantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteApproval(todoId: string, todoItemId: string, participantId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteApproval(todoId, todoItemId, participantId, options).then((request) => request(axios, basePath));
         },
         /**
          * participant to delete
@@ -852,6 +1159,28 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
             return localVarFp.getTodoHistoryById(todoId, options).then((request) => request(axios, basePath));
         },
         /**
+         * return todo item
+         * @summary Get todo item
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTodoItem(todoId: string, todoItemId: string, options?: any): AxiosPromise<TodoItemDto> {
+            return localVarFp.getTodoItem(todoId, todoItemId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * return todo item approvals
+         * @summary Get todo item approvals
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTodoItemApprovals(todoId: string, todoItemId: string, options?: any): AxiosPromise<ApprovalDto> {
+            return localVarFp.getTodoItemApprovals(todoId, todoItemId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * return todo audit history
          * @summary Get todo audit history
          * @param {string} todoId 
@@ -859,7 +1188,7 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTodoItemHistoryById(todoId: string, todoItemId: string, options?: any): AxiosPromise<TodoHistoryDto> {
+        getTodoItemHistoryById(todoId: string, todoItemId: string, options?: any): AxiosPromise<TodoItemHistoryDto> {
             return localVarFp.getTodoItemHistoryById(todoId, todoItemId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -869,7 +1198,7 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTodoParticipants(todoId: string, options?: any): AxiosPromise<TodoDto> {
+        getTodoParticipants(todoId: string, options?: any): AxiosPromise<ParticipantDto> {
             return localVarFp.getTodoParticipants(todoId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -890,7 +1219,7 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateParticipant(todoId: string, participantDto: ParticipantDto, options?: any): AxiosPromise<TodoItemDto> {
+        updateParticipant(todoId: string, participantDto: ParticipantDto, options?: any): AxiosPromise<ParticipantDto> {
             return localVarFp.updateParticipant(todoId, participantDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -914,6 +1243,18 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
          */
         updateTodoItem(todoId: string, todoItemDto: TodoItemDto, options?: any): AxiosPromise<TodoItemDto> {
             return localVarFp.updateTodoItem(todoId, todoItemDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * return todo item approval
+         * @summary Add item approval
+         * @param {string} todoId 
+         * @param {string} todoItemId 
+         * @param {ApprovalDto} approvalDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTodoItemApproval(todoId: string, todoItemId: string, approvalDto: ApprovalDto, options?: any): AxiosPromise<ApprovalDto> {
+            return localVarFp.updateTodoItemApproval(todoId, todoItemId, approvalDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -961,6 +1302,34 @@ export class TodoServiceApi extends BaseAPI {
      */
     public createTodoItem(todoId: string, todoItemDto: TodoItemDto, options?: RawAxiosRequestConfig) {
         return TodoServiceApiFp(this.configuration).createTodoItem(todoId, todoItemDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * return todo item approval
+     * @summary Add item approval
+     * @param {string} todoId 
+     * @param {string} todoItemId 
+     * @param {ApprovalDto} approvalDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoServiceApi
+     */
+    public createTodoItemApproval(todoId: string, todoItemId: string, approvalDto: ApprovalDto, options?: RawAxiosRequestConfig) {
+        return TodoServiceApiFp(this.configuration).createTodoItemApproval(todoId, todoItemId, approvalDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * approval to delete
+     * @summary delete todo item approval
+     * @param {string} todoId 
+     * @param {string} todoItemId 
+     * @param {string} participantId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoServiceApi
+     */
+    public deleteApproval(todoId: string, todoItemId: string, participantId: string, options?: RawAxiosRequestConfig) {
+        return TodoServiceApiFp(this.configuration).deleteApproval(todoId, todoItemId, participantId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1023,6 +1392,32 @@ export class TodoServiceApi extends BaseAPI {
      */
     public getTodoHistoryById(todoId: string, options?: RawAxiosRequestConfig) {
         return TodoServiceApiFp(this.configuration).getTodoHistoryById(todoId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * return todo item
+     * @summary Get todo item
+     * @param {string} todoId 
+     * @param {string} todoItemId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoServiceApi
+     */
+    public getTodoItem(todoId: string, todoItemId: string, options?: RawAxiosRequestConfig) {
+        return TodoServiceApiFp(this.configuration).getTodoItem(todoId, todoItemId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * return todo item approvals
+     * @summary Get todo item approvals
+     * @param {string} todoId 
+     * @param {string} todoItemId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoServiceApi
+     */
+    public getTodoItemApprovals(todoId: string, todoItemId: string, options?: RawAxiosRequestConfig) {
+        return TodoServiceApiFp(this.configuration).getTodoItemApprovals(todoId, todoItemId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1099,6 +1494,20 @@ export class TodoServiceApi extends BaseAPI {
      */
     public updateTodoItem(todoId: string, todoItemDto: TodoItemDto, options?: RawAxiosRequestConfig) {
         return TodoServiceApiFp(this.configuration).updateTodoItem(todoId, todoItemDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * return todo item approval
+     * @summary Add item approval
+     * @param {string} todoId 
+     * @param {string} todoItemId 
+     * @param {ApprovalDto} approvalDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoServiceApi
+     */
+    public updateTodoItemApproval(todoId: string, todoItemId: string, approvalDto: ApprovalDto, options?: RawAxiosRequestConfig) {
+        return TodoServiceApiFp(this.configuration).updateTodoItemApproval(todoId, todoItemId, approvalDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

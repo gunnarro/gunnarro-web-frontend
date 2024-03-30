@@ -36,8 +36,10 @@
   "loginErrorMsg": "Login failed, wrong username or password!",
   "participants": "Participants",
   "category": "Category",
+  "priority": "Priority",
   "price": "Price",
   "taskName": "Task",
+  "approvalRequired": "All participants must approve the task",
 
   "login": "Login",
   "save": "Save",

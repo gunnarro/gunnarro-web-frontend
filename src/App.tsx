@@ -8,6 +8,7 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { TodoForm } from './components/TodoForm';
 import { TodoItemForm } from './components/TodoItemForm';
+import { EditTodoItemForm } from './components/EditTodoItemForm';
 import { TodoAddParticipantForm } from './components/TodoAddParticipantForm'
 import { Login } from './pages/Login';
 import { Home } from './pages/Home';
@@ -40,6 +41,7 @@ const App = () => {
               <Route path='/todo/:todoId/history' element={<TodoHistoryView />} />
               <Route path='/todo/new' element={<TodoForm />} />
               <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />
+              <Route path='/todo/:todoId/items/:todoItemId/edit' element={<EditTodoItemForm userName="guest"/>} />
               <Route path='/about' element={<About />} />
             </Routes>
           </BrowserRouter>

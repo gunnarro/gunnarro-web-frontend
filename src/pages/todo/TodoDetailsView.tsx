@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // bootstrap icon import
-import { Trash, Pencil, CheckCircleFill } from 'react-bootstrap-icons';
+import { Trash, Pencil, CheckCircleFill, CheckSquare } from 'react-bootstrap-icons';
 
 // project import
 import { TodoRestApi } from '../../services/TodoRestApi';
@@ -170,33 +170,46 @@ export const TodoDetailsView = () => {
                                 <th scope="col"/>
                                 <th scope="col"/>
                                 <th scope="col"/>
+                                <th scope="col"/>
+                                <th scope="col"/>
                                 <th scope="col" className="float-end" ><Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button></th>
                            </tr>
                            <tr>
                                <th scope="col">{t("status")}</th>
+                               <th scope="col">{t("priority")}</th>
+                               <th scope="col">{t("category")}</th>
                                <th scope="col">{t("taskName")}</th>
                                <th scope="col">{t("action")}</th>
                                <th scope="col">{t("assignedTo")}</th>
                                <th scope="col">{t("description")}</th>
-                               <th scope="col">#</th>
+                               <th scope="col" className="text-center">#</th>
                            </tr>
                        </thead>
                        <tbody className="table-group-divider">
                              {todoData.todoItemDtoList && todoData.todoItemDtoList.map(item => (
                                   <tr key={item.id}>
                                      <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill /> : t(item.status)}</td>
+                                     <td>{item.priority}</td>
+                                     <td>{item.category}</td>
                                      <td>{item.name}</td>
                                      <td>{t(item.action as string)}</td>
                                      <td>{item.assignedTo}</td>
                                      <td>{item.description}</td>
                                      <td>
-                                        <button onClick={() => navigate("/todo/" + todoData.id + "/items")} type="button" className="btn btn-sm btn-outline-secondary">
+                                        <button onClick={() => navigate("/todo/" + todoData.id + "/items/" + item.id + "/edit")} type="button" className="btn btn-sm btn-outline-secondary">
                                             <Pencil size={16} color="royalblue" />
                                         </button>
                                         <span>&nbsp;</span>
                                         <button onClick={() => { confirmDeleteTodoItem(todoData.id as string, item.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
                                             <Trash  size={16} color="red" />
                                         </button>
+                                         <span>&nbsp;</span>
+                                        {
+                                            item.approvalRequired &&
+                                            <button onClick={() => navigate("/todo/" + todoData.id + "/items/" + item.id + "/approve")} type="button" className="btn btn-sm btn-outline-secondary">
+                                               <CheckSquare size={16} color="green" />
+                                            </button>
+                                        }
                                      </td>
                                  </tr>
                              ))}

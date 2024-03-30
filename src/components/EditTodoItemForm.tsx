@@ -10,20 +10,20 @@ import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Alert from 'react-bootstrap/Alert';
 // project import
-import { TodoRestApi } from '../services/TodoRestApi';
+import { TodoRestApi, toTodoItemDtoStatusEnum, toTodoItemDtoPriorityEnum, toTodoItemDtoActionEnum } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 import { LANGUAGES } from "../constants";
 // service import
 import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "generated/client/todoservice";
 
-interface TodoItemFormProps {
+interface EditTodoItemFormProps {
   userName: string;
 }
 
-export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
+export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
     const { t } = useTranslation()
     // the todoId is provided through the uri.
-    const { todoId } = useParams() as { todoId:string };
+    const { todoId, todoItemId } = useParams() as { todoId:string, todoItemId:string };
     // if the price input field should be visible or not
     const [showPriceField, setShowPriceField] = useState(false);
 
@@ -38,22 +38,61 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     const [formErrors, setFormErrors] = useState("");
     const [validated, setValidated] = useState(false);
     const [participantListData, setParticipantListData] = useState<ParticipantDto[]>([]);
-    const [todoItemForm, setTodoItemForm] = useState({
-        todo_id: todoId,
-        created_by: props.userName, // always set equal to user that create this todo item, can not be changed
-        name: '',
-        description: '',
-        action: '',
-        price: '',
-        status: TodoItemDtoStatusEnum.Open, // set to Open as default, can not be changed for new todo item
-        priority: TodoItemDtoPriorityEnum.Medium,
-        approval_required: false,
-        assigned_to: '',
-      });
 
-     useEffect(() => {
+    const [todoItemForm, setTodoItemForm] = useState(
+    {
+          id: '',
+          todo_id: '',
+          created_by: '',
+          last_modified_by: '',
+          name: '',
+          category: '',
+          description: '',
+          status: '',
+          action: '',
+          price: 0,
+          priority: '',
+          approval_required: false,
+          assigned_to: ''
+    });
+
+    useEffect(() => {
+            getTodoItem(todoId, todoItemId);
             getTodoParticipants(todoId);
-        } ,[])
+    }, [])
+
+    const getTodoItem = (todoId:string, todoItemId:string) => {
+         // clear current errors, if any
+         //setError("")
+         todoApi.getTodoItem(todoId, todoItemId)
+            .then((response) => {
+                let todoItem = {
+                          id: response.data.id!,
+                          todo_id: response.data.todoId!,
+                          created_by: '',
+                          last_modified_by: '',
+                          name: response.data.name!,
+                          category: response.data.category!,
+                          description: response.data.description!,
+                          status: response.data.status,
+                          action: response.data.action,
+                          price: response.data.price!,
+                          priority: response.data.priority,
+                          approval_required: false,
+                          assigned_to: response.data.assignedTo!
+                    };
+                setTodoItemForm(todoItem);
+                //setLoading(false);
+                console.log("loaded todo item, todoId=" + todoId + ", todoItemId=" + todoItemId + ", name=" + todoItemForm.name + ", " + todoItem.name)
+            })
+            .catch(function (error) {
+                 if (error.response && error.response.headers["content-type"] == 'application/json') {
+                    setFormErrors(error.response.data["description"]);
+                } else {
+                    setFormErrors(error.message);
+                }
+            })
+        }
 
     const getTodoParticipants = (todoId:string) => {
          // clear current errors, if any
@@ -100,30 +139,6 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
         });
     };
 
-    function toTodoItemDtoActionEnum(key: string): TodoItemDtoActionEnum {
-        console.log("map key: " + key);
-        if (key == TodoItemDtoActionEnum.ToBeSold) {
-           return TodoItemDtoActionEnum.ToBeSold;
-        } else if (key == TodoItemDtoActionEnum.GivesAway) {
-           return TodoItemDtoActionEnum.GivesAway;
-        } else if (key == TodoItemDtoActionEnum.ThrowAway) {
-           return TodoItemDtoActionEnum.ThrowAway;
-        } else if (key == TodoItemDtoActionEnum.OwnedBy) {
-           return TodoItemDtoActionEnum.OwnedBy;
-        } else if (key == TodoItemDtoActionEnum.GivenTo) {
-           return TodoItemDtoActionEnum.GivenTo;
-        } else if (key == TodoItemDtoActionEnum.StayAsIs) {
-           return TodoItemDtoActionEnum.StayAsIs;
-       } else {
-           console.log("no map for key: " + key);
-           return TodoItemDtoActionEnum.StayAsIs;
-       }
-    }
-
-    function isInStringEnum(key: string, enumeration: any): boolean {
-        return Object.keys(enumeration).includes(key) || Object.values(enumeration).includes(key);
-    }
-
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         // clear all previous error
@@ -137,15 +152,18 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
             // send data
             // map from form data into todo api model
             const todoItemDto : TodoItemDto = {
+                  id: todoItemForm.id,
                   todoId: todoItemForm.todo_id,
                   createdByUser: todoItemForm.created_by,
                   lastModifiedByUser: todoItemForm.created_by,
                   name: todoItemForm.name,
+                  category: todoItemForm.category,
                   description: todoItemForm.description,
-                  status: todoItemForm.status,
+                  status: toTodoItemDtoStatusEnum(todoItemForm.status),
                   action: toTodoItemDtoActionEnum(todoItemForm.action),
-                  priority: TodoItemDtoPriorityEnum.Medium,
-                  approvalRequired: false,
+                  price: todoItemForm.price,
+                  priority: toTodoItemDtoPriorityEnum(todoItemForm.priority),
+                  approvalRequired: true,
                   assignedTo: todoItemForm.assigned_to
             };
 
@@ -153,7 +171,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
             console.log(todoItemDto);
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
-            todoApi.createTodoItem(todoId, todoItemDto)
+            todoApi.updateTodoItem(todoId, todoItemDto)
                 .then((response) => navigateTodoItems())
                 .catch(function (error) {
                      if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -185,13 +203,10 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
               <Form.Group>
                 <Form.FloatingLabel label={t("createdBy")} className="mb-3">
                       <Form.Control
-                      autoFocus
-                      required
+                      disabled={true}
                       id="created_by"
                       type="text"
                       value={todoItemForm.created_by}
-                      onChange={handleFieldChange}
-                      isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.created_by)}
                     />
                     <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                 </Form.FloatingLabel>
@@ -199,17 +214,27 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
               <Form.Group>
                 <Form.FloatingLabel label={t("name")} className="mb-3">
                       <Form.Control
-                        required
+                        disabled={true}
                         id="name"
                         type="text"
                         value={todoItemForm.name}
-                        onChange={handleFieldChange}
-                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.name)}
                       />
                       <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                 </Form.FloatingLabel>
               </Form.Group>
-                 <Form.Group>
+              <Form.Group>
+                  <Form.FloatingLabel label={t("category")} className="mb-3">
+                        <Form.Control
+                          id="category"
+                          type="text"
+                          value={todoItemForm.category}
+                          onChange={handleFieldChange}
+                          isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.category)}
+                        />
+                        <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                  </Form.FloatingLabel>
+              </Form.Group>
+              <Form.Group>
                   <Form.FloatingLabel label={t("description")} className="mb-3">
                       <Form.Control
                         id="description"
@@ -220,6 +245,32 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                       />
                       <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                       </Form.FloatingLabel>
+                </Form.Group>
+                <Form.Group>
+                    <Form.FloatingLabel label={t("status")} className="mb-3">
+                        <Form.Select id="status" name="status" className="form-select" size="sm" value={todoItemForm.status} onChange={handleActionSelectChange}>
+                           {
+                             Object.entries(TodoItemDtoStatusEnum).map(([key, value]) => (
+                               <option key={key} value={value} >
+                                 {t(key)}
+                               </option>
+                             ))
+                           }
+                         </Form.Select>
+                    </Form.FloatingLabel>
+                </Form.Group>
+                <Form.Group>
+                    <Form.FloatingLabel label={t("priority")} className="mb-3">
+                        <Form.Select id="priority" name="priority" className="form-select" size="sm" value={todoItemForm.priority} onChange={handleActionSelectChange}>
+                           {
+                             Object.entries(TodoItemDtoPriorityEnum).map(([key, value]) => (
+                               <option key={key} value={value} >
+                                 {t(key)}
+                               </option>
+                             ))
+                           }
+                         </Form.Select>
+                    </Form.FloatingLabel>
                 </Form.Group>
                 <Form.Group>
                     <Form.FloatingLabel label={t("action")} className="mb-3">
@@ -240,10 +291,9 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                           <Form.Control
                             required
                             id="price"
-                            type="text"
+                            type="number"
                             value={todoItemForm.price}
                             onChange={handleFieldChange}
-                            isInvalid={validated && !/^[0-9]+$/.test(todoItemForm.price)}
                           />
                           <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                         </Form.FloatingLabel>

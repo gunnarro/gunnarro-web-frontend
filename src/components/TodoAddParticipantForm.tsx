@@ -116,7 +116,7 @@ export const TodoAddParticipantForm = () => {
                          type="switch"
                          label={t("activateUser")}
                        />
-              </Form.Group>
+           </Form.Group>
            <Form.Group>
               <div className="float-end">
                 <Button onClick={() => navigateTodos()} className="m-1" variant="outline-secondary" >{t("cancel")}</Button>
