@@ -124,20 +124,20 @@ export const TodoListView = () => {
                   <Table>
                         <thead>
                             <tr>
-                                <th scope="col">Status</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Created by</th>
-                                <th scope="col">Last modified by</th>
-                                <th scope="col">Created date</th>
-                                <th scope="col">Last modified date</th>
+                                <th scope="col">{t("status")}</th>
+                                <th scope="col">{t("name")}</th>
+                                <th scope="col">{t("description")}</th>
+                                <th scope="col">{t("createdBy")}</th>
+                                <th scope="col">{t("lastModifiedBy")}</th>
+                                <th scope="col">{t("createdDate")}</th>
+                                <th scope="col">{t("lastModifiedDate")}</th>
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
                         {
                               todoListData.map(todo => (
                               <tr key={todo.id}>
-                                 <td>{todo.status == TodoDtoStatusEnum.Open ? <CheckSquareFill /> : <ArrowDownLeftCircle />}</td>
+                                 <td>{todo.status == TodoDtoStatusEnum.Open ? <CheckSquareFill /> : <ArrowDownLeftCircle color="green" />}</td>
                                  <td>{todo.name}</td>
                                  <td>{todo.description}</td>
                                  <td>{todo.createdByUser}</td>

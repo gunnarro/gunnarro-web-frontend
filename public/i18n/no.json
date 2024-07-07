@@ -87,8 +87,24 @@
   "DONE": "Utført",
   "CANCELLED": "Kansellert",
 
+  "Lowest": "Lavest",
+  "Low": "Lav",
+  "Medium": "Medium",
+  "High": "Høy",
+  "Highest": "Høyest",
+
+  "LOWEST": "Lavest",
+  "LOW": "Lav",
+  "MEDIUM": "Medium",
+  "HIGH": "Høy",
+  "HIGHEST": "Høyest",
+
   "confirmDelete": "Bekreft sletting",
   "confirmDeleteMsg": "Vennligst bekreft at du ønsker å slette?",
   "yes": "Ja",
-  "no": "Nei"
+  "no": "Nei",
+
+  "genderEqualityPlan": "Likestillingsplan",
+  "hmsPlan": "HMS plan"
+
 }

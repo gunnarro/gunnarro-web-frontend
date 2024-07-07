@@ -1,14 +1,14 @@
 // react import
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // bootstrap icon import
-import { Trash, Pencil, CheckCircleFill, CheckSquare } from 'react-bootstrap-icons';
+import { Trash, Pencil, CheckCircleFill, CheckSquare, HandThumbsUp, HandThumbsDown } from 'react-bootstrap-icons';
 
 // project import
 import { TodoRestApi } from '../../services/TodoRestApi';
@@ -122,6 +122,11 @@ export const TodoDetailsView = () => {
         setConfirmDialogMsg("");
     }
 
+    function handleApproveTodoItem(todoId:string, todoItemId:string, approved:boolean) {
+        let participantId = "564821726293783289"
+        console.log("handle todo item approval, todoId=" + todoId + ", todoItemId=" + todoItemId + ", approved=" + approved + ", participantId=" + participantId);
+    }
+
     if (loading) {
         return <div>loading todo items for {todoId} ...</div>
     }
@@ -140,7 +145,7 @@ export const TodoDetailsView = () => {
                 <div>
                    <dl className="mb-3 row">
                        <dt className="col-sm-3">{t("reference")}</dt>
-                       <dd className="col-sm-8"><a href="/todo/:todoId/details">{todoData.id}</a></dd>
+                       <dd className="col-sm-8"><Link to={"/todo/" + todoData.id + "/details"}>{todoData.id}</Link></dd>
                        <dt className="col-sm-3">{t("createdModifiedBy")}</dt>
                        <dd className="col-sm-8">{todoData.createdByUser} / {todoData.lastModifiedByUser}</dd>
                        <dt className="col-sm-3">{t("createdModifiedDate")}</dt>
@@ -172,7 +177,7 @@ export const TodoDetailsView = () => {
                                 <th scope="col"/>
                                 <th scope="col"/>
                                 <th scope="col"/>
-                                <th scope="col" className="float-end" ><Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button></th>
+                                <th scope="col" className="text-end" ><Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button></th>
                            </tr>
                            <tr>
                                <th scope="col">{t("status")}</th>
@@ -188,14 +193,14 @@ export const TodoDetailsView = () => {
                        <tbody className="table-group-divider">
                              {todoData.todoItemDtoList && todoData.todoItemDtoList.map(item => (
                                   <tr key={item.id}>
-                                     <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill /> : t(item.status)}</td>
-                                     <td>{item.priority}</td>
+                                     <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill color="green" /> : t(item.status)}</td>
+                                     <td>{t(item.priority)}</td>
                                      <td>{item.category}</td>
                                      <td>{item.name}</td>
                                      <td>{t(item.action as string)}</td>
                                      <td>{item.assignedTo}</td>
                                      <td>{item.description}</td>
-                                     <td>
+                                     <td className="text-center">
                                         <button onClick={() => navigate("/todo/" + todoData.id + "/items/" + item.id + "/edit")} type="button" className="btn btn-sm btn-outline-secondary">
                                             <Pencil size={16} color="royalblue" />
                                         </button>
@@ -206,8 +211,14 @@ export const TodoDetailsView = () => {
                                          <span>&nbsp;</span>
                                         {
                                             item.approvalRequired &&
-                                            <button onClick={() => navigate("/todo/" + todoData.id + "/items/" + item.id + "/approve")} type="button" className="btn btn-sm btn-outline-secondary">
-                                               <CheckSquare size={16} color="green" />
+                                            <button onClick={() => { handleApproveTodoItem(todoData.id as string, item.id as string, true);}} type="button" className="btn btn-sm btn-outline-secondary">
+                                                <HandThumbsUp size={16} color="green" />
+                                            </button>
+                                        }
+                                        {
+                                            item.approvalRequired &&
+                                            <button onClick={() => { handleApproveTodoItem(todoData.id as string, item.id as string, false);}} type="button" className="btn btn-sm btn-outline-secondary"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This top tooltip is themed via CSS variables.">
+                                                 <HandThumbsDown size={16} color="red" />
                                             </button>
                                         }
                                      </td>
@@ -216,7 +227,6 @@ export const TodoDetailsView = () => {
                        </tbody>
                        <tfoot className="table-group-divider">
                            <tr>
-
                            </tr>
                        </tfoot>
                    </table>

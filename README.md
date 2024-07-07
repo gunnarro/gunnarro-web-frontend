@@ -39,7 +39,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install @types/react @types/react-dom
 - npm install moment # for date formation
   - usage: import moment from 'moment'; let formattedDate = moment(date).format('MMMM Do YYYY, h:mm:ss a'); 
-
+- npm install @react-pdf/renderer
 - npm install -g npm-check-updates
 
 ## Upgrade dependencies

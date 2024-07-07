@@ -26,6 +26,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
     const { todoId, todoItemId } = useParams() as { todoId:string, todoItemId:string };
     // if the price input field should be visible or not
     const [showPriceField, setShowPriceField] = useState(false);
+    const [switchState, setSwitchState] = useState(false);
 
     const navigate = useNavigate();
     const navigateTodoItems = () => {
@@ -66,7 +67,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
          //setError("")
          todoApi.getTodoItem(todoId, todoItemId)
             .then((response) => {
-                let todoItem = {
+               setTodoItemForm ( {
                           id: response.data.id!,
                           todo_id: response.data.todoId!,
                           created_by: '',
@@ -78,12 +79,12 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                           action: response.data.action,
                           price: response.data.price!,
                           priority: response.data.priority,
-                          approval_required: false,
+                          approval_required: Boolean(response.data.approvalRequired),
                           assigned_to: response.data.assignedTo!
-                    };
-                setTodoItemForm(todoItem);
+                    });
+               // setTodoItemForm(todoItem);
                 //setLoading(false);
-                console.log("loaded todo item, todoId=" + todoId + ", todoItemId=" + todoItemId + ", name=" + todoItemForm.name + ", " + todoItem.name)
+                console.log("loaded todo item, todoId=" + todoId + ", todoItemId=" + todoItemId + ", name=" + todoItemForm.name  + ", approval=" + todoItemForm.approval_required)
             })
             .catch(function (error) {
                  if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -139,6 +140,14 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
         });
     };
 
+    const handleApprovalCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTodoItemForm({
+          ...todoItemForm,
+          [event.target.id]: Boolean(event.target.checked),
+        });
+        console.log("id=" + event.target.id + ", value=" + event.target.checked  + ", todoItemForm.approval_required=" + todoItemForm.approval_required)
+    };
+
     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         // clear all previous error
@@ -163,7 +172,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                   action: toTodoItemDtoActionEnum(todoItemForm.action),
                   price: todoItemForm.price,
                   priority: toTodoItemDtoPriorityEnum(todoItemForm.priority),
-                  approvalRequired: true,
+                  approvalRequired: Boolean(todoItemForm.approval_required),
                   assignedTo: todoItemForm.assigned_to
             };
 
@@ -189,7 +198,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
        <Card.Header>
-          <Card.Title>{t("todoItemFormTitle")}, todoId={todoId}, user={props.userName}, createdBy={todoItemForm.created_by}</Card.Title>
+          <Card.Title>{t("todoItemFormTitle")}, todoId={todoId}, user={props.userName}, createdBy={todoItemForm.created_by}, approval={todoItemForm.approval_required}</Card.Title>
        </Card.Header>
        <Card.Body>
            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -316,8 +325,9 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                      <Form.Check
                          id="approval_required"
                          type="switch"
+                         value={String(todoItemForm.approval_required)}
                          label={t("approvalRequired")}
-                       />
+                         onChange={handleApprovalCheckChange} />
                 </Form.Group>
                 <Form.Group>
                       <div className="float-end">

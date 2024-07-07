@@ -37,7 +37,11 @@ export const Header = () => {
                <NavDropdown.Item href="/todo">{t('todo')}</NavDropdown.Item>
                <NavDropdown.Item href="/tournament-planner" disabled >{t('tournamentPlanner')}</NavDropdown.Item>
              </NavDropdown>
-             <Nav.Link href="/about">{t('about')}</Nav.Link>
+             <NavDropdown title={t('about')} id="basic-nav-dropdown">
+                <NavDropdown.Item href="/about/gender-equality-plan">{t('genderEqualityPlan')}</NavDropdown.Item>
+                <NavDropdown.Item href="/about/hms-pLan">{t('hmsPlan')}</NavDropdown.Item>
+                <NavDropdown.Item href="/about/about">{t('about')}</NavDropdown.Item>
+             </NavDropdown>
          </Nav>
          <div className="bg-secondary">
              <Form.Select className="form-select bg-secondary" size="sm" defaultValue={i18n.language} onChange={onChangeLang} >

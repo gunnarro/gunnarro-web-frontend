@@ -1,1 +1,11 @@
-/node_modules
+node_modules
+docs
+build
+.git
+.idea
+.npmrc
+*.md
+.gitignore
+*.md
+*.log
+Dockerfile

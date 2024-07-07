@@ -12,7 +12,9 @@ import { EditTodoItemForm } from './components/EditTodoItemForm';
 import { TodoAddParticipantForm } from './components/TodoAddParticipantForm'
 import { Login } from './pages/Login';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
+import { About } from './pages/about/About';
+import { GenderEqualityPlan } from './pages/about/GenderEqualityPlan';
+import { HMSPlan } from './pages/about/HMSPlan';
 import { EmployeeList } from './pages/employee/EmployeeList';
 import { Todo } from './pages/todo/Todo';
 import { TodoListView } from './pages/todo/TodoListView';
@@ -42,7 +44,9 @@ const App = () => {
               <Route path='/todo/new' element={<TodoForm />} />
               <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />
               <Route path='/todo/:todoId/items/:todoItemId/edit' element={<EditTodoItemForm userName="guest"/>} />
-              <Route path='/about' element={<About />} />
+              <Route path='/about/about' element={<About />} />
+              <Route path='/about/gender-equality-plan' element={<GenderEqualityPlan />} />
+              <Route path='/about/hms-plan' element={<HMSPlan />} />
             </Routes>
           </BrowserRouter>
       <Footer />

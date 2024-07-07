@@ -87,9 +87,31 @@
   "DONE": "Done",
   "CANCELLED": "Cancelled",
 
+  "Lowest": "LOWEST",
+  "Low": "LOW",
+  "Medium": "MEDIUM",
+  "High": "HIGH",
+  "Highest": "HIGHEST",
+
+  "LOWEST": "Lowest",
+  "LOW": "Low",
+  "MEDIUM": "Medium",
+  "HIGH": "High",
+  "HIGHEST": "Highest",
+
   "confirmDelete": "Confirm delete",
   "confirmDeleteMsg": "Please confirm that you want to delete the item?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+
+  "consent": "Consent",
+  "doNotConsent": "Do not consent",
+  "accept": "Accept",
+  "DoNotAccept": "DoNotAccept",
+  "Approve": "Approve",
+  "DoNotApprove": "DoNotApprove",
+
+  "genderEqualityPlan": "Gender Equality Plan",
+  "hmsPlan": "HMS plan"
 
 }

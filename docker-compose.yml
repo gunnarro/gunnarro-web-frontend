@@ -1,0 +1,11 @@
+version: 3
+services:
+  web:
+    container_name: gunnarro-web-frontend
+    stdin_open: true
+    tty: true
+    image: gunnarro/gunnarro-web-frontend:latest
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
