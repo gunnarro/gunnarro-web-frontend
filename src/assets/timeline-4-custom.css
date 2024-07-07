@@ -93,7 +93,7 @@
 	border-radius: 50%;
 	content: "";
 	height: var(--bsb-tl-circle-size);
-	left: calc(var(--bsb-tl-circle-offset)* - 1);
+	left: calc(var(--bsb-tl-circle-offset) * -1);
 	position: absolute;
 	top: calc(50% - var(--bsb-tl-circle-offset));
 	width: var(--bsb-tl-circle-size);
@@ -174,7 +174,7 @@
 
 	.bsb-timeline-4 .timeline>.timeline-item.left:after {
 		left: auto;
-		right: calc(var(--bsb-tl-circle-offset)*-1)
+		right: calc(var(--bsb-tl-circle-offset) * -1)
 	}
 
 	.bsb-timeline-4 .timeline>.timeline-item.left .timeline-meta {
