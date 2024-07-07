@@ -93,7 +93,7 @@
 	border-radius: 50%;
 	content: "";
 	height: var(--bsb-tl-circle-size);
-	left: calc(var(--bsb-tl-circle-offset)*-1);
+	left: calc(var(--bsb-tl-circle-offset)* - 1);
 	position: absolute;
 	top: calc(50% - var(--bsb-tl-circle-offset));
 	width: var(--bsb-tl-circle-size);
