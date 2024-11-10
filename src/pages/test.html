@@ -4,12 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+          -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <script language="JavaScript">
+        $('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    </script>
 
 </header>
 <body>
@@ -17,117 +34,483 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Fraktbrev</h3>
+            <h3 class="panel-title">Pakkliste</h3>
         </div>
         <div class="panel-body">
-            <table class="table table-bordered border-primary">
-                <thead>
 
-                </thead>
-                <tbody>
-                <tr class="border border-top-0">
-                    <td colspan="2" rowspan="1">
-                        <label>1 Senders navn/kode</label>
-                        <input type="text" class="form-control">
-                    </td>
-                    <td class="border border-0"></td>
-                    <td class="border border-0"></td>
+            <table class="table table-striped">
+                <tr>
+                    <th>Art#</th>
+                    <th>Brand</th>
+                    <th>Quantity</th>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <label>2 Adresse</label>
-                        <input type="text" class="form-control">
-                    </td>
-                    <td>
-                        15 Senders kundenr. hos transportøren
-                    </td>
-                    <td>
-                        17 Utstedelsesdato
+                    <td>23456</td>
+                    <td>Paracet pluaa 500mg</td>
+                    <td>300</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border: none !important; padding: 0px">
+                        <small>batch / expiration date:</small> <small class="text-primary">AD4567 / 09-2026</small>,
+                        <small class="text-danger">ER455 / 08-2026</small>, <small class="text-success">ER45998 /
+                        12-2027</small>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 100px;">
-                        <label>3 Stedsnr.</label>
-                        <input type="number" class="form-control" maxlength="8">
-                    </td>
-                    <td>
-                        <label>Sted</label>
-                        <input type="text" class="form-control">
-                    </td>
-                    <td>19 Annen fraktbetalers navn/kode</td>
-                    <td>20 Kundenr.</td>
-                </tr>
-                <tr class="border border-4 border-success">
-                    <td colspan="2">
-                        <label>4 Mottakers navn/kode</label>
-                        <input type="text" class="form-control">
-                    </td>
-                    <td colspan="2">
-                        <label>18 Annen fraktbetalers navn / kode | 20 Kundenummer</label>
-                    </td>
+                    <td>678</td>
+                    <td>Ibux 250mg</td>
+                    <td>300</td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <label>11 Over</label>
-                        <input type="text" class="form-control">
-                    </td>
-                    <td style="width:25px;">29 Transport koder</td>
-                    <td>
-                        <div class="list-group list-group-horizontal">
-                            <div class="list-group-item">
-                                <label class="form-control-lg fs-1">A</label>
-                                <input type="text" class="form-control border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">B</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">C</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">D</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">E</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">F</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">G</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">H</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">I</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">J</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                            <div class="list-group-item">
-                                <label class="form-control-lg">K</label>
-                                <input type="text" class="form-control  border-0" maxlength="1">
-                            </div>
-                        </div>
+                    <td colspan="3" style="border: none !important; padding: 0px">
+                        <small class="text-primary">AD4567 09/2026</small>, <small class="text-danger">ER455
+                        08/2026</small>, <small class="text-success">ER45998 12/2027</small>
                     </td>
                 </tr>
-                </tbody>
             </table>
         </div>
     </div>
-</div>
 
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Kundeinformasjon</h2>
+        </div>
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#kunde" role="tab" data-toggle="tab">
+                        <i class="fa fa-user"></i> Kunde
+                    </a>
+                <li>
+                    <a href="#adresse" role="tab" data-toggle="tab">
+                        <i class="fa fa-address-card"></i> Adresse
+                    </a>
+                </li>
+                <li>
+                    <a href="#kontakt" role="tab" data-toggle="tab">
+                        <i class="fa fa-envelope"></i> Kontakt
+                    </a>
+                </li>
+                <li>
+                    <a href="#faktura" role="tab" data-toggle="tab">
+                        <i class="fa fa-list"></i> Faktura
+                    </a>
+                </li>
+                <li>
+                    <a href="#transport" role="tab" data-toggle="tab">
+                        <i class="fa fa-people-carry"></i> Transport
+                    </a>
+                </li>
+            </ul>
 
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="kunde">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+
+                                <div class="col-md-6">
+                                    <h4>Kundeinformasjon</h4>
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <label class="form-label" for="inputKundeNr">Kundenummer</label>
+                                            </td>
+                                            <td style="width: 10px;">:</td>
+                                            <td>
+                                                <input id="inputKundeNr" class="form-control" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="form-label" for="inputKundeNavn">Kundenavn</label>
+                                            </td>
+                                            <td style="width: 10px;">:</td>
+                                            <td>
+                                                <input id="inputKundeNavn" class="form-control" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td style="width: 10px;"></td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <label class="form-check-label">Aktive</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td style="width: 10px;"></td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <label class="form-check-label">FMD</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="width: 10px;"></td>
+                                            <td class="align-right">
+                                                <button class="btn btn-primary">Lagre</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Adresse (fra Astra)</h4>
+                                            <address>
+                                                Stavangergat 35<br>
+                                                0467 Oslo</br>
+                                                Norge
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Underenhet</h4>
+                                            <ul>
+                                                <li><a href="#">Org eneht 1</a></li>
+                                                <li><a href="#">Org enhet 2</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="adresse">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <a href="#" class="btn btn-primary btn-xs pull-right">Ny adresse</a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item"
+                                                style="margin: 4px; border-left-width: 4px; border-left-color: green;">
+                                                <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
+                                                <address>
+                                                    <strong>gunnarro as</strong></br>
+                                                    Stavangergata 35</br>
+                                                    0467 Oslo</br>
+                                                    Norge</br>
+                                                </address>
+                                            </li>
+                                            <li class="list-group-item"
+                                                style="margin: 4px; border-left-width: 4px; border-left-color: red;">
+                                                <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
+                                                <address>
+                                                    <strong>Pd as</strong></br>
+                                                    Bergslia 39</br>
+                                                    0870 Oslo</br>
+                                                    Norge</br>
+                                                </address>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="kontakt">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <a href="#" class="btn btn-primary btn-xs pull-right">Ny kontakt</a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" style="margin: 4px;">
+                                                <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
+                                                Alfred Einstaein<br>
+                                                ae@king.com<br>
+                                                hovedkontakt
+                                            </li>
+                                            <li class="list-group-item" style="margin: 4px;">
+                                                <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
+                                                Petter Dass<br>
+                                                pd@mail.com<br>
+                                                kpoi transport
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="faktura">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <a href="#" class="btn btn-primary btn-xs pull-right">Lagre</a>
+                                    </div>
+                                    <div class="panel-body">
+                                    <textarea class="form-control">
+
+                                    </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="transport">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <a href="#" class="btn btn-primary btn-xs pull-right">Lagre</a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <h4>Standard text epost</h4>
+                                        <textarea class="form-control"></textarea>
+                                        <h4>Merknader</h4>
+                                        <textarea class="form-control"></textarea>
+                                        <h4>Vedlegg til epost</h4>
+                                        <ul class="list-group">
+                                            <li class="list-group-item" style="margin: 4px;">
+                                                <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
+                                                Logger
+                                            </li>
+                                            <li class="list-group-item" style="margin: 4px;">
+                                                <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
+                                                Lisenser
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Fraktbrev</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered border-primary">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        <tr class="border border-top-0">
+                            <td colspan="2" rowspan="1">
+                                <label>1 Senders navn/kode</label>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td class="border border-0"></td>
+                            <td class="border border-0"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label>2 Adresse</label>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                15 Senders kundenr. hos transportøren
+                            </td>
+                            <td>
+                                17 Utstedelsesdato
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px;">
+                                <label>3 Stedsnr.</label>
+                                <input type="number" class="form-control" maxlength="8">
+                            </td>
+                            <td>
+                                <label>Sted</label>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>19 Annen fraktbetalers navn/kode</td>
+                            <td>20 Kundenr.</td>
+                        </tr>
+                        <tr class="border border-4 border-success">
+                            <td colspan="2">
+                                <label>4 Mottakers navn/kode</label>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td colspan="2">
+                                <label>18 Annen fraktbetalers navn / kode | 20 Kundenummer</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label>11 Over</label>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td style="width:25px;">29 Transport koder</td>
+                            <td>
+                                <div class="list-group list-group-horizontal">
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg fs-1">A</label>
+                                        <input type="text" class="form-control border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">B</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">C</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">D</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">E</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">F</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">G</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">H</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">I</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">J</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                    <div class="list-group-item">
+                                        <label class="form-control-lg">K</label>
+                                        <input type="text" class="form-control  border-0" maxlength="1">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         -->
+
+        <!--
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   <h2 class="panel-title">Kundeinformasjon</h2>
+               </div>
+               <div class="panel-body">
+
+                   <div class="row">
+                       <div class="col-md-12">
+                           <h4>Kundesøk</h4>
+                           <label>Søk</label>
+                           <input type="text" class="form-control" placeholder="kundenummer eller navn">
+                       </div>
+                   </div>
+
+                   <div class="row">
+                       <h3>Hovedkontor</h3>
+                       <div class="form-group row">
+                           <label for="inputEmail3" class="col-sm-2 col-form-label">Kundenummer</label>
+                           <div class="col-sm-10">
+                               <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                           </div>
+                       </div>
+                       <div class="form-group row">
+                           <label for="inputPassword3" class="col-sm-2 col-form-label">Kundenavn</label>
+                           <div class="col-sm-10">
+                               <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                           </div>
+                       </div>
+                       <fieldset class="form-group">
+                           <div class="row">
+                               <legend class="col-form-label col-sm-2 pt-0"></legend>
+                               <div class="col-sm-10">
+                                   <div class="form-check">
+                                       <input class="form-check-input" type="checkbox">
+                                       <label class="form-check-label">Aktive</label>
+                                   </div>
+                                   <div class="form-check">
+                                       <input class="form-check-input" type="checkbox">
+                                       <label class="form-check-label">FMD</label>
+                                   </div>
+                               </div>
+                           </div>
+                       </fieldset>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-6">
+                           <h4>Forretningsadresse</h4>
+                           <label>Addresse</label>
+                           <input type="text" class="form-control" placeholder="K. Steinera 37">
+                           <label>Poststed</label>
+                           <input type="text" class="form-control" placeholder="31800 Plzen">
+                           <label>Land</label>
+                           <input type="text" class="form-control" placeholder="Czech Republic">
+                       </div>
+                       <div class="col-md-6">
+                           <h4>Transportinformasjon</h4>
+                           <h5>Epost standardtekst</h5>
+                           <h5>Merknader</h5>
+                           <h5>Epost vedlegg</h5>
+
+
+                       </div>
+                       <div class="col-md-6">
+                           <h4>Fakturainformasjon</h4>
+                           <h5>Fakturaadresse</h5>
+                           <label>Addresse</label>
+                           <input type="text" class="form-control">
+                           <label>Poststed</label>
+                           <input type="text" class="form-control">
+                           <label>Land</label>
+                           <input type="text" class="form-control">
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default" style="width: 18rem;">
+               <div class="panel-heading">
+                   <h3 class="panel-title">ALM</h3>
+               </div>
+               <div class="panel-body">
+                   <address>
+                       <strong>gunnarro as</strong></br>
+                       Stavangergata 35</br>
+                       0467 Oslo</br>
+                       Norge</br>
+                   </address>
+               </div>
+               <div class="panel-footer">
+                   <a href="#" class="card-link pull-left">Delete</a>
+                   <a href="#" class="card-link pull-right">Edit</a>
+               </div>
+           </div>
+        -->
+
+    </div>
 </body>
 </html>
