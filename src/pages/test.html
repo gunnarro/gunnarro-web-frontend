@@ -74,7 +74,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="panel-title">Kundeinformasjon</h2>
+            <h2 class="panel-title">Kunde</h2>
         </div>
         <div class="panel-body">
             <!-- Nav tabs -->
@@ -109,11 +109,13 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="kunde">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel-body">
-
-                                <div class="col-md-6">
-                                    <h4>Kundeinformasjon</h4>
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="pull-left">Kundeinformasjon</h4>
+                                    <a href="#" class="btn btn-primary btn-xs pull-right">Ny kunde</a>
+                                </div>
+                                <div class="panel-body">
                                     <table class="table">
                                         <tbody>
                                         <tr>
@@ -122,7 +124,7 @@
                                             </td>
                                             <td style="width: 10px;">:</td>
                                             <td>
-                                                <input id="inputKundeNr" class="form-control" type="text">
+                                                <input id="inputKundeNr" class="form-control" type="text" disabled="disabled">
                                             </td>
                                         </tr>
                                         <tr>
@@ -131,7 +133,25 @@
                                             </td>
                                             <td style="width: 10px;">:</td>
                                             <td>
-                                                <input id="inputKundeNavn" class="form-control" type="text">
+                                                <input id="inputKundeNavn" class="form-control" type="text" disabled="disabled">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="form-label" for="inputVat">VAT</label>
+                                            </td>
+                                            <td style="width: 10px;">:</td>
+                                            <td>
+                                                <input id="inputVat" class="form-control" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="form-label" for="inputHsKode">HS kode</label>
+                                            </td>
+                                            <td style="width: 10px;">:</td>
+                                            <td>
+                                                <input id="inputHsKode" class="form-control" type="text">
                                             </td>
                                         </tr>
                                         <tr>
@@ -160,30 +180,36 @@
                                             <td></td>
                                             <td style="width: 10px;"></td>
                                             <td class="align-right">
-                                                <button class="btn btn-primary">Lagre</button>
+                                                <button class="btn btn-primary btn-xs">Lagre</button>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h4>Adresse (fra Astra)</h4>
-                                            <address>
-                                                Stavangergat 35<br>
-                                                0467 Oslo</br>
-                                                Norge
-                                            </address>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>Adresse (fra Astra)</h4>
+                                                <address>
+                                                    Stavangergat 35<br>
+                                                    0467 Oslo<br>
+                                                    Norge
+                                                </address>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h4>Underenheter</h4>
-                                            <ul>
-                                                <li><a href="#">Org eneht 1</a></li>
-                                                <li><a href="#">Org enhet 2</a></li>
-                                            </ul>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>Underenheter</h4>
+                                                <ul>
+                                                    <li><a href="#">Org eneht 1</a></li>
+                                                    <li><a href="#">Org enhet 2</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
