@@ -16,7 +16,6 @@ import { About } from './pages/about/About';
 import { GenderEqualityPlan } from './pages/about/GenderEqualityPlan';
 import { HMSPlan } from './pages/about/HMSPlan';
 import { EmployeeList } from './pages/employee/EmployeeList';
-import { Todo } from './pages/todo/Todo';
 import { TodoListView } from './pages/todo/TodoListView';
 import { TodoHistoryView } from './pages/todo/TodoHistoryView';
 import { TodoDetailsView } from './pages/todo/TodoDetailsView'

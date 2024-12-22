@@ -30,303 +30,386 @@
 
 </header>
 <body>
+
 <!-- https://mdbootstrap.com/docs/standard/utilities/borders/ -->
 <div class="container">
+
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#alm" aria-controls="home" role="tab" data-toggle="tab">Alm</a></li>
+            <li role="presentation"><a href="#kjøl" aria-controls="profile" role="tab" data-toggle="tab">Kjøl</a></li>
+            <li role="presentation"><a href="#nark" aria-controls="messages" role="tab" data-toggle="tab">Nark</a></li>
+            <li role="presentation"><a href="#vareprøve" aria-controls="settings" role="tab" data-toggle="tab">Vareprøver</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <p></p>
+            <div role="tabpanel" class="tab-pane active" id="alm">
+                <table class="table">
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <td rowspan="2">Arimeck AS</td>
+                        <td>1023</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1024</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Orifarm AS</td>
+                        <td>1023</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1024</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="kjøl">
+                <table class="table">
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <td rowspan="2">Arimeck AS</td>
+                        <td>1023</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1024</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nark">
+                <table class="table">
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <td rowspan="2">Arimeck AS</td>
+                        <td>1023</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1024</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Plukkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Dobbeltkontroll</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Pakkliste</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="vareprøve"></div>
+        </div>
+
+    </div>
+
+
+<!--
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Pakkliste</h3>
         </div>
         <div class="panel-body">
-            <table class="table table-striped">
+
+            <table class="table">
+                <tbody class="table-group-divider">
                 <tr>
-                    <th>Art#</th>
-                    <th>Brand</th>
-                    <th>Quantity</th>
-                </tr>
-                <tr>
-                    <td>23456</td>
-                    <td>Paracet pluaa 500mg</td>
-                    <td>300</td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="border: none !important; padding: 0px">
-                        <small>batch / expiration date:</small> <small class="text-primary">AD4567 / 09-2026</small>,
-                        <small class="text-danger">ER455 / 08-2026</small>, <small class="text-success">ER45998 /
-                        12-2027</small>
+                    <td rowspan="3">Arimeck AS</td>
+                    <td>1023</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Vareoverføring</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm">Plukkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm">Dobbeltkontroll</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm">Pakkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Transport</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>678</td>
-                    <td>Ibux 250mg</td>
-                    <td>300</td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="border: none !important; padding: 0px">
-                        <small class="text-primary">AD4567 09/2026</small>, <small class="text-danger">ER455
-                        08/2026</small>, <small class="text-success">ER45998 12/2027</small>
+                    <td>1024</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Vareoverføring</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">Plukkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">Dobbeltkontroll</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">Pakkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Transport</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>1025</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Vareoverføring</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">
+                            <i class="fa fa-check text-success"></i>
+                            <span>Plukkliste</span>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm">Dobbeltkontroll</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm">Pakkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Orifarm AS</td>
+                    <td>1023</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Vareoverføring</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm">Plukkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm">Dobbeltkontroll</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm">Pakkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1024</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Vareoverføring</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">Plukkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">Dobbeltkontroll</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">Pakkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1025</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Vareoverføring</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm">Plukkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm">Dobbeltkontroll</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Faktura</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm">Pakkliste</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Transport</button>
+                    </td>
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>
-
-    <!-- tab-pane -->
-
+-->
+    <!--
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="panel-title">Kunde</h2>
+            <div class="panel-title">ALM Orifarm AS</div>
+            <span>November 2024</span>
         </div>
         <div class="panel-body">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
-                    <a href="#kunde" role="tab" data-toggle="tab">
-                        <i class="fa fa-user"></i> Kunde
-                    </a>
-                <li>
-                    <a href="#adresse" role="tab" data-toggle="tab">
-                        <i class="fa fa-address-card"></i> Adresse
-                    </a>
-                </li>
-                <li>
-                    <a href="#kontakt" role="tab" data-toggle="tab">
-                        <i class="fa fa-envelope"></i> Kontakt
-                    </a>
-                </li>
-                <li>
-                    <a href="#faktura" role="tab" data-toggle="tab">
-                        <i class="fa fa-list"></i> Faktura
-                    </a>
-                </li>
-                <li>
-                    <a href="#transport" role="tab" data-toggle="tab">
-                        <i class="fa fa-people-carry"></i> Transport
-                    </a>
-                </li>
-            </ul>
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="kunde">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <h4 class="pull-left">Kundeinformasjon</h4>
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Ny kunde</a>
-                                </div>
-                                <div class="panel-body">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <label class="form-label" for="inputKundeNr">Kundenummer</label>
-                                            </td>
-                                            <td style="width: 10px;">:</td>
-                                            <td>
-                                                <input id="inputKundeNr" class="form-control" type="text" disabled="disabled">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="form-label" for="inputKundeNavn">Kundenavn</label>
-                                            </td>
-                                            <td style="width: 10px;">:</td>
-                                            <td>
-                                                <input id="inputKundeNavn" class="form-control" type="text" disabled="disabled">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="form-label" for="inputVat">VAT</label>
-                                            </td>
-                                            <td style="width: 10px;">:</td>
-                                            <td>
-                                                <input id="inputVat" class="form-control" type="text">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="form-label" for="inputHsKode">HS kode</label>
-                                            </td>
-                                            <td style="width: 10px;">:</td>
-                                            <td>
-                                                <input id="inputHsKode" class="form-control" type="text">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            </td>
-                                            <td style="width: 10px;"></td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                    <label class="form-check-label">Aktive</label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            </td>
-                                            <td style="width: 10px;"></td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                    <label class="form-check-label">FMD</label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="width: 10px;"></td>
-                                            <td class="align-right">
-                                                <button class="btn btn-primary btn-xs">Lagre</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h4>Adresse (fra Astra)</h4>
-                                                <address>
-                                                    Stavangergat 35<br>
-                                                    0467 Oslo<br>
-                                                    Norge
-                                                </address>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h4>Underenheter</h4>
-                                                <ul>
-                                                    <li><a href="#">Org eneht 1</a></li>
-                                                    <li><a href="#">Org enhet 2</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <table class="table table-responsive">
+                <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>Paracett</td>
+                    <td>500 mg</td>
+                    <td>PR-2342323</td>
+                    <td>230</td>
+                    <td><button>Plukk</button></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6>Paracett 500mg</h6>
+                        <small>Batch: 25 / 12 mnd</small>
+                        <small>Antall</small>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="adresse">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Ny adresse</a>
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item"
-                                            style="margin: 4px; border-left-width: 4px; border-left-color: green;">
-                                            <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
-                                            <address>
-                                                <strong>gunnarro as</strong></br>
-                                                Stavangergata 35</br>
-                                                0467 Oslo</br>
-                                                Norge</br>
-                                            </address>
-                                        </li>
-                                        <li class="list-group-item"
-                                            style="margin: 4px; border-left-width: 4px; border-left-color: red;">
-                                            <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
-                                            <address>
-                                                <strong>Pd as</strong></br>
-                                                Bergslia 39</br>
-                                                0870 Oslo</br>
-                                                Norge</br>
-                                            </address>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-body-secondary">3 days ago</small>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="kontakt">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Ny kontakt</a>
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item" style="margin: 4px;">
-                                            <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
-                                            Alfred Einstaein<br>
-                                            ae@king.com<br>
-                                            hovedkontakt
-                                        </li>
-                                        <li class="list-group-item" style="margin: 4px;">
-                                            <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
-                                            Petter Dass<br>
-                                            pd@mail.com<br>
-                                            kpoi transport
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-body-secondary">3 days ago</small>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="faktura">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Lagre</a>
-                                </div>
-                                <div class="panel-body">
-                                    <textarea class="form-control">
-
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="transport">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Lagre</a>
-                                </div>
-                                <div class="panel-body">
-                                    <h4>Standard text epost</h4>
-                                    <textarea class="form-control"></textarea>
-                                    <h4>Merknader</h4>
-                                    <textarea class="form-control"></textarea>
-                                    <h4>Vedlegg til epost</h4>
-                                    <ul class="list-group">
-                                        <li class="list-group-item" style="margin: 4px;">
-                                            <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
-                                            Logger
-                                        </li>
-                                        <li class="list-group-item" style="margin: 4px;">
-                                            <a href="#" class="pull-right"><i class="fa fa-edit"></i></a>
-                                            Lisenser
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
+-->
 </div>
 </body>
 </html>

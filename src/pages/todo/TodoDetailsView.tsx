@@ -107,7 +107,7 @@ export const TodoDetailsView = () => {
         }
 
     const getAssignedTaskCount = (userName:string) => {
-        var counter = 0 as number;
+        let counter = 0 as number;
         todoData.todoItemDtoList && todoData.todoItemDtoList.forEach(todoItem => {
             if (todoItem.assignedTo == userName) {
                 counter += 1;

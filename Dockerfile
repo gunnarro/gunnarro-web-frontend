@@ -1,5 +1,5 @@
 # Use a base image with the latest Node.js LTS installed
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 # install dumb-init, which ensure that all signals are proxied to the Node.js process
 #RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
 # Set the working directory inside the container
