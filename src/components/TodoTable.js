@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { PropTypes } from 'prop-types';
 // bootstrap import
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } from 'react-bootstrap-icons'
-import { Table } from 'reactstrap';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { ShowConfirmDeleteDialog } from '../components/ConfirmModalDialog';
@@ -103,7 +102,7 @@ function GetTodosData({ userName }): React.ReactElement {
 }
 
 export const TodoTable = (userName) => (
-    <Table>
+    <table className="table">
         <thead>
             <tr>
                 <th scope="col">Status</th>
@@ -123,5 +122,5 @@ export const TodoTable = (userName) => (
                 <td></td>
             </tr>
         </tfoot>
-    </Table>
+    </table>
 )

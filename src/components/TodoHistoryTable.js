@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { PropTypes } from 'prop-types';
 // bootstrap import
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
-import { Table } from 'reactstrap';
 // project import
-import { TodoRestApi } from '../services//TodoRestApi';
+import { TodoRestApi } from '../services/TodoRestApi';
 import { showConfirmDeleteDialog } from '../components/ConfirmModalDialog';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
@@ -48,7 +47,7 @@ function GetTodoHistoryData({ todoId }) {
 }
 
 export const TodoHistoryTable = (todoId) => (
-    <Table>
+    <table className="table">
         <thead>
             <tr>
                 <th scope="col">Revision</th>
@@ -70,5 +69,5 @@ export const TodoHistoryTable = (todoId) => (
                 <td></td>
             </tr>
         </tfoot>
-    </Table>
+    </table>
 )

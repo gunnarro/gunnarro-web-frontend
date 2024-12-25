@@ -7,7 +7,6 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { Table } from 'reactstrap';
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from '../../services/TodoRestApi';
@@ -121,7 +120,7 @@ export const TodoListView = () => {
                     <Button onClick={() => navigateTodoNew()} size="sm" variant="outline-primary" className="float-end" >{t("add")}</Button>
             </Card.Header>
             <Card.Body>
-                  <Table>
+                  <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col">{t("status")}</th>
@@ -165,7 +164,7 @@ export const TodoListView = () => {
                             <tr>
                             </tr>
                         </tfoot>
-                    </Table>
+                    </table>
             </Card.Body>
         </Card>
        </div>

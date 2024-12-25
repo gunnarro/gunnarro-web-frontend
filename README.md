@@ -31,9 +31,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install react-i18next
 - npm install i18next-http-backend
 - npm install react-router-dom
-- npm install bootstrap react-bootstrap-icons reactstrap
-- npm install material-table @material-ui/core
-- npm install @material-ui/icons
+- npm install bootstrap react-bootstrap-icons
+- npm install material-table @material-ui/core // not in use
+- npm install @material-ui/icons // not in use
 - npm install axios
 - npm install react-hook-form
 - npm install @types/react @types/react-dom
