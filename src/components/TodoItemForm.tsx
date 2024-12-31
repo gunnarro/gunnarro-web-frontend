@@ -138,8 +138,6 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
             // map from form data into todo api model
             const todoItemDto : TodoItemDto = {
                   todoId: todoItemForm.todo_id,
-                  createdByUser: todoItemForm.created_by,
-                  lastModifiedByUser: todoItemForm.created_by,
                   name: todoItemForm.name,
                   description: todoItemForm.description,
                   status: todoItemForm.status,
@@ -149,7 +147,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
                   assignedTo: todoItemForm.assigned_to
             };
 
-            console.log("form assinged to: " + todoItemForm.assigned_to);
+            console.log("form assigned to: " + todoItemForm.assigned_to);
             console.log(todoItemDto);
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
@@ -171,7 +169,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
        <Card.Header>
-          <Card.Title>{t("todoItemFormTitle")}, todoId={todoId}, user={props.userName}, createdBy={todoItemForm.created_by}</Card.Title>
+          <Card.Title>{t("newTodoItemFormTitle")}</Card.Title>
        </Card.Header>
        <Card.Body>
            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -185,7 +183,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
               <Form.Group>
                 <Form.FloatingLabel label={t("createdBy")} className="mb-3">
                       <Form.Control
-                      autoFocus
+                      disabled
                       required
                       id="created_by"
                       type="text"
@@ -199,6 +197,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
               <Form.Group>
                 <Form.FloatingLabel label={t("name")} className="mb-3">
                       <Form.Control
+                        autoFocus
                         required
                         id="name"
                         type="text"

@@ -86,6 +86,7 @@ openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-a
 ```
 
 Run code generation from npm:
+see https://reactnative.dev/docs/the-new-architecture/using-codegen
 Create a 'codegen' option under the script section in the package.json file
 ```
 "scripts": {
@@ -98,7 +99,8 @@ Create a 'codegen' option under the script section in the package.json file
 ```
 the you can simply generate code by running:
 ```
-npm run codegen
+npm run codegen-todo
+npm run codegen-admin
 ```
 
 Where to place the generated code:

@@ -9,12 +9,12 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } from 'react-bootstrap-icons'
 // project import
-import { TodoRestApi } from '../../services/TodoRestApi';
+import { TodoRestApi, RestApiConfiguration } from '../../services/TodoRestApi';
 import { TodoTable } from '../../components/TodoTable';
 import { ShowConfirmDeleteDialog } from '../../components/ConfirmModalDialog';
 import { AlertBox } from '../../components/Alert';
 // service import
-import { TodoServiceApiFactory, Configuration } from "../../generated/client/todoservice";
+import { TodoServiceApiFactory } from "../../generated/client/todoservice";
 import { TodoDto, TodoDtoStatusEnum,  } from "../../generated/client/todoservice/model";
 
 function formatDate(dateStr:string) {
@@ -41,9 +41,10 @@ export const TodoListView = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [todoListData, setTodoListData] = useState<TodoDto[]>([]);
-    const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
+    const todoApi = TodoServiceApiFactory(RestApiConfiguration(), "", TodoRestApi);
 
-    // Always called after the render() method, and we use useEffect with an empty array [], this in order to prevent that the rest api is called whenever the component is rendered, which cause an infinity loop.
+    // Always called after the render() method, and we use useEffect with an empty array [],
+    // this in order to prevent that the rest api is called whenever the component is rendered, which cause an infinity loop.
     useEffect(() => {
         setLoading(true);
         getTodosByUserName(userName);

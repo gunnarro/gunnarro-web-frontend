@@ -53,7 +53,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
           action: '',
           price: 0,
           priority: '',
-          approval_required: false,
+          approval_required: 'false',
           assigned_to: ''
     });
 
@@ -70,7 +70,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                setTodoItemForm ( {
                           id: response.data.id!,
                           todo_id: response.data.todoId!,
-                          created_by: '',
+                          created_by: response.data.createdByUser!,
                           last_modified_by: '',
                           name: response.data.name!,
                           category: response.data.category!,
@@ -79,12 +79,12 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                           action: response.data.action,
                           price: response.data.price!,
                           priority: response.data.priority,
-                          approval_required: Boolean(response.data.approvalRequired),
+                          approval_required: String(response.data.approvalRequired),
                           assigned_to: response.data.assignedTo!
                     });
                // setTodoItemForm(todoItem);
                 //setLoading(false);
-                console.log("loaded todo item, todoId=" + todoId + ", todoItemId=" + todoItemId + ", name=" + todoItemForm.name  + ", approval=" + todoItemForm.approval_required)
+                console.log("loaded todo item into form, todoId=" + todoItemForm.todo_id + ", todoItemId=" + todoItemId + ", name=" + todoItemForm.name  + ", approval=" + todoItemForm.approval_required + ", " + String(response.data.approvalRequired))
             })
             .catch(function (error) {
                  if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -116,6 +116,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
 
      const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTodoItemForm({
+            // pass all todoItemForm properties
           ...todoItemForm,
           [event.target.id]: event.target.value,
         });
@@ -135,6 +136,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
 
     const handleAssignToSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setTodoItemForm({
+            // pass all todoItemForm properties
           ...todoItemForm,
           [event.target.id]: event.target.value,
         });
@@ -142,8 +144,9 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
 
     const handleApprovalCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTodoItemForm({
+            // pass all todoItemForm properties
           ...todoItemForm,
-          [event.target.id]: Boolean(event.target.checked),
+          [event.target.id]: String(event.target.checked),
         });
         console.log("id=" + event.target.id + ", value=" + event.target.checked  + ", todoItemForm.approval_required=" + todoItemForm.approval_required)
     };
@@ -172,11 +175,11 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                   action: toTodoItemDtoActionEnum(todoItemForm.action),
                   price: todoItemForm.price,
                   priority: toTodoItemDtoPriorityEnum(todoItemForm.priority),
-                  approvalRequired: Boolean(todoItemForm.approval_required),
+                  approvalRequired: Boolean(todoItemForm.approval_required).valueOf(),
                   assignedTo: todoItemForm.assigned_to
             };
 
-            console.log("form assinged to: " + todoItemForm.assigned_to);
+            console.log("form assigned to: " + todoItemForm.assigned_to + ", form approval: " + todoItemForm.approval_required);
             console.log(todoItemDto);
             const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
 
@@ -198,28 +201,45 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
     {formErrors && <AlertBox title={t("applicationErrorTitle")} message={formErrors} />}
     <Card>
        <Card.Header>
-          <Card.Title>{t("todoItemFormTitle")}, todoId={todoId}, user={props.userName}, createdBy={todoItemForm.created_by}, approval={todoItemForm.approval_required}</Card.Title>
+          <Card.Title>{t("todoItemFormTitle")}</Card.Title>
        </Card.Header>
        <Card.Body>
            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-            <Form.Control
+              <Form.Control
                 disabled
                 hidden
                 id="todo_id"
                 type="text"
                 value={todoItemForm.todo_id}
               />
-              <Form.Group>
-                <Form.FloatingLabel label={t("createdBy")} className="mb-3">
-                      <Form.Control
-                      disabled={true}
-                      id="created_by"
-                      type="text"
-                      value={todoItemForm.created_by}
-                    />
-                    <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
-                </Form.FloatingLabel>
-              </Form.Group>
+              <div className="row">
+                  <div className="col-md-6">
+                      <Form.Group>
+                        <Form.FloatingLabel label={t("createdBy")} className="mb-3">
+                              <Form.Control
+                              disabled={true}
+                              id="created_by"
+                              type="text"
+                              value={todoItemForm.created_by}
+                            />
+                            <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                        </Form.FloatingLabel>
+                      </Form.Group>
+                  </div>
+                  <div className="col-md-6">
+                    <Form.Group>
+                      <Form.FloatingLabel label={t("lastModifiedBy")} className="mb-3">
+                            <Form.Control
+                            disabled={true}
+                            id="created_date"
+                            type="text"
+                            value={todoItemForm.last_modified_by}
+                          />
+                          <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
+                      </Form.FloatingLabel>
+                    </Form.Group>
+                </div>
+              </div>
               <Form.Group>
                 <Form.FloatingLabel label={t("name")} className="mb-3">
                       <Form.Control
@@ -234,6 +254,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
               <Form.Group>
                   <Form.FloatingLabel label={t("category")} className="mb-3">
                         <Form.Control
+                          autoFocus
                           id="category"
                           type="text"
                           value={todoItemForm.category}

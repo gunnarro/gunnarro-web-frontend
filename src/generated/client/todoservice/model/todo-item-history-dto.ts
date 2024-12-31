@@ -15,13 +15,13 @@
 
 
 /**
- * Holds audit log for Todo item
+ * Holds audit log for Todo item.
  * @export
  * @interface TodoItemHistoryDto
  */
 export interface TodoItemHistoryDto {
     /**
-     * Unique identifier of the revision
+     * Unique identifier of the revision.
      * @type {number}
      * @memberof TodoItemHistoryDto
      */
@@ -33,7 +33,7 @@ export interface TodoItemHistoryDto {
      */
     'revisionEndId'?: number;
     /**
-     * the revision type, update, delete
+     * The revision type, update, delete.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
@@ -45,31 +45,31 @@ export interface TodoItemHistoryDto {
      */
     'id'?: string;
     /**
-     * Global unique identifier for the todo that this item belongs to.
+     * Global unique identifier for the todo item that this item belongs to.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
     'todoId': string;
     /**
-     * date when todo was created
+     * Date when todo item was created.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
     'createdDate'?: string;
     /**
-     * date when todo was last modified
+     * Date when todo item was last modified.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
     'lastModifiedDate'?: string;
     /**
-     * user that created the todo
+     * User that created the todo item.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
     'createdByUser'?: string;
     /**
-     * user that last modified the todo
+     * User that last modified the todo item.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
@@ -87,19 +87,19 @@ export interface TodoItemHistoryDto {
      */
     'description'?: string;
     /**
-     * Status of todo, OPEN, IN_PROGRESS or FINISHED
+     * Status of todo item, OPEN, IN_PROGRESS or FINISHED
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
     'status'?: string;
     /**
-     * The action that should be done for this item
+     * The action that should be done for this item.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */
     'action'?: string;
     /**
-     * the person that is responsible to follow up and fulfill this task
+     * The person that is responsible to follow up and fulfill this task.
      * @type {string}
      * @memberof TodoItemHistoryDto
      */

@@ -15,7 +15,7 @@
 
 
 /**
- * Holds information about a todo list participant
+ * Holds information about a todo list participant.
  * @export
  * @interface ParticipantDto
  */

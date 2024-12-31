@@ -16,9 +16,11 @@ import { About } from './pages/about/About';
 import { GenderEqualityPlan } from './pages/about/GenderEqualityPlan';
 import { HMSPlan } from './pages/about/HMSPlan';
 import { EmployeeList } from './pages/employee/EmployeeList';
+import { TodoAdminView } from './pages/todo/TodoAdminView';
 import { TodoListView } from './pages/todo/TodoListView';
 import { TodoHistoryView } from './pages/todo/TodoHistoryView';
-import { TodoDetailsView } from './pages/todo/TodoDetailsView'
+import { TodoDetailsView } from './pages/todo/TodoDetailsView';
+import { TodoParticipantDetails } from './pages/todo/TodoParticipantDetails';
 import { Cv } from './pages/cv/Cv';
 import { Projects } from './pages/cv/Projects';
 import { Availability } from './pages/employee/Availability';
@@ -35,10 +37,12 @@ const App = () => {
               <Route path='/employees/:employeeId/cv' element={<Cv />} />
               <Route path='/employees/:employeeId/projects' element={<Projects />} />
               <Route path='/employees/:employeeId/availability' element={<Availability />} />
+              <Route path='/todo/admin' element={<TodoAdminView />} />
               <Route path='/todo' element={<TodoForm />} />
               <Route path='/todo/:userName' element={<TodoListView />} />
               <Route path='/todo/:todoId/details' element={<TodoDetailsView />} />
               <Route path='/todo/:todoId/participants' element={<TodoAddParticipantForm />} />
+              <Route path='/todo/:todoId/participants/:participantId' element={<TodoParticipantDetails />} />
               <Route path='/todo/:todoId/history' element={<TodoHistoryView />} />
               <Route path='/todo/new' element={<TodoForm />} />
               <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />

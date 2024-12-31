@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { ShowConfirmDeleteDialog } from '../components/ConfirmModalDialog';
-// service import
+// Todo rest api import
 import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../generated/client/todoservice";
 
 

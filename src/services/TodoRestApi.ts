@@ -1,7 +1,7 @@
 // rest support
 import axios from "axios";
 // service import
-import { TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum } from "generated/client/todoservice";
+import { Configuration, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum } from "generated/client/todoservice";
 
 
 // When you add the headers to your axios request, the request becomes a "non-simple" request and the browser performs a preflight request before the actual request.
@@ -9,17 +9,32 @@ import { TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum }
 //
 // config axios with todo rest service properties, user and pwd should not be placed here, still in react learning mode.
 export const TodoRestApi = axios.create({
-  baseURL: 'https://localhost:9999',
+  baseURL: "https://localhost:9999",
   timeout: 50000,
   auth: {
-      username: 'my-service-name',
-      password: 'change-me'
+      username: "my-service-name",
+      password: "change-me"
   },
   headers: {
     "Cache-Control": "no-cache",
-    'Content-Type': 'application/json; charset=utf-8',
+    "Content-Type": "application/json; charset=utf-8",
   }
 });
+
+export function RestApiConfiguration() {
+    const config = new Configuration();
+    config.basePath = "https://localhost:9999";
+    config.username = "none";
+    config.password = "none";
+
+    const accessToken = localStorage.getItem('accessToken'); // get stored access token
+    if (accessToken) {
+        config.accessToken = "Bearer ${accessToken}"; // set in header
+    } else {
+        config.accessToken = "none"; // set in header
+    }
+    return config;
+}
 
 export function toTodoItemDtoActionEnum(key: string): TodoItemDtoActionEnum {
      console.log("map key: " + key);

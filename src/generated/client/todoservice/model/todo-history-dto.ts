@@ -15,13 +15,13 @@
 
 
 /**
- * Holds audit log for Todo
+ * Holds audit log for Todo.
  * @export
  * @interface TodoHistoryDto
  */
 export interface TodoHistoryDto {
     /**
-     * Unique identifier of the revision
+     * Unique identifier of the revision.
      * @type {number}
      * @memberof TodoHistoryDto
      */
@@ -33,7 +33,7 @@ export interface TodoHistoryDto {
      */
     'revisionEndId'?: number;
     /**
-     * the revision type, update, delete
+     * The revision type, update, delete.
      * @type {string}
      * @memberof TodoHistoryDto
      */
@@ -45,31 +45,31 @@ export interface TodoHistoryDto {
      */
     'id'?: string;
     /**
-     * date when todo was created
+     * Date when todo was created.
      * @type {string}
      * @memberof TodoHistoryDto
      */
     'createdDate'?: string;
     /**
-     * date when todo was last modified
+     * Date when todo was last modified.
      * @type {string}
      * @memberof TodoHistoryDto
      */
     'lastModifiedDate'?: string;
     /**
-     * user that created the todo
+     * User that created the todo.
      * @type {string}
      * @memberof TodoHistoryDto
      */
     'createdByUser'?: string;
     /**
-     * user that last modified the todo
+     * User that last modified the todo.
      * @type {string}
      * @memberof TodoHistoryDto
      */
     'lastModifiedByUser'?: string;
     /**
-     * Name of todo
+     * Name of todo.
      * @type {string}
      * @memberof TodoHistoryDto
      */
@@ -81,7 +81,7 @@ export interface TodoHistoryDto {
      */
     'status': string;
     /**
-     * description of this to do task
+     * Description of this to do task.
      * @type {string}
      * @memberof TodoHistoryDto
      */

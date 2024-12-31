@@ -158,8 +158,8 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * return todo item approval
-         * @summary Add item approval
+         * return approval for todo item
+         * @summary approve todo item
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {ApprovalDto} approvalDto 
@@ -203,7 +203,7 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * approval to delete
-         * @summary delete todo item approval
+         * @summary delete approval for todo item
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {string} participantId 
@@ -460,7 +460,7 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * return todo item approvals
+         * return approvals for a todo item
          * @summary Get todo item approvals
          * @param {string} todoId 
          * @param {string} todoItemId 
@@ -724,8 +724,8 @@ export const TodoServiceApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * return todo item approval
-         * @summary Add item approval
+         * return updated todo item approval
+         * @summary updated todo item approval, options are approved or not.
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {ApprovalDto} approvalDto 
@@ -819,8 +819,8 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * return todo item approval
-         * @summary Add item approval
+         * return approval for todo item
+         * @summary approve todo item
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {ApprovalDto} approvalDto 
@@ -835,7 +835,7 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * approval to delete
-         * @summary delete todo item approval
+         * @summary delete approval for todo item
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {string} participantId 
@@ -930,7 +930,7 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * return todo item approvals
+         * return approvals for a todo item
          * @summary Get todo item approvals
          * @param {string} todoId 
          * @param {string} todoItemId 
@@ -1026,8 +1026,8 @@ export const TodoServiceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * return todo item approval
-         * @summary Add item approval
+         * return updated todo item approval
+         * @summary updated todo item approval, options are approved or not.
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {ApprovalDto} approvalDto 
@@ -1083,8 +1083,8 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
             return localVarFp.createTodoItem(todoId, todoItemDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * return todo item approval
-         * @summary Add item approval
+         * return approval for todo item
+         * @summary approve todo item
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {ApprovalDto} approvalDto 
@@ -1096,7 +1096,7 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * approval to delete
-         * @summary delete todo item approval
+         * @summary delete approval for todo item
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {string} participantId 
@@ -1170,7 +1170,7 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
             return localVarFp.getTodoItem(todoId, todoItemId, options).then((request) => request(axios, basePath));
         },
         /**
-         * return todo item approvals
+         * return approvals for a todo item
          * @summary Get todo item approvals
          * @param {string} todoId 
          * @param {string} todoItemId 
@@ -1245,8 +1245,8 @@ export const TodoServiceApiFactory = function (configuration?: Configuration, ba
             return localVarFp.updateTodoItem(todoId, todoItemDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * return todo item approval
-         * @summary Add item approval
+         * return updated todo item approval
+         * @summary updated todo item approval, options are approved or not.
          * @param {string} todoId 
          * @param {string} todoItemId 
          * @param {ApprovalDto} approvalDto 
@@ -1305,8 +1305,8 @@ export class TodoServiceApi extends BaseAPI {
     }
 
     /**
-     * return todo item approval
-     * @summary Add item approval
+     * return approval for todo item
+     * @summary approve todo item
      * @param {string} todoId 
      * @param {string} todoItemId 
      * @param {ApprovalDto} approvalDto 
@@ -1320,7 +1320,7 @@ export class TodoServiceApi extends BaseAPI {
 
     /**
      * approval to delete
-     * @summary delete todo item approval
+     * @summary delete approval for todo item
      * @param {string} todoId 
      * @param {string} todoItemId 
      * @param {string} participantId 
@@ -1408,7 +1408,7 @@ export class TodoServiceApi extends BaseAPI {
     }
 
     /**
-     * return todo item approvals
+     * return approvals for a todo item
      * @summary Get todo item approvals
      * @param {string} todoId 
      * @param {string} todoItemId 
@@ -1497,8 +1497,8 @@ export class TodoServiceApi extends BaseAPI {
     }
 
     /**
-     * return todo item approval
-     * @summary Add item approval
+     * return updated todo item approval
+     * @summary updated todo item approval, options are approved or not.
      * @param {string} todoId 
      * @param {string} todoItemId 
      * @param {ApprovalDto} approvalDto 

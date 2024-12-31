@@ -13,9 +13,12 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { ApprovalDto } from './approval-dto';
 
 /**
- * Holds information about a todo item
+ * Holds information about a todo item.
  * @export
  * @interface TodoItemDto
  */
@@ -33,31 +36,31 @@ export interface TodoItemDto {
      */
     'todoId'?: string;
     /**
-     * date when todo was created
+     * Date when todo item was created.
      * @type {string}
      * @memberof TodoItemDto
      */
     'createdDate'?: string;
     /**
-     * date when todo was last modified
+     * Date when todo item was last modified.
      * @type {string}
      * @memberof TodoItemDto
      */
     'lastModifiedDate'?: string;
     /**
-     * user that created the todo
+     * User that created the todo item.
      * @type {string}
      * @memberof TodoItemDto
      */
     'createdByUser'?: string;
     /**
-     * user that last modified the todo
+     * User that last modified the todo item.
      * @type {string}
      * @memberof TodoItemDto
      */
     'lastModifiedByUser'?: string;
     /**
-     * Name of the task
+     * Name of the task.
      * @type {string}
      * @memberof TodoItemDto
      */
@@ -69,13 +72,13 @@ export interface TodoItemDto {
      */
     'category'?: string;
     /**
-     * description of the task to do
+     * Description of the task to do.
      * @type {string}
      * @memberof TodoItemDto
      */
     'description'?: string;
     /**
-     * Holds all possible statues for a todo item
+     * Holds all possible statues for a todo item.
      * @type {string}
      * @memberof TodoItemDto
      */
@@ -87,7 +90,7 @@ export interface TodoItemDto {
      */
     'action': TodoItemDtoActionEnum;
     /**
-     * the person that is responsible to follow up and fulfill this task
+     * The person that is responsible to follow up and fulfill this task.
      * @type {string}
      * @memberof TodoItemDto
      */
@@ -99,13 +102,13 @@ export interface TodoItemDto {
      */
     'priority': TodoItemDtoPriorityEnum;
     /**
-     * the price of this item
+     * The price of this item.
      * @type {number}
      * @memberof TodoItemDto
      */
     'price'?: number;
     /**
-     * number of minutes worked with this task
+     * Number of minutes worked with this task.
      * @type {number}
      * @memberof TodoItemDto
      */
@@ -116,10 +119,23 @@ export interface TodoItemDto {
      * @memberof TodoItemDto
      */
     'approvalRequired'?: boolean;
+    /**
+     * Holds a list of participants that have approved or not approved the todo item.
+     * @type {Array<ApprovalDto>}
+     * @memberof TodoItemDto
+     */
+    'approvalList'?: Array<ApprovalDto>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TodoItemDto
+     */
+    'approvedByAll'?: boolean;
 }
 
 export const TodoItemDtoStatusEnum = {
     Open: 'OPEN',
+    Approved: 'APPROVED',
     InProgress: 'IN_PROGRESS',
     OnHold: 'ON_HOLD',
     Done: 'DONE',

@@ -15,37 +15,31 @@
 
 
 /**
- * Holds all participants that have approved the todo item
+ * Holds a participant that have to approve the todo item.
  * @export
  * @interface ApprovalDto
  */
 export interface ApprovalDto {
     /**
-     * Global unique identifier of a participant. Should not be set for new todo item.
+     * Unique identifier of the approval.
      * @type {string}
      * @memberof ApprovalDto
      */
     'id'?: string;
     /**
-     * Unique identifier of the todo item that is approved.
+     * Unique identifier of the todo item that must be approved by all participants of the todo list.
      * @type {string}
      * @memberof ApprovalDto
      */
     'todoItemId'?: string;
     /**
-     * Unique identifier of the participant that have approved the todo item.
+     * Unique identifier of the participant that have to approve the todo item.
      * @type {string}
      * @memberof ApprovalDto
      */
     'participantId'?: string;
     /**
-     * Name of the participant that have approved the todo item.
-     * @type {string}
-     * @memberof ApprovalDto
-     */
-    'name'?: string;
-    /**
-     * Set equal to true if approved, false otherwise.
+     * Set equal to true if approved by the participant, false otherwise.
      * @type {boolean}
      * @memberof ApprovalDto
      */

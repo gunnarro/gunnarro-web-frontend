@@ -11,12 +11,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Trash, Pencil, CheckCircleFill, CheckSquare, HandThumbsUp, HandThumbsDown } from 'react-bootstrap-icons';
 
 // project import
-import { TodoRestApi } from '../../services/TodoRestApi';
+import { TodoRestApi, RestApiConfiguration } from '../../services/TodoRestApi';
 import { TodoItemTable } from '../../components/TodoItemTable';
 import { ShowConfirmDeleteDialog } from '../../components/ConfirmModalDialog';
 import { AlertBox } from '../../components/Alert';
 // service import
-import { TodoServiceApiFactory, TodoDto, TodoItemDto, TodoDtoStatusEnum, ParticipantDto, ErrorResponse, Configuration } from "../../generated/client/todoservice";
+import { TodoServiceApiFactory, TodoDto, TodoItemDto, TodoDtoStatusEnum, ParticipantDto, ApprovalDto, ErrorResponse, Configuration } from "../../generated/client/todoservice";
 
 export const TodoDetailsView = () => {
     const { t } = useTranslation()
@@ -31,6 +31,10 @@ export const TodoDetailsView = () => {
     const navigateAddParticipant = () => {
         navigate("/todo/" + todoId + "/participants");
      };
+
+     const navigateToShowParticipant = (participantId:string) => {
+        navigate("/todo/" + todoId + "/participants/" + participantId);
+    };
 
      // confirm dialog useState
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -52,7 +56,7 @@ export const TodoDetailsView = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
+    const todoApi = TodoServiceApiFactory(RestApiConfiguration(), "", TodoRestApi);
 
     useEffect(() => {
         setLoading(true);
@@ -125,6 +129,24 @@ export const TodoDetailsView = () => {
     function handleApproveTodoItem(todoId:string, todoItemId:string, approved:boolean) {
         let participantId = "564821726293783289"
         console.log("handle todo item approval, todoId=" + todoId + ", todoItemId=" + todoItemId + ", approved=" + approved + ", participantId=" + participantId);
+
+        const approvalDto : ApprovalDto = {
+              todoItemId: todoItemId,
+              participantId: participantId,
+              approved: approved,
+        };
+
+        todoApi.createTodoItemApproval(todoId, todoItemId, approvalDto)
+            .then((response) => {
+                console.log("approved todo item " + todoItemId);
+            })
+            .catch(function (error) {
+                 if (error.response && error.response.headers["content-type"] == 'application/json') {
+                    setError(error.response.data["description"]);
+                } else {
+                    setError(error.message);
+                }
+            })
     }
 
     if (loading) {
@@ -142,94 +164,126 @@ export const TodoDetailsView = () => {
                     <Button className="float-end" onClick={() => navigateAddParticipant()} size="sm" variant="outline-primary">{t("addParticipant")}</Button>
            </Card.Header>
            <Card.Body>
-                <div>
-                   <dl className="mb-3 row">
-                       <dt className="col-sm-3">{t("reference")}</dt>
-                       <dd className="col-sm-8"><Link to={"/todo/" + todoData.id + "/details"}>{todoData.id}</Link></dd>
-                       <dt className="col-sm-3">{t("createdModifiedBy")}</dt>
-                       <dd className="col-sm-8">{todoData.createdByUser} / {todoData.lastModifiedByUser}</dd>
-                       <dt className="col-sm-3">{t("createdModifiedDate")}</dt>
-                       <dd className="col-sm-8">{todoData.createdDate} / {todoData.lastModifiedDate}</dd>
-                       <dt className="col-sm-3">{t("status")}</dt>
-                       <dd className="col-sm-8">{t(todoData.status)}</dd>
-                       <dt className="col-sm-3">{t("participants")}</dt>
-                       <dd className="col-sm-8">
-                           <div key="participants" className="hstack gap-4 col-md-2">
-                              {
-                                 todoData.participantDtoList && todoData.participantDtoList.map((participant) => (
-                                      <Button disabled key={participant.id} type="button" className="position-relative" variant="outline-secondary">
-                                         {participant.name}
-                                         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">{ getAssignedTaskCount(participant.name as string) }</span>
-                                      </Button>
-                                 ))
-                              }
-                           </div>
-                       </dd>
-                   </dl>
+                <div className="row">
+                   <div className="col-md-6">
+                       <dl className="mb-6 row">
+                           <dt className="col-sm-4">{t("reference")}</dt>
+                           <dd className="col-sm-8"><Link to={"/todo/" + todoData.id + "/details"}>{todoData.id}</Link></dd>
+                           <dt className="col-sm-4">{t("createdModifiedBy")}</dt>
+                           <dd className="col-sm-8">{todoData.createdByUser} / {todoData.lastModifiedByUser}</dd>
+                           <dt className="col-sm-4">{t("createdModifiedDate")}</dt>
+                           <dd className="col-sm-8">{todoData.createdDate} / {todoData.lastModifiedDate}</dd>
+                           <dt className="col-sm-4">{t("status")}</dt>
+                           <dd className="col-sm-8">{t(todoData.status)}</dd>
+                       </dl>
+                   </div>
+                   <div className="col-md-6">
+                        <dl className="mb-6 row">
+                             <dt className="col-sm-3">{t("participants")}</dt>
+                               <dd className="col-sm-8">
+                                   <div key="participants" className="col-md-4 vstack gap-3">
+                                      {
+                                         todoData.participantDtoList && todoData.participantDtoList.map((participant) => (
+                                              <Button key={participant.id} type="button" onClick={ () => navigateToShowParticipant(participant.id as string) } className="position-relative" size="sm" variant="outline-secondary">
+                                                 {participant.name}
+                                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">{ getAssignedTaskCount(participant.name as string) }</span>
+                                              </Button>
+                                         ))
+                                      }
+                                   </div>
+                               </dd>
+                        </dl>
+                   </div>
                </div>
-                <table className="table">
-                       <thead>
-                           <tr>
-                                <th scope="col"/>
-                                <th scope="col"/>
-                                <th scope="col"/>
-                                <th scope="col"/>
-                                <th scope="col"/>
-                                <th scope="col"/>
-                                <th scope="col"/>
-                                <th scope="col" className="text-end" ><Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button></th>
-                           </tr>
-                           <tr>
-                               <th scope="col">{t("status")}</th>
-                               <th scope="col">{t("priority")}</th>
-                               <th scope="col">{t("category")}</th>
-                               <th scope="col">{t("taskName")}</th>
-                               <th scope="col">{t("action")}</th>
-                               <th scope="col">{t("assignedTo")}</th>
-                               <th scope="col">{t("description")}</th>
-                               <th scope="col" className="text-center">#</th>
-                           </tr>
-                       </thead>
-                       <tbody className="table-group-divider">
-                             {todoData.todoItemDtoList && todoData.todoItemDtoList.map(item => (
-                                  <tr key={item.id}>
-                                     <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill color="green" /> : t(item.status)}</td>
-                                     <td>{t(item.priority)}</td>
-                                     <td>{item.category}</td>
-                                     <td>{item.name}</td>
-                                     <td>{t(item.action as string)}</td>
-                                     <td>{item.assignedTo}</td>
-                                     <td>{item.description}</td>
-                                     <td className="text-center">
-                                        <button onClick={() => navigate("/todo/" + todoData.id + "/items/" + item.id + "/edit")} type="button" className="btn btn-sm btn-outline-secondary">
-                                            <Pencil size={16} color="royalblue" />
+               <table className="table">
+                   <thead>
+                        <tr>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col" className="text-end">
+                                <Button onClick={() => navigateTodoItemNew()} size="sm" variant="outline-primary" >{t("add")}</Button>
+                            </th>
+                        </tr>
+                       <tr>
+                       <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <th scope="col"/>
+                            <td scope="col" className="p-0">
+                                <div className="row h6">
+                                    <div className="col-md-6"><span className="text-secondary">Antall</span></div>
+                                    <div className="col-md-6"><span className="text-primary">2342</span></div>
+                                </div>
+                            </td>
+                       </tr>
+                       <tr>
+                           <th scope="col">{t("status")}</th>
+                           <th scope="col">{t("priority")}</th>
+                           <th scope="col">{t("category")}</th>
+                           <th scope="col">{t("taskName")}</th>
+                           <th scope="col">{t("action")}</th>
+                           <th scope="col">{t("assignedTo")}</th>
+                           <th scope="col">{t("description")}</th>
+                           <th scope="col">{t("approvedOf")}</th>
+                           <th scope="col" className="text-center">#</th>
+                       </tr>
+                   </thead>
+                   <tbody className="table-group-divider">
+                         {todoData.todoItemDtoList && todoData.todoItemDtoList.map(item => (
+                              <tr key={item.id}>
+                                 <td>{item.status == TodoDtoStatusEnum.Done ? <CheckCircleFill color="green" /> : t(item.status)}</td>
+                                 <td>{t(item.priority)}</td>
+                                 <td>{item.category}</td>
+                                 <td>{item.name}</td>
+                                 <td>{t(item.action as string)}</td>
+                                 <td>{item.assignedTo}</td>
+                                 <td>{item.description} AR={item.approvalRequired}</td>
+                                 <td>
+                                        {item.createdByUser}<br/>
+                                        {item.lastModifiedByUser}<br/>
+                                        {item.createdDate}<br/>
+                                        {item.lastModifiedDate}
+                                 </td>
+                                 <td className="text-left">
+                                    <button onClick={() => navigate("/todo/" + todoData.id + "/items/" + item.id + "/edit")} type="button" className="btn btn-sm btn-outline-secondary">
+                                        <Pencil size={16} color="royalblue" />
+                                    </button>
+                                    <span>&nbsp;</span>
+                                    <button onClick={() => { confirmDeleteTodoItem(todoData.id as string, item.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
+                                        <Trash  size={16} color="red" />
+                                    </button>
+                                    <span>&nbsp;</span>
+                                    {
+                                        item.approvalRequired &&
+                                        <button onClick={() => { handleApproveTodoItem(todoData.id as string, item.id as string, true);}} type="button" className="btn btn-sm btn-outline-secondary">
+                                            <HandThumbsUp size={16} color="green" />
                                         </button>
-                                        <span>&nbsp;</span>
-                                        <button onClick={() => { confirmDeleteTodoItem(todoData.id as string, item.id as string);}} type="button" className="btn btn-sm btn-outline-secondary">
-                                            <Trash  size={16} color="red" />
+                                    }
+                                    {
+                                        item.approvalRequired &&
+                                        <button onClick={() => { handleApproveTodoItem(todoData.id as string, item.id as string, false);}} type="button" className="btn btn-sm btn-outline-secondary"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This top tooltip is themed via CSS variables.">
+                                             <HandThumbsDown size={16} color="red" />
                                         </button>
-                                         <span>&nbsp;</span>
-                                        {
-                                            item.approvalRequired &&
-                                            <button onClick={() => { handleApproveTodoItem(todoData.id as string, item.id as string, true);}} type="button" className="btn btn-sm btn-outline-secondary">
-                                                <HandThumbsUp size={16} color="green" />
-                                            </button>
-                                        }
-                                        {
-                                            item.approvalRequired &&
-                                            <button onClick={() => { handleApproveTodoItem(todoData.id as string, item.id as string, false);}} type="button" className="btn btn-sm btn-outline-secondary"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This top tooltip is themed via CSS variables.">
-                                                 <HandThumbsDown size={16} color="red" />
-                                            </button>
-                                        }
-                                     </td>
-                                 </tr>
-                             ))}
-                       </tbody>
-                       <tfoot className="table-group-divider">
-                           <tr>
-                           </tr>
-                       </tfoot>
-                   </table>
+                                    }
+                                 </td>
+                             </tr>
+                         ))}
+                   </tbody>
+                   <tfoot className="table-group-divider">
+                       <tr>
+                       </tr>
+                   </tfoot>
+               </table>
            </Card.Body>
         </Card>
     </Container>

@@ -35,6 +35,7 @@ export const Header = () => {
              <Nav.Link href="/todo">{t('todo')}</Nav.Link>
              <NavDropdown title={t('products')} id="basic-nav-dropdown">
                <NavDropdown.Item href="/todo">{t('todo')}</NavDropdown.Item>
+               <NavDropdown.Item href="/todo/admin">{t('todoAdmin')}</NavDropdown.Item>
                <NavDropdown.Item href="/tournament-planner" disabled >{t('tournamentPlanner')}</NavDropdown.Item>
              </NavDropdown>
              <NavDropdown title={t('about')} id="basic-nav-dropdown">

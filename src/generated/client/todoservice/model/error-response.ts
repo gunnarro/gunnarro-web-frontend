@@ -15,31 +15,31 @@
 
 
 /**
- * Holds rest service error description
+ * Holds rest service error description.
  * @export
  * @interface ErrorResponse
  */
 export interface ErrorResponse {
     /**
-     * http status code
+     * http status code.
      * @type {number}
      * @memberof ErrorResponse
      */
     'httpStatus'?: number;
     /**
-     * Http message
+     * Http message.
      * @type {string}
      * @memberof ErrorResponse
      */
     'httpMessage'?: string;
     /**
-     * Internal error code
+     * Internal error code.
      * @type {number}
      * @memberof ErrorResponse
      */
     'errorCode'?: number;
     /**
-     * Description of the error
+     * Description of the error.
      * @type {string}
      * @memberof ErrorResponse
      */

@@ -4,7 +4,7 @@
     "title": "Todo Service",
     "description": "Rest Api for todo services",
     "contact": {
-      "name": "gunnarro@gunnarroas.org",
+      "name": "gunnarro",
       "url": "https://gunnarroas.org",
       "email": "gunnarro@gunnarroas.org"
     },
@@ -887,7 +887,7 @@
           "Todo Service"
         ],
         "summary": "Get todo item approvals",
-        "description": "return todo item approvals",
+        "description": "return approvals for a todo item",
         "operationId": "getTodoItemApprovals",
         "parameters": [
           {
@@ -909,7 +909,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Found todo item approvals",
+            "description": "Found approvals for todo item",
             "content": {
               "application/json": {
                 "schema": {
@@ -994,8 +994,8 @@
         "tags": [
           "Todo Service"
         ],
-        "summary": "Add item approval",
-        "description": "return todo item approval",
+        "summary": "updated todo item approval, options are approved or not.",
+        "description": "return updated todo item approval",
         "operationId": "updateTodoItemApproval",
         "parameters": [
           {
@@ -1017,6 +1017,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalDto"
+              }
+            },
             "*/*": {
               "schema": {
                 "$ref": "#/components/schemas/ApprovalDto"
@@ -1027,7 +1032,7 @@
         },
         "responses": {
           "200": {
-            "description": "Added todo item approval",
+            "description": "Updated approval for todo item",
             "content": {
               "application/json": {
                 "schema": {
@@ -1112,8 +1117,8 @@
         "tags": [
           "Todo Service"
         ],
-        "summary": "Add item approval",
-        "description": "return todo item approval",
+        "summary": "approve todo item",
+        "description": "return approval for todo item",
         "operationId": "createTodoItemApproval",
         "parameters": [
           {
@@ -1135,6 +1140,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalDto"
+              }
+            },
             "*/*": {
               "schema": {
                 "$ref": "#/components/schemas/ApprovalDto"
@@ -1145,7 +1155,7 @@
         },
         "responses": {
           "200": {
-            "description": "Added todo item approval",
+            "description": "Approved todo item",
             "content": {
               "application/json": {
                 "schema": {
@@ -1237,6 +1247,11 @@
         "operationId": "createTodo",
         "requestBody": {
           "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TodoDto"
+              }
+            },
             "*/*": {
               "schema": {
                 "$ref": "#/components/schemas/TodoDto"
@@ -1962,7 +1977,7 @@
         "tags": [
           "Todo Service"
         ],
-        "summary": "delete todo item approval",
+        "summary": "delete approval for todo item",
         "description": "approval to delete",
         "operationId": "deleteApproval",
         "parameters": [
@@ -2071,6 +2086,28 @@
   },
   "components": {
     "schemas": {
+      "ApprovalDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the approval."
+          },
+          "todoItemId": {
+            "type": "string",
+            "description": "Unique identifier of the todo item that must be approved by all participants of the todo list."
+          },
+          "participantId": {
+            "type": "string",
+            "description": "Unique identifier of the participant that have to approve the todo item."
+          },
+          "approved": {
+            "type": "boolean",
+            "description": "Set equal to true if approved by the participant, false otherwise."
+          }
+        },
+        "description": "Holds a participant that have to approve the todo item."
+      },
       "ParticipantDto": {
         "type": "object",
         "properties": {
@@ -2096,7 +2133,7 @@
             "format": "int32"
           }
         },
-        "description": "Holds information about a todo list participant"
+        "description": "Holds information about a todo list participant."
       },
       "TodoDto": {
         "required": [
@@ -2133,7 +2170,7 @@
             "description": "user that last modified the todo"
           },
           "name": {
-            "pattern": "[\\w\\s\\dæÆøØåÅ_-]{2,50}",
+            "pattern": "[\\w\\sæÆøØåÅ_-]{2,50}",
             "type": "string",
             "description": "Name of todo"
           },
@@ -2149,7 +2186,7 @@
             ]
           },
           "description": {
-            "pattern": "[\\w\\s\\dæÆøØåÅ_-]{0,100}",
+            "pattern": "[\\w\\sæÆøØåÅ_-]{0,100}",
             "type": "string",
             "description": "description of this to do task"
           },
@@ -2190,41 +2227,42 @@
           },
           "createdDate": {
             "type": "string",
-            "description": "date when todo was created",
+            "description": "Date when todo item was created.",
             "format": "date-time"
           },
           "lastModifiedDate": {
             "type": "string",
-            "description": "date when todo was last modified",
+            "description": "Date when todo item was last modified.",
             "format": "date-time"
           },
           "createdByUser": {
             "type": "string",
-            "description": "user that created the todo"
+            "description": "User that created the todo item."
           },
           "lastModifiedByUser": {
             "type": "string",
-            "description": "user that last modified the todo"
+            "description": "User that last modified the todo item."
           },
           "name": {
-            "pattern": "[\\w\\s\\dæÆøØåÅ_-]{2,50}",
+            "pattern": "[\\w\\sæÆøØåÅ_-]{2,50}",
             "type": "string",
-            "description": "Name of the task"
+            "description": "Name of the task."
           },
           "category": {
-            "pattern": "[\\w\\s\\dæÆøØåÅ_-]{0,50}",
+            "pattern": "[\\w\\sæÆøØåÅ_-]{0,50}",
             "type": "string"
           },
           "description": {
-            "pattern": "[\\w\\s\\dæÆøØåÅ_-]{0,100}",
+            "pattern": "[\\w\\sæÆøØåÅ_-]{0,100}",
             "type": "string",
-            "description": "description of the task to do"
+            "description": "Description of the task to do."
           },
           "status": {
             "type": "string",
-            "description": "Holds all possible statues for a todo item",
+            "description": "Holds all possible statues for a todo item.",
             "enum": [
               "OPEN",
+              "APPROVED",
               "IN_PROGRESS",
               "ON_HOLD",
               "DONE",
@@ -2245,7 +2283,7 @@
           },
           "assignedTo": {
             "type": "string",
-            "description": "the person that is responsible to follow up and fulfill this task"
+            "description": "The person that is responsible to follow up and fulfill this task."
           },
           "priority": {
             "type": "string",
@@ -2260,74 +2298,58 @@
           },
           "price": {
             "type": "integer",
-            "description": "the price of this item",
+            "description": "The price of this item.",
             "format": "int32"
           },
           "workedMinutes": {
             "type": "integer",
-            "description": "number of minutes worked with this task",
+            "description": "Number of minutes worked with this task.",
             "format": "int32"
           },
           "approvalRequired": {
             "type": "boolean",
             "description": "Indicates it this task must be approved ba all participants or not, Default is no need for approval."
+          },
+          "approvalList": {
+            "type": "array",
+            "description": "Holds a list of participants that have approved or not approved the todo item.",
+            "items": {
+              "$ref": "#/components/schemas/ApprovalDto"
+            }
+          },
+          "approvedByAll": {
+            "type": "boolean"
           }
         },
-        "description": "Holds information about a todo item"
+        "description": "Holds information about a todo item."
       },
       "ErrorResponse": {
         "type": "object",
         "properties": {
           "httpStatus": {
             "type": "integer",
-            "description": "http status code",
+            "description": "http status code.",
             "format": "int32",
             "example": 404
           },
           "httpMessage": {
             "type": "string",
-            "description": "Http message",
+            "description": "Http message.",
             "example": "Not Found"
           },
           "errorCode": {
             "type": "integer",
-            "description": "Internal error code",
+            "description": "Internal error code.",
             "format": "int32",
             "example": 4041001
           },
           "description": {
             "type": "string",
-            "description": "Description of the error",
+            "description": "Description of the error.",
             "example": "Customer not found"
           }
         },
-        "description": "Holds rest service error description"
-      },
-      "ApprovalDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Global unique identifier of a participant. Should not be set for new todo item."
-          },
-          "todoItemId": {
-            "type": "string",
-            "description": "Unique identifier of the todo item that is approved."
-          },
-          "participantId": {
-            "type": "string",
-            "description": "Unique identifier of the participant that have approved the todo item."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the participant that have approved the todo item."
-          },
-          "approved": {
-            "type": "boolean",
-            "description": "Set equal to true if approved, false otherwise."
-          }
-        },
-        "description": "Holds all participants that have approved the todo item"
+        "description": "Holds rest service error description."
       },
       "TodoItemHistoryDto": {
         "required": [
@@ -2337,7 +2359,7 @@
         "properties": {
           "revisionNumber": {
             "type": "integer",
-            "description": "Unique identifier of the revision",
+            "description": "Unique identifier of the revision.",
             "format": "int64"
           },
           "revisionEndId": {
@@ -2346,7 +2368,7 @@
           },
           "revisionType": {
             "type": "string",
-            "description": "the revision type, update, delete"
+            "description": "The revision type, update, delete."
           },
           "id": {
             "pattern": "[0-9]{1,25}",
@@ -2356,25 +2378,25 @@
           "todoId": {
             "pattern": "[0-9]{1,25}",
             "type": "string",
-            "description": "Global unique identifier for the todo that this item belongs to."
+            "description": "Global unique identifier for the todo item that this item belongs to."
           },
           "createdDate": {
             "type": "string",
-            "description": "date when todo was created",
+            "description": "Date when todo item was created.",
             "format": "date-time"
           },
           "lastModifiedDate": {
             "type": "string",
-            "description": "date when todo was last modified",
+            "description": "Date when todo item was last modified.",
             "format": "date-time"
           },
           "createdByUser": {
             "type": "string",
-            "description": "user that created the todo"
+            "description": "User that created the todo item."
           },
           "lastModifiedByUser": {
             "type": "string",
-            "description": "user that last modified the todo"
+            "description": "User that last modified the todo item."
           },
           "name": {
             "pattern": "[\\w\\s\\dæÆøØåÅ_-]{1,50}",
@@ -2388,15 +2410,15 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of todo, OPEN, IN_PROGRESS or FINISHED"
+            "description": "Status of todo item, OPEN, IN_PROGRESS or FINISHED"
           },
           "action": {
             "type": "string",
-            "description": "The action that should be done for this item"
+            "description": "The action that should be done for this item."
           },
           "assignedTo": {
             "type": "string",
-            "description": "the person that is responsible to follow up and fulfill this task"
+            "description": "The person that is responsible to follow up and fulfill this task."
           },
           "priority": {
             "type": "string",
@@ -2410,7 +2432,7 @@
             ]
           }
         },
-        "description": "Holds audit log for Todo item"
+        "description": "Holds audit log for Todo item."
       },
       "TodoHistoryDto": {
         "required": [
@@ -2420,7 +2442,7 @@
         "properties": {
           "revisionNumber": {
             "type": "integer",
-            "description": "Unique identifier of the revision",
+            "description": "Unique identifier of the revision.",
             "format": "int64"
           },
           "revisionEndId": {
@@ -2429,7 +2451,7 @@
           },
           "revisionType": {
             "type": "string",
-            "description": "the revision type, update, delete"
+            "description": "The revision type, update, delete."
           },
           "id": {
             "pattern": "[0-9]{1,25}",
@@ -2438,27 +2460,27 @@
           },
           "createdDate": {
             "type": "string",
-            "description": "date when todo was created",
+            "description": "Date when todo was created.",
             "format": "date-time"
           },
           "lastModifiedDate": {
             "type": "string",
-            "description": "date when todo was last modified",
+            "description": "Date when todo was last modified.",
             "format": "date-time"
           },
           "createdByUser": {
             "pattern": "[a-zA-Z]{1,50}",
             "type": "string",
-            "description": "user that created the todo"
+            "description": "User that created the todo."
           },
           "lastModifiedByUser": {
             "type": "string",
-            "description": "user that last modified the todo"
+            "description": "User that last modified the todo."
           },
           "name": {
             "pattern": "[\\w\\s\\d-_]{1,50}",
             "type": "string",
-            "description": "Name of todo"
+            "description": "Name of todo."
           },
           "status": {
             "type": "string",
@@ -2467,10 +2489,10 @@
           "description": {
             "pattern": "[\\w\\s\\d-_]{1,100}",
             "type": "string",
-            "description": "description of this to do task"
+            "description": "Description of this to do task."
           }
         },
-        "description": "Holds audit log for Todo"
+        "description": "Holds audit log for Todo."
       }
     },
     "securitySchemes": {

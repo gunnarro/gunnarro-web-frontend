@@ -1,0 +1,15 @@
+# ref: https://openapi-generator.tech/docs/generators/typescript-axios/
+generatorName: typescript-axios
+outputDir: src/generated
+cleanupOutput: true
+inputSpec: docs/api/admin-service-api.yaml
+additionalProperties:
+supportsES6: true
+
+apiPackage: src/generated/adminservice/api
+modelPackage: src/generated/adminservice/model
+withSeparateModelsAndApi: true
+npmName: admin-service-client
+# If not provided, using the version from the OpenAPI specification file.
+# npmVersion: 1.0.0
+enumPropertyNaming: PascalCase
