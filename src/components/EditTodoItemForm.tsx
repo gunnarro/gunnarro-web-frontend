@@ -5,16 +5,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi, toTodoItemDtoStatusEnum, toTodoItemDtoPriorityEnum, toTodoItemDtoActionEnum } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
-import { LANGUAGES } from "../constants";
 // service import
-import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "../generated/client/todoservice";
+import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, Configuration } from "../generated/client/todoservice";
 
 interface EditTodoItemFormProps {
   userName: string;
@@ -26,11 +23,9 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
     const { todoId, todoItemId } = useParams() as { todoId:string, todoItemId:string };
     // if the price input field should be visible or not
     const [showPriceField, setShowPriceField] = useState(false);
-    const [switchState, setSwitchState] = useState(false);
 
     const navigate = useNavigate();
     const navigateTodoItems = () => {
-           //navigate('/todos');
            navigate(-1); // same as browser back button
         };
 
@@ -64,7 +59,6 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
 
     const getTodoItem = (todoId:string, todoItemId:string) => {
          // clear current errors, if any
-         //setError("")
          todoApi.getTodoItem(todoId, todoItemId)
             .then((response) => {
                setTodoItemForm ( {
@@ -82,8 +76,6 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                           approval_required: String(response.data.approvalRequired),
                           assigned_to: response.data.assignedTo!
                     });
-               // setTodoItemForm(todoItem);
-                //setLoading(false);
                 console.log("loaded todo item into form, todoId=" + todoItemForm.todo_id + ", todoItemId=" + todoItemId + ", name=" + todoItemForm.name  + ", approval=" + todoItemForm.approval_required + ", " + String(response.data.approvalRequired))
             })
             .catch(function (error) {
@@ -97,12 +89,10 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
 
     const getTodoParticipants = (todoId:string) => {
          // clear current errors, if any
-         //setError("")
          todoApi.getTodoParticipants(todoId)
             .then((response) => {
                 const participants = JSON.parse(JSON.stringify(response.data)) as ParticipantDto[];
                 setParticipantListData(participants);
-                //setLoading(false);
                 console.log("loaded participants for todoId=" + todoId)
             })
             .catch(function (error) {
