@@ -11,7 +11,7 @@ import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } fro
 // project import
 import { TodoRestApi } from '../../services/TodoRestApi';
 import { TodoTable } from '../../components/TodoTable';
-import { UsersTable } from '../../components/UsersTable';
+//import { UsersTable } from '../../components/UsersTable';
 import { ShowConfirmDeleteDialog } from '../../components/ConfirmModalDialog';
 import { AlertBox } from '../../components/Alert';
 // todo rest api import
@@ -178,7 +178,7 @@ export const TodoAdminView = () => {
                 </table>
             </div>
             <div role="tabpanel" className="tab-pane" id="user">
-                 <UsersTable />
+
             </div>
         </div>
     </div>

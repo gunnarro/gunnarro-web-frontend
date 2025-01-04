@@ -14,13 +14,13 @@ import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 import { LANGUAGES } from "../constants";
 // service import
-import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "generated/client/todoservice";
+import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "../generated/client/todoservice";
 
 interface TodoItemFormProps {
   userName: string;
 }
 
-export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
+export const TodoItemForm = () => {
     const { t } = useTranslation()
     // the todoId is provided through the uri.
     const { todoId } = useParams() as { todoId:string };
@@ -40,7 +40,7 @@ export const TodoItemForm: React.FC<TodoItemFormProps> = (props) => {
     const [participantListData, setParticipantListData] = useState<ParticipantDto[]>([]);
     const [todoItemForm, setTodoItemForm] = useState({
         todo_id: todoId,
-        created_by: props.userName, // always set equal to user that create this todo item, can not be changed
+        created_by: "", // always set equal to user that create this todo item, can not be changed
         name: '',
         description: '',
         action: '',

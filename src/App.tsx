@@ -45,7 +45,7 @@ const App = () => {
               <Route path='/todo/:todoId/participants/:participantId' element={<TodoParticipantDetails />} />
               <Route path='/todo/:todoId/history' element={<TodoHistoryView />} />
               <Route path='/todo/new' element={<TodoForm />} />
-              <Route path='/todo/:todoId/items/new' element={<TodoItemForm userName="guest"/>} />
+              <Route path='/todo/:todoId/items/new' element={<TodoItemForm />} />
               <Route path='/todo/:todoId/items/:todoItemId/edit' element={<EditTodoItemForm userName="guest"/>} />
               <Route path='/about/about' element={<About />} />
               <Route path='/about/gender-equality-plan' element={<GenderEqualityPlan />} />

@@ -1,7 +1,7 @@
 // rest support
 import axios from "axios";
 // service import
-import { Configuration, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum } from "generated/client/todoservice";
+import { Configuration, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum } from "../generated/client/todoservice";
 
 
 // When you add the headers to your axios request, the request becomes a "non-simple" request and the browser performs a preflight request before the actual request.
@@ -27,7 +27,9 @@ export function RestApiConfiguration() {
     config.username = "none";
     config.password = "none";
 
+    {/* Always check for users access token and add it to the request header, if not found, the user is not authenticated to call any service. */}
     const accessToken = localStorage.getItem('accessToken'); // get stored access token
+    console.log("Read token from LocalStorage: " + accessToken);
     if (accessToken) {
         config.accessToken = "Bearer ${accessToken}"; // set in header
     } else {

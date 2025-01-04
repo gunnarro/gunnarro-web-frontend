@@ -5,7 +5,6 @@ import { PropTypes } from 'prop-types';
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
-import { showConfirmDeleteDialog } from '../components/ConfirmModalDialog';
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.

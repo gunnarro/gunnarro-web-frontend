@@ -14,7 +14,7 @@ import { TodoRestApi, toTodoItemDtoStatusEnum, toTodoItemDtoPriorityEnum, toTodo
 import { AlertBox } from '../components/Alert';
 import { LANGUAGES } from "../constants";
 // service import
-import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "generated/client/todoservice";
+import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "../generated/client/todoservice";
 
 interface EditTodoItemFormProps {
   userName: string;

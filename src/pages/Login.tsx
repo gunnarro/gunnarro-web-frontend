@@ -23,6 +23,7 @@ export const Login = () => {
         setError("")
         // mock
         setError("loginErrorMsg")
+        console.log("handle login form")
     }
 
     return (
@@ -30,8 +31,8 @@ export const Login = () => {
             <Card className="border-0">
                {error && <AlertBox title="login failed" message={error} />}
                <Form noValidate onSubmit={handleFormSubmit}>
-                  <Form.Group controlId="validationUserName">
-                     <Form.FloatingLabel controlId="user_name" label={t("userName")} className="mb-3">
+                  <Form.Group>
+                     <Form.FloatingLabel label={t("userName")} className="mb-3">
                      <Form.Control
                        autoFocus
                        required
@@ -41,8 +42,8 @@ export const Login = () => {
                      />
                      </Form.FloatingLabel>
                   </Form.Group>
-                  <Form.Group controlId="validationPassword">
-                     <Form.FloatingLabel controlId="password" label={t("password")} className="mb-3">
+                  <Form.Group>
+                     <Form.FloatingLabel label={t("password")} className="mb-3">
                      <Form.Control
                        required
                        id="password"
@@ -59,7 +60,7 @@ export const Login = () => {
                          />
                      <div className="float-end">
                        <Button onClick={() => navigateHome()} className="m-1" variant="outline-secondary" >{t("cancel")}</Button>
-                       <Button type="submit" className="" variant="outline-primary" >{t("login")}</Button>
+                       <Button type="submit" variant="outline-primary" >{t("login")}</Button>
                      </div>
                   </Form.Group>
                </Form>

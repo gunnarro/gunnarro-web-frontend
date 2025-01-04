@@ -225,7 +225,7 @@ npm install -g n
 ### install latest stable version of node.js
 sudo n lts
 
-### create default react app
+### create default react app (deprecated - do not use create-react-app anymore)
 sudo npm -g install create-react-app
 create-react-app --version
 
@@ -270,6 +270,16 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Use Vite
+Create React App and react-scripts is no longer maintained and have nullabilities that will not be fixed, so it is time time to get ride of that shitty part of react applications.
+
+Start using Vite, See https://medium.com/@gerasimostzivras3/upgrade-your-react-app-moving-from-create-react-app-to-vite-00063e257108
+
+Steps:
+```
+  1. npm install vite @vitejs/plugin-react --save-de
+  2. npm uninstall react-scripts
+```
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
