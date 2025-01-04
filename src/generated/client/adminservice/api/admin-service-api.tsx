@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Todo Service
- * Rest Api for todo services
+ * Todo
+ * Rest Api for todo
  *
  * The version of the OpenAPI document: V1
  * Contact: gunnarro@gunnarroas.org
@@ -25,6 +25,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, ope
 import { ErrorResponse } from '../model';
 // @ts-ignore
 import { TodoDto } from '../model';
+// @ts-ignore
+import { UserDto } from '../model';
 /**
  * AdminServiceApi - axios parameter creator
  * @export
@@ -32,9 +34,52 @@ import { TodoDto } from '../model';
 export const AdminServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Create a new user
+         * @summary Create new user
+         * @param {number} userId
+         * @param {UserDto} arg1
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createUser: async (userId: number, arg1: UserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('createUser', 'userId', userId)
+            // verify required parameter 'arg1' is not null or undefined
+            assertParamExists('createUser', 'arg1', arg1)
+            const localVarPath = `/adminservice/v1/users/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (arg1 !== undefined) {
+                for (const [key, value] of Object.entries(arg1)) {
+                    localVarQueryParameter[key] = value;
+                }
+            }
+
+
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * id of todo to be deleted
          * @summary delete todo
-         * @param {string} todoId 
+         * @param {string} todoId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -55,7 +100,7 @@ export const AdminServiceApiAxiosParamCreator = function (configuration?: Config
             const localVarQueryParameter = {} as any;
 
 
-    
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -68,7 +113,7 @@ export const AdminServiceApiAxiosParamCreator = function (configuration?: Config
         /**
          * id of user to be deleted
          * @summary delete user
-         * @param {string} userId 
+         * @param {string} userId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -89,7 +134,7 @@ export const AdminServiceApiAxiosParamCreator = function (configuration?: Config
             const localVarQueryParameter = {} as any;
 
 
-    
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -119,7 +164,41 @@ export const AdminServiceApiAxiosParamCreator = function (configuration?: Config
             const localVarQueryParameter = {} as any;
 
 
-    
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * return requested user
+         * @summary Get specific user
+         * @param {number} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUser: async (userId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUser', 'userId', userId)
+            const localVarPath = `/adminservice/v1/users/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -149,7 +228,50 @@ export const AdminServiceApiAxiosParamCreator = function (configuration?: Config
             const localVarQueryParameter = {} as any;
 
 
-    
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Update a user
+         * @summary Update user
+         * @param {number} userId
+         * @param {UserDto} arg1
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUser: async (userId: number, arg1: UserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('updateUser', 'userId', userId)
+            // verify required parameter 'arg1' is not null or undefined
+            assertParamExists('updateUser', 'arg1', arg1)
+            const localVarPath = `/adminservice/v1/users/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (arg1 !== undefined) {
+                for (const [key, value] of Object.entries(arg1)) {
+                    localVarQueryParameter[key] = value;
+                }
+            }
+
+
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -170,9 +292,23 @@ export const AdminServiceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AdminServiceApiAxiosParamCreator(configuration)
     return {
         /**
+         * Create a new user
+         * @summary Create new user
+         * @param {number} userId
+         * @param {UserDto} arg1
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createUser(userId: number, arg1: UserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createUser(userId, arg1, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AdminServiceApi.createUser']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * id of todo to be deleted
          * @summary delete todo
-         * @param {string} todoId 
+         * @param {string} todoId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -185,7 +321,7 @@ export const AdminServiceApiFp = function(configuration?: Configuration) {
         /**
          * id of user to be deleted
          * @summary delete user
-         * @param {string} userId 
+         * @param {string} userId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -208,15 +344,42 @@ export const AdminServiceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * return requested user
+         * @summary Get specific user
+         * @param {number} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUser(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUser(userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AdminServiceApi.getUser']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * return all users
          * @summary Get all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TodoDto>> {
+        async getUsers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUsers(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AdminServiceApi.getUsers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Update a user
+         * @summary Update user
+         * @param {number} userId
+         * @param {UserDto} arg1
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateUser(userId: number, arg1: UserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUser(userId, arg1, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AdminServiceApi.updateUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -230,9 +393,20 @@ export const AdminServiceApiFactory = function (configuration?: Configuration, b
     const localVarFp = AdminServiceApiFp(configuration)
     return {
         /**
+         * Create a new user
+         * @summary Create new user
+         * @param {number} userId
+         * @param {UserDto} arg1
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createUser(userId: number, arg1: UserDto, options?: any): AxiosPromise<UserDto> {
+            return localVarFp.createUser(userId, arg1, options).then((request) => request(axios, basePath));
+        },
+        /**
          * id of todo to be deleted
          * @summary delete todo
-         * @param {string} todoId 
+         * @param {string} todoId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -242,7 +416,7 @@ export const AdminServiceApiFactory = function (configuration?: Configuration, b
         /**
          * id of user to be deleted
          * @summary delete user
-         * @param {string} userId 
+         * @param {string} userId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -259,13 +433,34 @@ export const AdminServiceApiFactory = function (configuration?: Configuration, b
             return localVarFp.getTodos(options).then((request) => request(axios, basePath));
         },
         /**
+         * return requested user
+         * @summary Get specific user
+         * @param {number} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUser(userId: number, options?: any): AxiosPromise<UserDto> {
+            return localVarFp.getUser(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * return all users
          * @summary Get all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsers(options?: any): AxiosPromise<TodoDto> {
+        getUsers(options?: any): AxiosPromise<UserDto> {
             return localVarFp.getUsers(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update a user
+         * @summary Update user
+         * @param {number} userId
+         * @param {UserDto} arg1
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUser(userId: number, arg1: UserDto, options?: any): AxiosPromise<UserDto> {
+            return localVarFp.updateUser(userId, arg1, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -278,9 +473,22 @@ export const AdminServiceApiFactory = function (configuration?: Configuration, b
  */
 export class AdminServiceApi extends BaseAPI {
     /**
+     * Create a new user
+     * @summary Create new user
+     * @param {number} userId
+     * @param {UserDto} arg1
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminServiceApi
+     */
+    public createUser(userId: number, arg1: UserDto, options?: RawAxiosRequestConfig) {
+        return AdminServiceApiFp(this.configuration).createUser(userId, arg1, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * id of todo to be deleted
      * @summary delete todo
-     * @param {string} todoId 
+     * @param {string} todoId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AdminServiceApi
@@ -292,7 +500,7 @@ export class AdminServiceApi extends BaseAPI {
     /**
      * id of user to be deleted
      * @summary delete user
-     * @param {string} userId 
+     * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AdminServiceApi
@@ -313,6 +521,18 @@ export class AdminServiceApi extends BaseAPI {
     }
 
     /**
+     * return requested user
+     * @summary Get specific user
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminServiceApi
+     */
+    public getUser(userId: number, options?: RawAxiosRequestConfig) {
+        return AdminServiceApiFp(this.configuration).getUser(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * return all users
      * @summary Get all users
      * @param {*} [options] Override http request option.
@@ -321,6 +541,19 @@ export class AdminServiceApi extends BaseAPI {
      */
     public getUsers(options?: RawAxiosRequestConfig) {
         return AdminServiceApiFp(this.configuration).getUsers(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update a user
+     * @summary Update user
+     * @param {number} userId
+     * @param {UserDto} arg1
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminServiceApi
+     */
+    public updateUser(userId: number, arg1: UserDto, options?: RawAxiosRequestConfig) {
+        return AdminServiceApiFp(this.configuration).updateUser(userId, arg1, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

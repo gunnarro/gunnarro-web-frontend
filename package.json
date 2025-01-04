@@ -29,8 +29,8 @@
     "typescript": "^5.7.2"
   },
   "scripts": {
-    "codegen-todo": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated/client/todoservice --additional-properties=npmName=todo-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model",
-    "codegen-admin": "openapi-generator-cli generate -i docs/api/admin-service-api.yaml -g typescript-axios -o src/generated/client/adminservice --additional-properties=npmName=admin-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model",
+    "codegen-todo": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated/client/todoservice --additional-properties=npmName=todo-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model,importFileExtension=tsx",
+    "codegen-admin": "openapi-generator-cli generate -i docs/api/admin-service-api.yaml -g typescript-axios -o src/generated/client/adminservice --additional-properties=npmName=admin-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model,importFileExtension=tsx",
     "start": "vite",
     "build": "vite build",
     "test": "vite preview"

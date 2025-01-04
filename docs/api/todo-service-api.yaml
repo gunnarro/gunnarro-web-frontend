@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Todo Service",
-    "description": "Rest Api for todo services",
+    "title": "Todo",
+    "description": "Rest Api for todo",
     "contact": {
       "name": "gunnarro",
       "url": "https://gunnarroas.org",

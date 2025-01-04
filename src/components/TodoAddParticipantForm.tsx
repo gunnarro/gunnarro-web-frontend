@@ -12,7 +12,8 @@ import Alert from 'react-bootstrap/Alert';
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
-import { TodoServiceApiFactory, ParticipantDto, ErrorResponse, Configuration } from "../generated/client/todoservice";
+import { TodoServiceApiFactory, Configuration } from "../generated/client/todoservice";
+import { ParticipantDto, ErrorResponse } from "../generated/client/todoservice/model";
 
 export const TodoAddParticipantForm = () => {
     const { t } = useTranslation();

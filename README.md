@@ -90,11 +90,11 @@ see https://reactnative.dev/docs/the-new-architecture/using-codegen
 Create a 'codegen' option under the script section in the package.json file
 ```
 "scripts": {
-  "codegen": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated --additional-properties=npmName=todo-service-client,apiPackage=todoservice/api,modelPackage=todoservice/model",
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
+  "codegen-todo": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated/client/todoservice --additional-properties=npmName=todo-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model,importFileExtension=tsx",
+  "codegen-admin": "openapi-generator-cli generate -i docs/api/admin-service-api.yaml -g typescript-axios -o src/generated/client/adminservice --additional-properties=npmName=admin-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model",
+  "start": "vite",
+  "build": "vite build",
+  "test": "vite preview"
 },
 ```
 the you can simply generate code by running:

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Todo Service
- * Rest Api for todo services
+ * Todo
+ * Rest Api for todo
  *
  * The version of the OpenAPI document: V1
  * Contact: gunnarro@gunnarroas.org
