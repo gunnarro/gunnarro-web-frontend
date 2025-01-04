@@ -1,6 +1,6 @@
 // react import
 import { useTranslation } from 'react-i18next';
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 // project import
-import { TodoRestApi } from '../services/TodoRestApi';
+import { TodoRestApi, toTodoItemDtoActionEnum } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
 import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, Configuration } from "../generated/client/todoservice";
@@ -92,26 +92,6 @@ export const TodoItemForm = () => {
           [event.target.id]: event.target.value,
         });
     };
-
-    function toTodoItemDtoActionEnum(key: string): TodoItemDtoActionEnum {
-        console.log("map key: " + key);
-        if (key == TodoItemDtoActionEnum.ToBeSold) {
-           return TodoItemDtoActionEnum.ToBeSold;
-        } else if (key == TodoItemDtoActionEnum.GivesAway) {
-           return TodoItemDtoActionEnum.GivesAway;
-        } else if (key == TodoItemDtoActionEnum.ThrowAway) {
-           return TodoItemDtoActionEnum.ThrowAway;
-        } else if (key == TodoItemDtoActionEnum.OwnedBy) {
-           return TodoItemDtoActionEnum.OwnedBy;
-        } else if (key == TodoItemDtoActionEnum.GivenTo) {
-           return TodoItemDtoActionEnum.GivenTo;
-        } else if (key == TodoItemDtoActionEnum.StayAsIs) {
-           return TodoItemDtoActionEnum.StayAsIs;
-       } else {
-           console.log("no map for key: " + key);
-           return TodoItemDtoActionEnum.StayAsIs;
-       }
-    }
 
     function isInStringEnum(key: string, enumeration: any): boolean {
         return Object.keys(enumeration).includes(key) || Object.values(enumeration).includes(key);
