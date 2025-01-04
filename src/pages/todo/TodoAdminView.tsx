@@ -15,7 +15,8 @@ import { TodoTable } from '../../components/TodoTable';
 import { ShowConfirmDeleteDialog } from '../../components/ConfirmModalDialog';
 import { AlertBox } from '../../components/Alert';
 // todo rest api import
-import { AdminServiceApiFactory, Configuration } from "../../generated/client/adminservice";
+import { AdminServiceApiFactory } from "../../generated/client/adminservice/api/admin-service-api";
+import { Configuration } from "../../generated/client/adminservice/configuration";
 import { TodoDto, TodoDtoStatusEnum, ErrorResponse } from "../../generated/client/adminservice/model";
 
 function formatDate(dateStr:string) {
