@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
 import { PropTypes } from 'prop-types';
-// bootstrap import
-import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 
@@ -13,7 +10,6 @@ function GetTodoHistoryData({ todoId }) {
     GetTodoHistoryData.propTypes = {
         todoId: PropTypes.PropTypes.isRequired
     };
-    const navigate = useNavigate()
     const [todoHistoryListData, setTodoHistoryListData] = useState([]);
     // load data
     useEffect(() => {

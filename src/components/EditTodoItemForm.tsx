@@ -1,6 +1,6 @@
 // react import
 import { useTranslation } from 'react-i18next';
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
@@ -112,6 +112,14 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
         });
      };
 
+     const handleAssignToSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+            setTodoItemForm({
+                // pass all todoItemForm properties
+              ...todoItemForm,
+              [event.target.id]: event.target.value,
+            });
+        };
+
     const handleActionSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         if (event.target.value == "TO_BE_SOLD") {
             setShowPriceField(true);
@@ -119,14 +127,6 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
             setShowPriceField(false);
         }
         setTodoItemForm({
-          ...todoItemForm,
-          [event.target.id]: event.target.value,
-        });
-    };
-
-    const handleAssignToSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setTodoItemForm({
-            // pass all todoItemForm properties
           ...todoItemForm,
           [event.target.id]: event.target.value,
         });
@@ -152,7 +152,7 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
               event.stopPropagation();
          } else {
             // send data
-            // map from form data into todo api model
+            // map from form data into api todoItem model
             const todoItemDto : TodoItemDto = {
                   id: todoItemForm.id,
                   todoId: todoItemForm.todo_id,

@@ -7,12 +7,11 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
 // service import
-import { TodoServiceApiFactory, TodoDto, TodoDtoStatusEnum, ErrorResponse, Configuration } from "../generated/client/todoservice";
+import { TodoServiceApiFactory, TodoDto, TodoDtoStatusEnum, Configuration } from "../generated/client/todoservice";
 
 export const TodoForm = () => {
 
@@ -20,7 +19,6 @@ export const TodoForm = () => {
 
     const navigate = useNavigate();
     const navigateTodos = () => {
-       //navigate('/todos');
        navigate(-1); // same as browser back button
     };
 
@@ -51,7 +49,7 @@ export const TodoForm = () => {
               event.stopPropagation();
          } else {
             // send data
-            // map from form data into todo api model
+            // map from form data into api todoDto model
             const todoDto : TodoDto = {
                   createdByUser: todoForm.created_by,
                   lastModifiedByUser: todoForm.created_by,
