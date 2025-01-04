@@ -1,6 +1,5 @@
 // react import
-import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PropTypes } from 'prop-types';
 // bootstrap import
@@ -10,8 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { TodoRestApi } from '../services/TodoRestApi';
 import { ShowConfirmDeleteDialog } from '../components/ConfirmModalDialog';
 // Todo rest api import
-import { TodoServiceApiFactory, TodoDto, ErrorResponse, Configuration } from "../generated/client/todoservice";
-
+import { TodoServiceApiFactory, Configuration } from "../generated/client/todoservice";
 
 // To keep things simple, we'll store the returned Rest Api data in the React local state.
 // The initial value is an empty array.
@@ -20,45 +18,8 @@ function GetTodoItemData({ todoId }): React.ReactElement {
         todoId: PropTypes.string.isRequired
     };
     const navigate = useNavigate();
-    const [data, setData] = useState([]);
     // load data
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [todoData, setTodoData] = useState([]);
     const todoApi = TodoServiceApiFactory(new Configuration(), "", TodoRestApi);
-/*
-    useEffect(() => {
-        setLoading(true);
-        todoApi.getTodoById(todoId)
-            .then((response) => {
-                setTodoData(response.data); console.log(todoData);
-                 setLoading(false);
-             })
-            .catch(function (error) {
-                 if (error.response && error.response.headers["content-type"] == 'application/json') {
-                    setError(error.response.data["description"]);
-                } else {
-                    setError(error.message);
-                }
-                setLoading(false);
-            });
-    }, []);
-*/
-/*
-    useEffect(() => {
-      TodoRestApi.get('/todoservice/v1/todos/' + todoId)
-        .then(response => {
-            //alert(response.headers['content-type'])
-            //alert(JSON.stringify(response.data.todoItemDtoList))
-            if (response.data.todoItemDtoList !== undefined && response.data.todoItemDtoList !== null) {
-                setTodoData(response.data.todoItemDtoList);
-            }
-        })
-        .catch(error => {
-          alert("Error calling todo service rest api, error" + error);
-        });
-    }, []);
-*/
      const deleteTodoItem = (todoId, todoItemId) => {
             const confirmed = ShowConfirmDeleteDialog(true);
             if (confirmed) {
@@ -76,7 +37,8 @@ function GetTodoItemData({ todoId }): React.ReactElement {
 
     return (
         <>
-          {todoData && todoData.todoItemDtoList.map(item => (
+          {
+              todoData && todoData.todoItemDtoList.map(item => (
               <tr key={item.id}>
                  <td>{item.status == 'Finished' ? <CheckCircleFill /> : 'todo'}</td>
                  <td>{item.name}</td>

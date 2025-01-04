@@ -5,16 +5,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 // bootstrap import
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Alert from 'react-bootstrap/Alert';
 // project import
 import { TodoRestApi } from '../services/TodoRestApi';
 import { AlertBox } from '../components/Alert';
-import { LANGUAGES } from "../constants";
 // service import
-import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, ErrorResponse, Configuration } from "../generated/client/todoservice";
+import { TodoServiceApiFactory, TodoItemDto, ParticipantDto, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDtoPriorityEnum, Configuration } from "../generated/client/todoservice";
 
 interface TodoItemFormProps {
   userName: string;
@@ -29,7 +26,6 @@ export const TodoItemForm = () => {
 
     const navigate = useNavigate();
     const navigateTodoItems = () => {
-           //navigate('/todos');
            navigate(-1); // same as browser back button
         };
 
@@ -57,13 +53,10 @@ export const TodoItemForm = () => {
 
     const getTodoParticipants = (todoId:string) => {
          // clear current errors, if any
-         //setError("")
          todoApi.getTodoParticipants(todoId)
             .then((response) => {
                 const participants = JSON.parse(JSON.stringify(response.data)) as ParticipantDto[];
                 setParticipantListData(participants);
-                //setLoading(false);
-                console.log("loaded participants for todoId=" + todoId)
             })
             .catch(function (error) {
                  if (error.response && error.response.headers["content-type"] == 'application/json') {
@@ -135,7 +128,7 @@ export const TodoItemForm = () => {
               event.stopPropagation();
          } else {
             // send data
-            // map from form data into todo api model
+            // map from form data into api todoItemDto model
             const todoItemDto : TodoItemDto = {
                   todoId: todoItemForm.todo_id,
                   name: todoItemForm.name,
@@ -203,7 +196,7 @@ export const TodoItemForm = () => {
                         type="text"
                         value={todoItemForm.name}
                         onChange={handleFieldChange}
-                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.name)}
+                        isInvalid={validated && !/^[a-zA-Z\d]+$/.test(todoItemForm.name)}
                       />
                       <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                 </Form.FloatingLabel>
@@ -215,7 +208,7 @@ export const TodoItemForm = () => {
                         type="text"
                         value={todoItemForm.description}
                         onChange={handleFieldChange}
-                        isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoItemForm.description)}
+                        isInvalid={validated && !/^[a-zA-Z\d]+$/.test(todoItemForm.description)}
                       />
                       <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                       </Form.FloatingLabel>
@@ -242,7 +235,7 @@ export const TodoItemForm = () => {
                             type="text"
                             value={todoItemForm.price}
                             onChange={handleFieldChange}
-                            isInvalid={validated && !/^[0-9]+$/.test(todoItemForm.price)}
+                            isInvalid={validated && !/^\d+$/.test(todoItemForm.price)}
                           />
                           <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
                         </Form.FloatingLabel>
