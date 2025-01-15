@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>template</title>
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="table.css">
+
+    <style>
+        /* Targets all the pages */
+       /* A4 = 8.3 x 11.7 inches */
+       @page {
+         size: a4 portrait;
+         margin-top: 0.2in;
+        -webkit-print-color-adjust: economy;
+        print-color-adjust: economy;
+       }
+
+table {
+    -webkit-print-color-adjust: economy;
+    print-color-adjust: economy;
+}
+
+    .footer {
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     height: 1in;
+    }
+    </style>
+</head>
+
+<body>
+<div>
+    <div>
+        <div>
+            <span style="background-color: green;">page header</span>
+        </div>
+        <!-- all other page content -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>
+                    <?xml version="1.0" encoding="utf-8"?>
+                    <svg width="16px" height="16px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M8 16L3.54223 12.3383C1.93278 11.0162 1 9.04287 1 6.96005C1 3.11612 4.15607 0 8 0C11.8439 0 15 3.11612 15 6.96005C15 9.04287 14.0672 11.0162 12.4578 12.3383L8 16ZM3 6H5C6.10457 6 7 6.89543 7 8V9L3 7.5V6ZM11 6C9.89543 6 9 6.89543 9 8V9L13 7.5V6H11Z"
+                              fill="#000000"/>
+                    </svg>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="padding: 1px; margin: 1px;vertical-align: bottom;">
+                    <table class="table table-sm" style="margin: 1px;padding: 1px;">
+                        <tr style="background-color: #ffffff;">
+                            <td style="border-top: 0;vertical-align: bottom;">Antall</td>
+                            <td style="border-top: 0;color: blue;vertical-align: bottom;">23</td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 0;vertical-align: bottom;">Feil</td>
+                            <td style="border-top: 0;color: blue;vertical-align: bottom;">23</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <th scope="col">status</th>
+                <th scope="col">priority</th>
+                <th scope="col">category</th>
+                <th scope="col">taskName</th>
+                <th scope="col">approvedOf</th>
+                <th scope="col">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-success">
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 448 512">
+                        <path d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="#44ee44ee" viewBox="0 0 448 512">
+                        <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                        <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td class="table-danger">status</td>
+                <td>priority</td>
+                <td>category</td>
+                <td>taskName</td>
+                <td>approvedOf</td>
+                <td>#</td>
+            </tr>
+            </tbody>
+            <tfoot class="footer">
+            <tr>
+                <td colspan="9" style="border-top: 2px;">gunnarro as, Stavangergata 35, 0467 Oslo, Norway</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+</body>
+</html>
