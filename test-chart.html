@@ -1,0 +1,256 @@
+<html lang="en">
+<header>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- jquery version 4.4.7 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.1.0/chartjs-plugin-annotation.min.js"
+            integrity="sha512-8MntMizyPIYkcjoDkYqgrQOuWOZsp92zlZ9d7M2RCG0s1Zua8H215p2PdsxS7qg/4hLrHrdPsZgVZpXheHYT+Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+
+    <script>
+
+        const ORDRE_TYPE_COLOR_MAP = {
+                       "ALM" : '#145a32',
+                       "KJØL" : '#2874a6',
+                       "NARK" : '#b03a2e',
+                       "VAREPRØVE" : '#d35400',
+                     }
+
+        const ORDRE_STAGE_COLOR_MAP = {
+                       "NY" : '#3e95cd',
+                       "KLAR" : '#8e5ea2',
+                       "VAREOVERFØRING" : '#3cba9f',
+                       "PLUKK" : '#d35400',
+                       "FAKTURERING" : '#f4d03f',
+                       "VAREUTMELDING" : '#bfc9ca',
+                       "KONTROLL_OG_PAKK" : '#2471a3',
+                       "TRANSPORT" : '#707b7c',
+                       "UTLEVERING" : '#239b56'
+                     }
+
+        const ORDRE_STAGE_BG_COLORS = [
+               ORDRE_STAGE_COLOR_MAP['NY'],
+               ORDRE_STAGE_COLOR_MAP['KLAR'],
+               ORDRE_STAGE_COLOR_MAP['VAREOVERFØRING'],
+               ORDRE_STAGE_COLOR_MAP['PLUKK'],
+               ORDRE_STAGE_COLOR_MAP['FAKTURERING'],
+               ORDRE_STAGE_COLOR_MAP['VAREUTMELDING'],
+               ORDRE_STAGE_COLOR_MAP['KONTROLL_OG_PAKK'],
+               ORDRE_STAGE_COLOR_MAP['TRANSPORT'],
+               ORDRE_STAGE_COLOR_MAP['UTLEVERING']
+           ];
+
+
+       async function loadChart() {
+           //const response = await fetch( 'https://datausa.io/api/data?drilldowns=Nation&measures=Population');
+           //const data = await response.json();
+           //console.log(data);
+           //length = data.data.length;
+
+           var ordreStatData = [
+               {
+                 "ordreType" : "ORDRE",
+                 "antall" : 97,
+                 "stageMap" : {
+                       "NY" : 34,
+                       "KLAR" : 34,
+                       "VAREOVERFØRING" : 34,
+                       "PLUKK" : 5,
+                       "FAKTURERING" : 4,
+                       "VAREUTMELDING" : 12,
+                       "KONTROLL_OG_PAKK" : 6,
+                       "TRANSPORT" : 9,
+                       "UTLEVERING" : 2
+                     }
+                 },
+
+               {
+                 "ordreType" : "ALM",
+                 "antall" : 57,
+                 "stageMap" : {
+                       "NY" : 34,
+                       "KLAR" : 34,
+                       "VAREOVERFØRING" : 34,
+                       "PLUKK" : 5,
+                       "FAKTURERING" : 4,
+                       "VAREUTMELDING" : 12,
+                       "KONTROLL_OG_PAKK" : 6,
+                       "TRANSPORT" : 9,
+                       "UTLEVERING" : 2
+                     }
+                 },
+                 {
+                 "ordreType" : "KJØL",
+                 "antall" : 33,
+                 "stageMap" : {
+                       "NY" : 34,
+                       "KLAR" : 34,
+                       "VAREOVERFØRING" : 34,
+                       "PLUKK" : 5,
+                       "FAKTURERING" : 4,
+                       "VAREUTMELDING" : 12,
+                       "KONTROLL_OG_PAKK" : 6,
+                       "TRANSPORT" : 9,
+                       "UTLEVERING" : 2
+                     }
+                 },
+                 {
+                 "ordreType" : "NARK",
+                 "antall" : 34,
+                 "stageMap" : {
+                       "NY" : 0,
+                       "KLAR" : 0,
+                       "VAREOVERFØRING" : 0,
+                       "PLUKK" : 0,
+                       "FAKTURERING" : 0,
+                       "VAREUTMELDING" : 0,
+                       "KONTROLL_OG_PAKK" : 0,
+                       "TRANSPORT" : 0,
+                       "UTLEVERING" : 34
+                     }
+                 }
+           ];
+
+           console.log(ordreStatData);
+
+
+/*
+           for (let key in ordreStatData[0].stageMap) {
+                labelsx.push(key);
+                valuesx.push(ordreStatData[0].stageMap[key]);
+           }
+*/
+           //for (i = 0; i < ordreStatData.length; i++) {
+           //    labelsx.push(ordreStatData[i].stageMap);
+           //    valuesx.push(ordreStatData[i].stageMap);
+           //}
+
+            var ordreData = [
+                {ordreType: "Alm", antall: 77} ,
+                {ordreType: "Kjøl", antall: 56},
+                {ordreType: "Nark", antall: 33},
+                {ordreType: "Vareprøve", antall: 12},
+            ];
+
+           labels = [];
+           values = [];
+           for (i = 0; i < ordreData.length; i++) {
+               labels.push(ordreData[i].ordreType);
+               values.push(ordreData[i].antall);
+           }
+
+           //---------------------
+           // Alle ordretyper
+           // --------------------
+
+           lagPieChart('alle-pie-chart', ordreStatData[0], true);
+           lagPieChart('alm-pie-chart', ordreStatData[1], false);
+           lagPieChart('kjøl-pie-chart', ordreStatData[2], false);
+           lagPieChart('nark-pie-chart', ordreStatData[3], false);
+
+        }
+
+
+        /**
+        * lag pie grap
+        */
+       function lagPieChart(divElmId, ordreStatData, showLabels) {
+           labels = [];
+           values = [];
+
+           labels.push("NY");
+           values.push(ordreStatData.stageMap["NY"]);
+           labels.push("KLAR");
+           values.push(ordreStatData.stageMap["KLAR"]);
+           labels.push("VAREOVERFØRING");
+           values.push(ordreStatData.stageMap["VAREOVERFØRING"]);
+           labels.push("PLUKK");
+           values.push(ordreStatData.stageMap["PLUKK"]);
+           labels.push("FAKTURERING");
+           values.push(ordreStatData.stageMap["FAKTURERING"]);
+           labels.push("VAREUTMELDING");
+           values.push(ordreStatData.stageMap["VARUTMELDING"]);
+           labels.push("KONTROLL_OG_PAKK");
+           values.push(ordreStatData.stageMap["KONTROLL_OG_PAKK"]);
+           labels.push("TRANSPORT");
+           values.push(ordreStatData.stageMap["TRANSPORT"]);
+           labels.push("UTLEVERING");
+           values.push(ordreStatData.stageMap["UTLEVERING"]);
+
+            const annotation = {
+             type: 'doughnutLabel',
+             content: ({chart}) => [
+               ordreStatData.antall.toFixed(0),
+               ordreStatData.ordreType,
+             ],
+             drawTime: 'beforeDraw',
+             position: {
+               y: '30%'
+             },
+             font: [{size: 80, weight: 'bold'}, {size: 60, weight: 'bold'}],
+             color: ({chart}) => ['black', ORDRE_TYPE_COLOR_MAP[ordreStatData.ordreType]]
+           };
+
+
+           new Chart(document.getElementById(divElmId), {
+                type: 'doughnut',
+                data: {
+                    labels: showLabels ? labels : [],
+                    datasets: [
+                        {
+                            label: "Antall per ordre type",
+                             backgroundColor: ORDRE_STAGE_BG_COLORS,
+                            data: values
+                        }
+                    ]
+                },
+                options: {
+                   aspectRatio: 2,
+                   circumference: 180,
+                   rotation: -90,
+                   plugins: {
+                     legend: { display: true, position: 'left', align: 'center'},
+                     annotation: {
+                       annotations: {
+                         annotation
+                       }
+                     }
+                   }
+                 }
+            });
+       }
+
+    </script>
+</header>
+<body onload="loadChart()">
+<div class="canvas m-2">
+    <h1 class="text-center">Eksport ordre oversikt for Januar 2025</h1>
+    <div class="row">
+        <div class="col-12">
+            <canvas id="alle-pie-chart" width="100" height="100"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <canvas id="alm-pie-chart" width="100" height="100"></canvas>
+        </div>
+        <div class="col-4">
+            <canvas id="kjøl-pie-chart" width="100" height="100"></canvas>
+        </div>
+        <div class="col-4">
+            <canvas id="nark-pie-chart" width="100" height="100"></canvas>
+        </div>
+    </div>
+</div>
+</body>
+</html>
