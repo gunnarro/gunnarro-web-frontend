@@ -30,34 +30,33 @@ export const Header = () => {
          </Navbar.Brand>
          <Navbar.Toggle aria-controls="basic-navbar-nav" />
          <Navbar.Collapse id="basic-navbar-nav">
-         <Nav className="me-auto" navbar>
-             <Nav.Link href="/">{t('home')}</Nav.Link>
-             <Nav.Link href="/employees">{t('employees')}</Nav.Link>
-             <NavDropdown title={t('products')} id="basic-nav-dropdown">
-               <NavDropdown.Item href="/todo">{t('todo')}</NavDropdown.Item>
-               <NavDropdown.Item href="/todo/admin">{t('todoAdmin')}</NavDropdown.Item>
-               <NavDropdown.Item href="/tournament-planner" disabled >{t('tournamentPlanner')}</NavDropdown.Item>
-             </NavDropdown>
-             <NavDropdown title={t('about')} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/about/gender-equality-plan">{t('genderEqualityPlan')}</NavDropdown.Item>
-                <NavDropdown.Item href="/about/hms-pLan">{t('hmsPlan')}</NavDropdown.Item>
-                <NavDropdown.Item href="/about/about">{t('about')}</NavDropdown.Item>
-             </NavDropdown>
-         </Nav>
-         <div className="bg-secondary">
-             <Form.Select className="form-select bg-secondary" size="sm" defaultValue={i18n.language} onChange={onChangeLang} >
-               {LANGUAGES.map(({ code, label }) => (
-                  <option key={code} value={code}>
-                    {label}
-                  </option>
-                ))}
-             </Form.Select>
-         </div>
-         <div className="ms-5">
-            <h4><Badge bg="success">{process.env.ENVIRONMENT}</Badge></h4>
-            <Badge bg="primary">{process.env.APP_VERSION}</Badge>
-         </div>
+             <Nav className="me-auto" navbar>
+                 <Nav.Link href="/">{t('home')}</Nav.Link>
+                 <Nav.Link href="/employees">{t('employees')}</Nav.Link>
+                 <NavDropdown title={t('products')} id="basic-nav-dropdown">
+                   <NavDropdown.Item href="/todo">{t('todo')}</NavDropdown.Item>
+                   <NavDropdown.Item href="/todo/admin">{t('todoAdmin')}</NavDropdown.Item>
+                   <NavDropdown.Item href="/tournament-planner" disabled >{t('tournamentPlanner')}</NavDropdown.Item>
+                 </NavDropdown>
+                 <NavDropdown title={t('about')} id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/about/gender-equality-plan">{t('genderEqualityPlan')}</NavDropdown.Item>
+                    <NavDropdown.Item href="/about/hms-pLan">{t('hmsPlan')}</NavDropdown.Item>
+                    <NavDropdown.Item href="/about/about">{t('about')}</NavDropdown.Item>
+                 </NavDropdown>
+             </Nav>
+             <div className="bg-secondary">
+                 <Form.Select className="form-select bg-secondary" size="sm" defaultValue={i18n.language} onChange={onChangeLang} >
+                   {LANGUAGES.map(({ code, label }) => (
+                      <option key={code} value={code}>
+                        {label}
+                      </option>
+                    ))}
+                 </Form.Select>
+             </div>
          </Navbar.Collapse>
+         <div className="ms-5">
+           <h3><Badge bg="success">{process.env.ENVIRONMENT}</Badge></h3>
+         </div>
         </Container>
     </Navbar>
  );

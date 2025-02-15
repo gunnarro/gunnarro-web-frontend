@@ -49,11 +49,7 @@ export const TodoDetailsView = () => {
                       const pdfUrl = URL.createObjectURL(pdfData);
 
                 console.log("view as pdf, pdf data: " + pdfData)
-                window.open("https://localhost:9999/todoservice/v1/todos/562652859753120501/pdf");
-
-
-
-
+                window.open("https://localhost:9999/todoservice/v1/todos/562652859753120501/pdf", "Todo pdf", "noopener");
             })
             .catch(function (error) {
                 if (error.response && error.response.headers["content-type"] == 'application/json') {

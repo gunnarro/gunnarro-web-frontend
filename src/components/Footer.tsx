@@ -6,7 +6,7 @@ export const Footer = () => (
         <div>
             <small>{packageInfo.name} v_{packageInfo.version}</small>
         </div>
-        <div className="float-end">
+        <div>
             <small>{packageInfo.description}</small>
         </div>
     </footer>
