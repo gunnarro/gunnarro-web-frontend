@@ -6,7 +6,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import { Trash, Pencil, CheckSquareFill, ArrowDownLeftCircle, ClockHistory } from 'react-bootstrap-icons'
 // project import
 import { TodoRestApi, RestApiConfiguration } from '../../services/TodoRestApi';
@@ -34,21 +33,18 @@ export const TodoListView = () => {
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [confirmDialogMsg, setConfirmDialogMsg] = useState("");
     const [confirmDialogTodoId, setConfirmDialogTodoId] = useState("");
-    // initial todo data
+    // initial todoDto data
     const initialTodos: TodoDto[] = [];
 
      // load data
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
     const [todoListData, setTodoListData] = useState<TodoDto[]>([]);
     const todoApi = TodoServiceApiFactory(RestApiConfiguration(), "", TodoRestApi);
 
     // Always called after the render() method, and we use useEffect with an empty array [],
     // this in order to prevent that the rest api is called whenever the component is rendered, which cause an infinity loop.
     useEffect(() => {
-        setLoading(true);
         getTodosByUserName(userName);
-        setLoading(false);
     } ,[])
 
     const confirmDeleteTodo = (todoId:string) => {
@@ -75,8 +71,6 @@ export const TodoListView = () => {
             .then((response) => {
                 const todoDtos = JSON.parse(JSON.stringify(response.data)) as TodoDto[];
                 setTodoListData(todoDtos);
-                setLoading(false);
-                console.log("loaded todos for " + userName)
             })
             .catch(function (error) {
                  if (error.response && error.response.headers["content-type"] == 'application/json') {

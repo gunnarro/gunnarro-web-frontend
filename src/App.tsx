@@ -11,6 +11,7 @@ import { TodoItemForm } from './components/TodoItemForm';
 import { EditTodoItemForm } from './components/EditTodoItemForm';
 import { TodoAddParticipantForm } from './components/TodoAddParticipantForm'
 import { Login } from './pages/Login';
+import { RegisterUser } from './pages/RegisterUser';
 import { Home } from './pages/Home';
 import { About } from './pages/about/About';
 import { GenderEqualityPlan } from './pages/about/GenderEqualityPlan';
@@ -33,6 +34,7 @@ const App = () => {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<RegisterUser />} />
               <Route path='/employees' element={<EmployeeList />} />
               <Route path='/employees/:employeeId/cv' element={<Cv />} />
               <Route path='/employees/:employeeId/projects' element={<Projects />} />

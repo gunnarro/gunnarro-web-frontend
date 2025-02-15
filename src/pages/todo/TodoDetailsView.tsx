@@ -36,6 +36,34 @@ export const TodoDetailsView = () => {
         navigate("/todo/" + todoId + "/participants/" + participantId);
     };
 
+    const viewAsPdf = () => {
+        console.log("view as pdf, " + todoId);
+        // clear current errors, if any
+
+        setError("")
+        todoApi.getTodoPdf(todoId)
+            .then((response) => {
+                 const pdfData = new Blob(
+                      [response.data],
+                      {type: 'application/pdf'});
+                      const pdfUrl = URL.createObjectURL(pdfData);
+
+                console.log("view as pdf, pdf data: " + pdfData)
+                window.open("https://localhost:9999/todoservice/v1/todos/562652859753120501/pdf");
+
+
+
+
+            })
+            .catch(function (error) {
+                if (error.response && error.response.headers["content-type"] == 'application/json') {
+                    setError(error.response.data["description"]);
+                } else {
+                    setError(error.message);
+                }
+            });
+    };
+
      // confirm dialog useState
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [confirmDialogMsg, setConfirmDialogMsg] = useState("");
@@ -162,6 +190,7 @@ export const TodoDetailsView = () => {
                     <h4 className="float-start">{todoData.name} - {todoData.description}</h4>
                     <Button className="float-end ms-2" onClick={() => navigate(-1)} size="sm" variant="outline-primary">{t("back")}</Button>
                     <Button className="float-end" onClick={() => navigateAddParticipant()} size="sm" variant="outline-primary">{t("addParticipant")}</Button>
+                    <Button className="float-end" onClick={() => viewAsPdf()} size="sm" variant="outline-primary">{t("pdf")}</Button>
            </Card.Header>
            <Card.Body>
                 <div className="row">

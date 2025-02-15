@@ -13,18 +13,48 @@ export const Login = () => {
 
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const navigateHome = () => {
+    const navigateToHome = () => {
         navigate('/');
     };
 
-    function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        // clear all previous error
-        setError("")
-        // mock
-        setError("loginErrorMsg")
-        console.log("handle login form")
-    }
+    const navigateToTodoList = () => {
+        navigate('/todos');
+    };
+
+     function handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
+           event.preventDefault();
+                  // clear all previous error
+                  setFormErrors("")
+                  // Check form input
+                  const form = event.currentTarget;
+                  if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                   } else {
+                      // send data
+                      // map from form data into api todoDto model
+                      const userDto : UserDto = {
+                            userName: registerUserForm.userName,
+                            email: registerUserForm.email,
+                            //password: todoForm.name,
+                            enabled: registerUserForm.enabled
+                      };
+
+                      const todoApi = AdminServiceApiFactory(new Configuration(), "", TodoRestApi);
+
+                      console.log("login user=" + userDto.userName + ", " + userDto.password);
+                      todoApi.login(999, userDto)
+                          .then((response) => navigateTodos())
+                          .catch(function (error) {
+                               if (error.response && error.response.headers["content-type"] == 'application/json') {
+                                  setFormErrors(error.response.data["description"]);
+                              } else {
+                                  setFormErrors(error.message);
+                              }
+                          });
+                   }
+                   setValidated(true);
+        }
 
     return (
         <div className="m-4 w-25 mx-auto">
@@ -36,7 +66,7 @@ export const Login = () => {
                      <Form.Control
                        autoFocus
                        required
-                       id="user_name"
+                       id="userName"
                        type="text"
                        placeholder=""
                      />
@@ -59,10 +89,11 @@ export const Login = () => {
                            label={t("rememberMe")}
                          />
                      <div className="float-end">
-                       <Button onClick={() => navigateHome()} className="m-1" variant="outline-secondary" >{t("cancel")}</Button>
+                       <Button onClick={() => navigateToHome()} className="m-1" variant="outline-secondary" >{t("cancel")}</Button>
                        <Button type="submit" variant="outline-primary" >{t("login")}</Button>
                      </div>
                   </Form.Group>
+                  <Button type="submit" variant="outline-primary" >{t("registerUser")}</Button>
                </Form>
             </Card>
          </div>
