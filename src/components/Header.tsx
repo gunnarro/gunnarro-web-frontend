@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
+import Badge from 'react-bootstrap/Badge';
 // project import
 import { LANGUAGES } from "../constants";
 
@@ -51,6 +52,10 @@ export const Header = () => {
                   </option>
                 ))}
              </Form.Select>
+         </div>
+         <div className="ms-5">
+            <h4><Badge bg="success">{process.env.ENVIRONMENT}</Badge></h4>
+            <Badge bg="primary">{process.env.APP_VERSION}</Badge>
          </div>
          </Navbar.Collapse>
         </Container>

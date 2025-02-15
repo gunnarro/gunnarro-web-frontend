@@ -1,3 +1,4 @@
+import { defineConfig, loadEnv } from 'vite';
 // rest support
 import axios from "axios";
 // service import
@@ -9,11 +10,11 @@ import { Configuration, TodoItemDtoStatusEnum, TodoItemDtoActionEnum, TodoItemDt
 //
 // config axios with todo rest service properties, user and pwd should not be placed here, still in react learning mode.
 export const TodoRestApi = axios.create({
-  baseURL: "https://localhost:9999",
-  timeout: 50000,
+  baseURL: process.env.TODO_SERVICE_URL,
+  timeout: process.env.TODO_SERVICE_TIMEOUT,
   auth: {
-      username: "my-service-name",
-      password: "change-me"
+      username: process.env.TODO_SERVICE_USER,
+      password: process.env.TODO_SERVICE_PWD
   },
   headers: {
     "Cache-Control": "no-cache",
@@ -23,9 +24,9 @@ export const TodoRestApi = axios.create({
 
 export function RestApiConfiguration() {
     const config = new Configuration();
-    config.basePath = "https://localhost:9999";
-    config.username = "none";
-    config.password = "none";
+    config.basePath = process.env.TODO_SERVICE_URL;
+    config.username = process.env.TODO_SERVICE_USER;
+    config.password = process.env.TODO_SERVICE_PWD;
 
     {/* Always check for users access token and add it to the request header, if not found, the user is not authenticated to call any service. */}
     const accessToken = localStorage.getItem('accessToken'); // get stored access token
