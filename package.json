@@ -4,29 +4,29 @@
   "description": "powered by gunnarro as",
   "private": true,
   "dependencies": {
-    "@react-pdf/renderer": "^4.1.5",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
-    "axios": "^1.7.9",
-    "bootstrap": "^5.3.3",
-    "i18next": "^24.2.0",
-    "i18next-http-backend": "^3.0.1",
-    "react": "^19.0.0",
-    "react-bootstrap": "^2.10.7",
-    "react-bootstrap-icons": "^1.11.5",
-    "react-dom": "^19.0.0",
-    "react-i18next": "^15.2.0",
-    "react-router-dom": "^7.1.1",
-    "typescript": "^5.7.2",
-    "vite-plugin-svgr": "^4.3.0"
+    "@react-pdf/renderer": "^4.3.0",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.3.1",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "axios": "^1.11.0",
+    "bootstrap": "^5.3.8",
+    "i18next": "^25.5.2",
+    "i18next-http-backend": "^3.0.2",
+    "react": "^19.1.1",
+    "react-bootstrap": "^2.10.10",
+    "react-bootstrap-icons": "^1.11.6",
+    "react-dom": "^19.1.1",
+    "react-i18next": "^15.7.5",
+    "react-router-dom": "^7.8.2",
+    "typescript": "^5.9.2",
+    "vite-plugin-svgr": "^4.5.0"
   },
   "overrides": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.9.2"
   },
   "scripts": {
     "codegen-todo": "openapi-generator-cli generate -i docs/api/todo-service-api.yaml -g typescript-axios -o src/generated/client/todoservice --additional-properties=npmName=todo-service-client,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model,importFileExtension=tsx",
@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.0.7"
+    "@vitejs/plugin-react": "^5.0.2",
+    "vite": "^7.1.14"
   }
 }
