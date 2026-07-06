@@ -1,0 +1,116 @@
+<!-- https://github.com/Dynamsoft/barcode-reader-javascript-samples/tree/main/frameworks/pwa -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dynamsoft Barcode Scanner Batch Sample - Hello World (Decode via Camera)</title>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Include Dynamsoft Barcode Reader Bundle via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/dynamsoft-barcode-reader-bundle@11.4.2001/dist/dbr.bundle.js"></script>
+    <!-- If the network is unstable or you prefer to self-host the SDK, uncomment the line below to load it locally -->
+    <!-- <script src="../dist/dbr.bundle.js"></script> -->
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <h1 class="barcode-scanner-title">
+            Hello World (Scan One Single Barcode via Camera)
+        </h1>
+        <button class="btn btn-button btn-primary btn-xs" onclick="startScan()">Scan</button>
+        <button class="btn btn-button btn-danger btn-xs" onclick="clearScanResult()">Clear</button>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <!-- This div will host the barcode scanner's camera view -->
+            <div class="barcode-scanner-view" style="width: 100%; height: 70vh;"></div>
+        </div>
+        <div class="col-md-4">
+            <h4>Scanned barcodes</h4>
+            <ul class="result-view"></ul>
+        </div>
+    </div>
+</div>
+<script>
+
+    const resultView = document.querySelector(".result-view");
+
+    function clearScanResult() {
+        resultView.innerHTML = "";
+    }
+
+        // Detect file:// protocol and show a helpful tip
+    if (location.protocol === "file:") {
+      const tip = document.createElement("div");
+      tip.style.cssText = "background:#fff3cd;border:1px solid #ffc107;color:#856404;padding:12px 16px;margin:8px;border-radius:6px;font:14px/1.5 sans-serif;text-align:center;";
+      tip.innerHTML = '<strong>Tip:</strong> This page works via <code>file://</code>, but for the best experience, '
+        + 'serve it from a web server (e.g. HTTPS or localhost).';
+      document.body.insertBefore(tip, document.body.firstChild);
+    }
+
+    /** LICENSE ALERT - README
+     * To use the library, you need to first specify a license key.
+     *
+     * You can visit https://www.dynamsoft.com/customer/license/trialLicense?utm_source=samples&product=dbr&package=js to get your own trial license good for 30 days.
+     * Note that if you downloaded this sample from Dynamsoft while logged in, the above license key may already be your own 30-day trial license.
+     * For more information, see https://www.dynamsoft.com/barcode-reader/docs/web/programming/javascript/user-guide/index.html#license&utm_source=samples or contact support@dynamsoft.com.
+     * LICENSE ALERT - THE END
+     */
+    Dynamsoft.License.LicenseManager.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
+
+    (async () => {
+      const cameraView = await Dynamsoft.DCE.CameraView.createInstance();
+      const cameraEnhancer = await Dynamsoft.DCE.CameraEnhancer.createInstance(cameraView);
+      // camera config
+      // cameraEnhancer.enableEnhancedFeatures(Dynamsoft.DCE.EnumEnhancedFeatures.EF_AUTO_ZOOM);
+
+
+      const cvRouter = await Dynamsoft.CVR.CaptureVisionRouter.createInstance();
+
+      cvRouter.setInput(cameraEnhancer);
+
+      const resultReceiver = new Dynamsoft.CVR.CapturedResultReceiver();
+
+      resultReceiver.onDecodedBarcodesReceived = (result) => {
+        //resultView.innerHTML = "";
+        for (let item of result.barcodeResultItems) {
+          const div = document.createElement("li");
+          div.innerHTML = new Date().toLocaleString() + ` format: ${item.formatString}<br> text: ${item.text}`;
+          resultView.append(div);
+        }
+      };
+
+      await cvRouter.addResultReceiver(resultReceiver);
+
+      // Filter out unchecked and duplicate results.
+      const filter = new Dynamsoft.Utility.MultiFrameResultCrossFilter();
+      // Filter out unchecked barcodes.
+      filter.enableResultCrossVerification("barcode", true);
+      // Filter out duplicate barcodes within 3 seconds.
+      filter.enableResultDeduplication("barcode", true);
+      await cvRouter.addResultFilter(filter);
+
+      const uiElement = cameraView.getUIElement();
+      document.querySelector(".barcode-scanner-view").append(uiElement);
+
+      await cameraEnhancer.open();
+      await cvRouter.startCapturing("ReadBarcodes_SpeedFirst");
+    })();
+</script>
+
+<!--
+  Please note that putting CSS at the end is not a best practice.
+  We do this so that you can focus on reading the JS logic.
+-->
+<style>
+
+</style>
+</body>
+
+</html>

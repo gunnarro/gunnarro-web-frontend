@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/dynamsoft-barcode-reader-bundle@11.4.3000/dist/dbr.bundle.js"></script>
+</header>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <div id="camera-view-container" style="width: 100%; height: 60vh"></div>
+                </div>
+                <div class="col-md-5">
+                    <div id="btnClear" class="btn btn-button btn-primary btn-xs">Clear</div>
+                    <div id="btnDone" class="btn btn-button btn-primary btn-xs">Done</div>
+                    <div>
+                        <ol id="scannedCodesList"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let currentSessionResult = [];
+
+Dynamsoft.License.LicenseManager.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
+Dynamsoft.Core.CoreModule.loadWasm();
+(async () => {
+  let cvRouter = await Dynamsoft.CVR.CaptureVisionRouter.createInstance();
+
+  let cameraView = await Dynamsoft.DCE.CameraView.createInstance();
+  let cameraEnhancer = await Dynamsoft.DCE.CameraEnhancer.createInstance(cameraView);
+  document.querySelector("#camera-view-container").append(cameraView.getUIElement());
+  cvRouter.setInput(cameraEnhancer);
+
+  await cvRouter.addResultReceiver(
+  {
+    onDecodedBarcodesReceived: (result) => {
+        for (let item of result.barcodeResultItems) {
+          if (!hasItem(item)) {
+            currentSessionResult.push(item);
+          }
+        }
+        renderCurrentSessionScanResult();
+    }
+  }
+ );
+
+ function renderCurrentSessionScanResult() {
+      let  currentSessionResultList = document.querySelector("#scannedCodesList");
+      currentSessionResultList.textContent = '';
+      for (let item of currentSessionResult) {
+        let scannedCodeLi = document.createElement("li");
+        scannedCodeLi.innerText = `${item.text}`;
+        currentSessionResultList.append(scannedCodeLi);
+      }
+    }
+
+ const hasItem = (item) => {
+      return currentSessionResult.find((result) => {
+        return result.text === item.text && result.formatString === item.formatString;
+      })
+    }
+
+  document.querySelector("#btnClear").addEventListener("click", () => {
+      currentSessionResult = [];
+      renderCurrentSessionScanResult();
+    });
+
+    document.querySelector("#btnDone").addEventListener("click", () => {
+      currentSessionResult = [];
+      renderCurrentSessionScanResult();
+      alert("sent to server")
+    });
+
+
+  let filter = new Dynamsoft.Utility.MultiFrameResultCrossFilter();
+  filter.enableResultCrossVerification("barcode", true);
+  filter.enableResultDeduplication("barcode", true);
+  await cvRouter.addResultFilter(filter);
+
+  await cameraEnhancer.open();
+
+  // Scan Templates: If you are bulk-processing large batches, you can set the CaptureVisionRouter to preset templates
+  // like ReadBarcodes_ReadRateFirst (maximizes quantity) or ReadBarcodes_SpeedFirst (maximizes speed)
+  // depending on your needs.
+
+  await cvRouter.startCapturing("ReadBarcodes_SpeedFirst");
+})();
+
+document.querySelector(".dce-msg-poweredby").className="hide";
+document.querySelector(".dce-sel-camera").className="hide"
+
+</script>
+</body>
+</html>
