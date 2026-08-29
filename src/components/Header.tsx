@@ -18,7 +18,7 @@ export const Header = () => {
    };
 
  return (
-    <Navbar expand="lg" className="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between" style={{ height: 80 }}>
+    <Navbar expand="lg" className="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between">
      <Container>
          <Navbar.Brand href="/">
               <img alt="gunnarro:as" src="/gunnarro-as-40.png"
@@ -28,7 +28,7 @@ export const Header = () => {
                 }}
               />
          </Navbar.Brand>
-         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
          <Navbar.Collapse id="basic-navbar-nav">
              <Nav className="me-auto" navbar>
                  <Nav.Link href="/">{t('home')}</Nav.Link>
@@ -44,19 +44,7 @@ export const Header = () => {
                     <NavDropdown.Item href="/about/about">{t('about')}</NavDropdown.Item>
                  </NavDropdown>
              </Nav>
-             <div className="bg-secondary">
-                 <Form.Select className="form-select bg-secondary" size="sm" defaultValue={i18n.language} onChange={onChangeLang} >
-                   {LANGUAGES.map(({ code, label }) => (
-                      <option key={code} value={code}>
-                        {label}
-                      </option>
-                    ))}
-                 </Form.Select>
-             </div>
          </Navbar.Collapse>
-         <div className="ms-5">
-           <h3><Badge bg="success">{process.env.ENVIRONMENT}</Badge></h3>
-         </div>
         </Container>
     </Navbar>
  );

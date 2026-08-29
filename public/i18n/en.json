@@ -15,6 +15,7 @@
   "lastModifiedDate": "Last modified date",
   "createdModifiedDate": "Created/last modified",
   "createdModifiedBy": "Created/last modified by",
+  "approvedBy": "Approved by",
   "name": "Name",
   "email": "Email",
   "activateUser": "Activate user",

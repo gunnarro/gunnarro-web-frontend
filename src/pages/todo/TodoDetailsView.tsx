@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 // bootstrap import
+import 'bootstrap-table';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -247,7 +248,7 @@ export const TodoDetailsView = () => {
                             <td scope="col" className="p-0">
                                 <div className="row h6">
                                     <div className="col-md-6"><span className="text-secondary">Antall</span></div>
-                                    <div className="col-md-6"><span className="text-primary">2342</span></div>
+                                    <div className="col-md-6"><span className="text-primary">12</span></div>
                                 </div>
                             </td>
                        </tr>
@@ -259,7 +260,7 @@ export const TodoDetailsView = () => {
                            <th scope="col">{t("action")}</th>
                            <th scope="col">{t("assignedTo")}</th>
                            <th scope="col">{t("description")}</th>
-                           <th scope="col">{t("approvedOf")}</th>
+                           <th scope="col">{t("approvedBy")}</th>
                            <th scope="col" className="text-center">#</th>
                        </tr>
                    </thead>

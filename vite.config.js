@@ -13,7 +13,7 @@ import svgr from 'vite-plugin-svgr';
        'process.env.APP_VERSION': JSON.stringify(env.APP_VERSION),
      },
      server: {
-       port: 3000,
+       port: 8080,
        host: true
      },
      build: {

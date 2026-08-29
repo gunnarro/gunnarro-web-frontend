@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+@media (max-width: 575.98px) {
+  /* Hide the traditional desktop table header */
+  .table-custom-stacked thead {
+    display: none;
+  }
+
+  /* Make every row and cell behave like a block element */
+  .table-custom-stacked,
+  .table-custom-stacked tbody,
+  .table-custom-stacked tr,
+  .table-custom-stacked td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Separate stacked rows visually like cards */
+  .table-custom-stacked tr {
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem;
+  }

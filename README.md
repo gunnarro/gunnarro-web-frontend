@@ -5,6 +5,13 @@
 
 
 # gunnarro-web-frontend
+
+# Start
+```
+npm run start
+```
+
+
 ## Installed
 npm install react-table
 
@@ -39,7 +46,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - npm install @types/react @types/react-dom
 - npm install moment # for date formation
   - usage: import moment from 'moment'; let formattedDate = moment(date).format('MMMM Do YYYY, h:mm:ss a'); 
-- npm install @react-pdf/renderer
+- historyinstall @react-pdf/renderer
 - npm install -g npm-check-updates
 
 ## Upgrade dependencies
@@ -216,11 +223,14 @@ docker system prune
 install npm
 
 check
-npm --version
+npm  --version
 node --version
 
 ### update node.js to latest version
 npm install -g n
+ 
+#### To latest LTS
+sudo n lts
 
 ### install latest stable version of node.js
 sudo n lts
@@ -280,6 +290,17 @@ Steps:
   1. npm install vite @vitejs/plugin-react --save-de
   2. npm uninstall react-scripts
 ```
+
+## Port redirection
+Redirect external traffic arriving on port 443 to port 8443:
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+
+Redirect local/loopback traffic (if requests originate from the server itself):
+sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-ports 8080
+
+Show configured NAT rules:
+sudo nft list table ip nat
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

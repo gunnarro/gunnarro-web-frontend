@@ -342,6 +342,8 @@ export const EditTodoItemForm: React.FC<EditTodoItemFormProps> = (props) => {
                 </Form.Group>
                 <Form.Group>
                       <div className="float-end">
+                         <input type="file" id="fileInput" class="hide" action="/todos/12/items/100/img"/>
+                         <Button variant="outline-primary">Upload image</Button>
                          <Button onClick={() => navigateTodoItems()} className="m-1" variant="outline-secondary" >{t("Cancel")}</Button>
                          <Button type="submit" variant="outline-primary" >{t("Save")}</Button>
                       </div>

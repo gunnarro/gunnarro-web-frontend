@@ -128,12 +128,12 @@ export const TodoAdminView = () => {
         <div className="tab-content">
             <p/>
             <div role="tabpanel" className="tab-pane active" id="todo">
-                <table className="table">
+                <table className="table table-hover" data-toggle="table">
                     <thead>
                         <tr>
-                            <th scope="col">{t("status")}</th>
+                            <th scope="col" data-field="status" data-sortable="true">{t("status")}</th>
                             <th scope="col">{t("id")}</th>
-                            <th scope="col">{t("name")}</th>
+                            <th scope="col" data-field="id" data-sortable="name">{t("name")}</th>
                             <th scope="col">{t("items")}</th>
                             <th scope="col">{t("participants")}</th>
                             <th scope="col">{t("createdBy")}</th>

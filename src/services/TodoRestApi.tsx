@@ -22,6 +22,7 @@ export const TodoRestApi = axios.create({
   }
 });
 
+
 export function RestApiConfiguration() {
     const config = new Configuration();
     config.basePath = process.env.TODO_SERVICE_URL;

@@ -118,7 +118,6 @@ export const TodoForm = () => {
                     onChange={handleFieldChange}
                     isInvalid={validated && !/^[a-zA-Z0-9]+$/.test(todoForm.description)}
                   />
-                  <Form.Control.Feedback type="invalid">{t("validationErrorMsg")}</Form.Control.Feedback>
               </Form.FloatingLabel>
            </Form.Group>
            <Form.Group>
